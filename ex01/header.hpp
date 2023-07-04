@@ -19,6 +19,7 @@ class Contact {
 		int	index;
 
 	public :
+		void	set_index(int n);
 		void	set_str(std::string str, int i);
 		void	get_str();
 };
@@ -30,7 +31,7 @@ class PhoneBook {
 	public :
 		int		check(std::string av);
 		void	adding(std::string av, int i, int);
-		void	display();
+		void	display(int n);
 };
 
 #endif

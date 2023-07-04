@@ -8,7 +8,13 @@ int PhoneBook::check(std::string av)
 		return (SEARCH);
 	else if (!av.compare("exit"))
 		return (EXIT);
+	// std::cout << "la" << std::endl;
 	return (0);
+}
+
+void	Contact::set_index(int n)
+{
+	this->index = n;
 }
 
 void	Contact::set_str(std::string str, int i)
@@ -25,54 +31,81 @@ void	Contact::set_str(std::string str, int i)
 		this->darkest_secret = str;
 }
 
-
 void	PhoneBook::adding(std::string av, int i, int n)
 {
-	// do
-	// {
 		if (i == 0)
 		{
 			std::cout << "enter first name : ";
-			std::cin >> av;
+			std::getline(std::cin, av);
 			this->contacts[n].set_str(av, i);
 		}
 		else if (i == 1)
 		{
 			std::cout << "enter last name : ";
-			std::cin >> av;
+			std::getline(std::cin, av);
 			this->contacts[n].set_str(av, i);
 		}
 		else if (i == 2)
 		{
 			std::cout << "enter nickname : ";
-			std::cin >> av;
+			std::getline(std::cin, av);
 			this->contacts[n].set_str(av, i);
 		}
 		else if (i == 3)
 		{
 			std::cout << "enter phone number : ";
-			std::cin >> av;
+			std::getline(std::cin, av);
 			this->contacts[n].set_str(av, i);
 		}
 		else if (i == 4)
 		{
 			std::cout << "enter darkest secret : ";
-			std::cin >> av;
+			std::getline(std::cin, av);
 			this->contacts[n].set_str(av, i);
 		}
-		
-	// }
-	// while (i < 5);
+		this->contacts[n].set_index(n + 1);
+}
+
+void	print_space(int size)
+{
+	while (size < 10)
+	{
+		std::cout <<' ';
+		size++;
+	}
 }
 
 void	Contact::get_str()
 {
-	
-	PhoneBook ph;
-	std::cout << "here it is = " << this->first_name;
+	// std::cout << "s " << size  << std::endl;
+	// std::cout << "l " << this->first_name.length()  << std::endl;
+	std::cout	<< "|" << this->index
+				<< "         "
+				<< "|";
+	if (this->first_name.length() >= 10)
+	{
+		//copy the name into a tmp and truncat it to '.'
+		std::string tmp;
+		tmp.copy(this->first_name, 9, 0);
+	}
+	std::cout	<< this->first_name;
+	print_space(this->first_name.size());
+
+	std::cout	<< "|" << this->last_name;
+	print_space(this->last_name.size());
+
+	std::cout	<< "|" << this->nickname;
+	print_space(this->nickname.size());
+	std::cout	<< std::endl;
 }
 
-void	PhoneBook::display()
+void	PhoneBook::display(int n)
 {
-	this->contacts[0].get_str();
+	std::cout	<< "|" << "   index  "
+				<< "|" << "first name"
+				<< "|" << "last name "
+				<< "|" << " nickname "
+				<< std::endl;
+	for (int i = 0; i < n; i++)
+		this->contacts[i].get_str();
 }
