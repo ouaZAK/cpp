@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string.h>
 
 #define ADD 1
 #define SEARCH 2
@@ -20,8 +21,10 @@ class Contact {
 
 	public :
 		void	set_index(int n);
+		int		get_index();
 		void	set_str(std::string str, int i);
 		void	get_str();
+		void	get_cnt(std::string av, int n);
 };
 
 class PhoneBook {
@@ -29,6 +32,7 @@ class PhoneBook {
 		Contact contacts[8];
 	
 	public :
+		int		check_valid(std::string av, PhoneBook phone, int n);
 		int		check(std::string av);
 		void	adding(std::string av, int i, int);
 		void	display(int n);
