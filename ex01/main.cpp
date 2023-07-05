@@ -3,8 +3,17 @@
 int PhoneBook::check_valid(std::string av, PhoneBook phone, int n)
 {
 	(void)phone;
-	this->contacts[n - 1].get_cnt(av, n);
-	return (1);
+	int i;
+
+	char s[av.length()];
+	av.copy(s, av.length());
+	i = atoi(s);
+	if (i >= 1 && i <= 8 && i <= n)
+	{
+		this->contacts[i-1].get_cnt(av, i);
+		return (1);
+	}
+	return (0);
 }
 
 int main()
@@ -32,14 +41,23 @@ int main()
 		{
 			for (int i = 0; i < 5; i++)
 				phone.adding(av, i, n);
-			if (n != 8)
+			if (n != 3)
 				n++;
-			else if (n == 8)
-				n--;
 		}
 		else if ((int)phone.check(av) == SEARCH)
 		{
-			phone.display(n);
+			if (!n)
+			{
+				std::cout << "empty" << std::endl;
+				continue ;
+			}
+			else if (n == 3)
+			{
+				phone.display(n);
+				n = 2;
+			}
+			else
+				phone.display(n);
 			do
 			{
 				std::cout << "choose an index number : ";

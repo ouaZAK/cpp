@@ -1,6 +1,6 @@
 NAME = PhoneBook
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=thread
 RM = rm -rf
 SRC =	main.cpp \
 		Classes.cpp
