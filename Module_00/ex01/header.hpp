@@ -20,10 +20,10 @@ class Contact {
 
 	public :
 		void	set_index(int n);
-		int		get_index();
+		int		get_index(void);
 		void	set_str(std::string str, int i);
-		void	get_str();
-		void	get_cnt();
+		void	get_str(void);
+		void	get_cnt(void);
 };
 
 class PhoneBook {

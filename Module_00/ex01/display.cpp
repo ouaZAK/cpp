@@ -1,6 +1,6 @@
 #include "header.hpp"
 
-void	Contact::get_cnt()
+void	Contact::get_cnt(void)
 {
 	std::cout << "first name : " << this->first_name << std::endl;
 	std::cout << "last name : " << this->last_name << std::endl;
@@ -39,7 +39,7 @@ void	print(std::string str)
 	}
 }
 
-void	Contact::get_str()
+void	Contact::get_str(void)
 {
 	std::cout	<< "|" << this->index << "         " << "|";
 	print(this->first_name);

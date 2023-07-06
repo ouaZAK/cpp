@@ -31,7 +31,7 @@ void	Contact::set_index(int n)
 	this->index = n;
 }
 
-int	Contact::get_index()
+int	Contact::get_index(void)
 {
 	return (this->index);
 }
