@@ -1,21 +1,5 @@
 #include "header.hpp"
 
-int PhoneBook::check_valid(std::string av, PhoneBook phone, int n)
-{
-	(void)phone;
-	int i;
-
-	char s[av.length()];
-	av.copy(s, av.length());
-	i = atoi(s);
-	if (i >= 1 && i <= 8 && i <= n)
-	{
-		this->contacts[i-1].get_cnt(av, i);
-		return (1);
-	}
-	return (0);
-}
-
 int main()
 {
 	PhoneBook phone;
@@ -24,12 +8,11 @@ int main()
 	int	stop;
 
 	n = 0;
-	stop = 1;
 	do
 	{
+		stop = 1;
 		std::cout << "type ADD, SEARCH or EXIT : ";
 		std::getline(std::cin, av);
-		// std::cout << "<" << av << ">";
 		if (!(int)phone.check(av))
 		{
 			std::cout << "entre valid input" << std::endl;
@@ -39,6 +22,8 @@ int main()
 			exit(0);
 		else if ((int)phone.check(av) == ADD)
 		{
+			if (n == 3)
+				n = 2;
 			for (int i = 0; i < 5; i++)
 				phone.adding(av, i, n);
 			if (n != 3)
@@ -51,23 +36,18 @@ int main()
 				std::cout << "empty" << std::endl;
 				continue ;
 			}
-			else if (n == 3)
-			{
-				phone.display(n);
-				n = 2;
-			}
 			else
 				phone.display(n);
 			do
 			{
 				std::cout << "choose an index number : ";
 				std::getline(std::cin, av);
-				if (phone.check_valid(av, phone, n))
+				if (phone.check_valid(av, n))
 					stop = 0;
 				else
 					std::cout << "wrong index\n";
 			}
-			while (stop);
+			while (stop == 1);
 		}
 	}
 	while (1);

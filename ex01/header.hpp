@@ -11,20 +11,19 @@
 
 class Contact {
 	private :
+		int	index;
 		std::string first_name;
 		std::string last_name;
 		std::string nickname;
 		std::string phone_number;
 		std::string	darkest_secret;
 
-		int	index;
-
 	public :
 		void	set_index(int n);
 		int		get_index();
 		void	set_str(std::string str, int i);
 		void	get_str();
-		void	get_cnt(std::string av, int n);
+		void	get_cnt();
 };
 
 class PhoneBook {
@@ -32,7 +31,7 @@ class PhoneBook {
 		Contact contacts[8];
 	
 	public :
-		int		check_valid(std::string av, PhoneBook phone, int n);
+		int		check_valid(std::string av, int n);
 		int		check(std::string av);
 		void	adding(std::string av, int i, int);
 		void	display(int n);
