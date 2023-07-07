@@ -1,34 +1,23 @@
-#include <iostream>
-
-class test
-{
-	private :
-		std::string str;
-
-	public :
-		std::string &get_it(std::string &str);
-		// test(std::string s)
-		// {
-		// 	std::cout << s << " is alive"<< std::endl;
-		// }
-		// ~test()
-		// {
-		// 	std::cout << "died"<< std::endl;
-		// }
-};
-
-std::string &get_it(std::string &str)
-{
-	str += " lala";
-	return (str);
-}
+#include "HumanA.hpp"
+#include "HumanB.hpp"
+#include "Weapon.hpp"
 
 int main()
 {
-	test str;
-	std::string s = "haha ";
-
-	str.get_it(s);
-	std::cout << s << std::endl;
+	{
+		Weapon club = Weapon("crude  club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+		}
+		{
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
 	return (0);
 }
