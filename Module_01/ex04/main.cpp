@@ -32,8 +32,8 @@ int main(int ac, char **av)
 	while (1)
 	{
 		std::getline(inpF, loc);
-		lenLoc += loc.length() + 1;
 		strFull += (loc + "\n");
+		lenLoc += loc.length() + 1;
 		pos = strFull.find(av[2], strFull.length() - lenLoc);
 		while (pos < lenLoc)
 		{
