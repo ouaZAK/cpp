@@ -5,7 +5,7 @@
 int main()
 {
 	{
-		Weapon club = Weapon("crude  club");
+		Weapon club = Weapon("");
 		HumanA bob("Bob", club);
 		bob.attack();
 		club.setType("some other type of club");
