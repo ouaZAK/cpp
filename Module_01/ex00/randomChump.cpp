@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/30 19:56:58 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/07/31 13:00:43 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Zombie.hpp"
 
 void	randomChump(std::string name)
 {
-	Zombie z;
+	Zombie z(name);
 
-	z.set_name(name);
 	z.annouce();
 }

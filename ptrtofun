@@ -1,0 +1,6 @@
+	typedef void (Harl::*arr[4])(void);
+	typedef void (Harl::*ptr)(void);
+
+	arr ff = {a, b, c, d};
+
+	ptr Debug = &Harl::debug;

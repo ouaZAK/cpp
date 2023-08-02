@@ -1,55 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 16:13:45 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/07/31 17:13:39 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
-#include <string.h>
 #include <fstream>
 
 int main(int ac, char **av)
 {
 	if (ac != 4)
+		return (1);
+	else
 	{
-		std::cout << "enter 3 argument : \"<filename>\"  \"s1\"  \"s2\"" << std::endl;
-		return (0);
-	}
+		std::string strFull;
+		std::string str = av[1];
+		std::ifstream inpF(av[1]);
+		if (inpF.fail())
+			return (2);
 
-	std::string		loc = av[1];
-	std::ifstream	inpF(loc);
-	if (inpF.fail())
-	{
-		std::cout << "fail to open"<< std::endl;
-		return (2);
-	}
-	std::ofstream	outF(loc + ".replace");
-	if (outF.fail())
-	{
-		std::cout << "fail to open"<< std::endl;
-		return (2);
-	}
-
-	std::string strFull;
-	size_t lenLoc = 0;
-	size_t pos = 0;
-	int n = 0;
-
-	while (1)
-	{
-		std::getline(inpF, loc);
-		strFull += (loc + "\n");
-		lenLoc += loc.length() + 1;
-		pos = strFull.find(av[2], strFull.length() - lenLoc);
-		while (pos < lenLoc)
+		std::ofstream outF(str + ".replace");
+		if (outF.fail())
+			return (3);
+		
+		str = av[2];
+		while (1)
 		{
-			if (pos != strFull.npos)
+			std::getline(inpF, strFull);
+			strFull = strFull + '\n';
+			size_t x =  strFull.find(av[2], 0);
+			if (x != strFull.npos)
 			{
-				n = strFull.find(av[2], strFull.length() - lenLoc);
-				strFull.erase(n,strlen(av[2]));
-				strFull.insert(n, av[3]);
+				strFull.erase(x, str.length());
+				strFull.insert(x, av[3]);	
 			}
-			pos = strFull.find(av[2], strFull.length()) - lenLoc;
+			outF << strFull;
+			if (inpF.eof())
+				break ;
 		}
-		if (inpF.eof())
-			break ;
+		inpF.close();
+		outF.close();
 	}
-	outF << strFull;
-	outF.close();
-	inpF.close();
 	return (0);
 }

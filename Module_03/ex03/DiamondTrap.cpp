@@ -1,39 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/01 12:49:52 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/08/01 19:34:30 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
 {
-	std::cout << "Default Diam Constructor called" << std::endl;
+	name = "z";
+	ClapTrap::name = "z_clap_name";
+	std::cout << "diam default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string str) : ScavTrap(str), FragTrap(str)
+DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
-	ScavTrap::name = str + "_clap_name";
-	name = str;
-	FragTrap::hit = FragTrap::hit;
-	ScavTrap::energy = ScavTrap::energy;
-	FragTrap::atk = FragTrap::atk;
-	// ScavTrap::attack(const std::string &target);
-	std::cout << "Diam Constructor called" << std::endl;
+	ClapTrap::name = name + "_clap_name";
+	this->name = name;
+	hp = FragTrap::hp;
+	ep = ScavTrap::ep;
+	ad = FragTrap::ad;
+	std::cout << "diam " << name << " asignement constructor called" << std::endl;
+}
+
+DiamondTrap::DiamondTrap(const DiamondTrap &diam) : ClapTrap(diam), ScavTrap(diam), FragTrap(diam)
+{
+	name = diam.name;
+	hp = FragTrap::hp;
+	ep = ScavTrap::ep;
+	ad = FragTrap::ad;
+	std::cout << "diam copy constructor called" << std::endl;
+}
+
+DiamondTrap &DiamondTrap::operator = (const DiamondTrap &diam)
+{
+	name = diam.name;
+	hp = diam.hp;
+	ep = diam.ep;
+	ad = diam.ad;
+	return (*this);
 }
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "Diam Destructor called" << std::endl;
-}
-
-DiamondTrap::DiamondTrap(const DiamondTrap &diam) : ScavTrap(diam), FragTrap(diam)
-{
-	std::cout << "Diam copy constructror called" << std::endl;
-	*this = diam;
-}
-
-DiamondTrap	&DiamondTrap::operator=(const DiamondTrap &diam)
-{
-	name = diam.name;
-	FragTrap::hit = FragTrap::hit;
-	ScavTrap::energy = ScavTrap::energy;
-	FragTrap::atk = FragTrap::atk;
-	return (*this);
+	std::cout << "diam " << name << " destructor called" << std::endl;
 }
 
 void	DiamondTrap::attack(const std::string &target)
@@ -43,5 +59,6 @@ void	DiamondTrap::attack(const std::string &target)
 
 void	DiamondTrap::whoAmI(void)
 {
-	std::cout << "DiamondTrap " << " i am " << name << std::endl;
+	std::cout	<< "diam name : " << name 
+				<< "\nclap name :" << ClapTrap::name << std::endl;
 }

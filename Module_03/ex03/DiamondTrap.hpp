@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/01 12:50:02 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/08/01 19:07:48 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DIAMONDTRAP_HPP
 #define DIAMONDTRAP_HPP
 
@@ -10,21 +22,12 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		std::string name;
 	public:
 		DiamondTrap();
-		DiamondTrap(std::string str);
-		DiamondTrap(const DiamondTrap &clap);
-		DiamondTrap	&operator = (const DiamondTrap &clap);
+		DiamondTrap(const std::string &name);
+		DiamondTrap(const DiamondTrap &diam);
+		DiamondTrap &operator = (const DiamondTrap &diam);
 		~DiamondTrap();
-
 		void	attack(const std::string &target);
 		void	whoAmI(void);
-		// void			takeDamage(unsigned int amount);
-		// void			beRepaired(unsigned int amount);
-		// void			setHit(unsigned int n);
-		// void			setEnergy(unsigned int n);
-		// void			setAtk(unsigned int n);
-		// unsigned int	getHit(void);
-		// unsigned int	getEnergy(void);
-		// unsigned int	getAtk(void);
 };
 
 #endif

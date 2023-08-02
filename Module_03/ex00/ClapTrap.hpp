@@ -1,32 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 18:53:53 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/07/31 19:09:00 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
 #include <iostream>
-#include <string.h>
 
 class ClapTrap
 {
 	private:
 		std::string		name;
-		unsigned int	hit;
-		unsigned int	energy;
-		unsigned int	atk;
-
+		unsigned int	hp;
+		unsigned int	ep;
+		unsigned int	ad;
 	public:
-		ClapTrap(std::string str);
+		ClapTrap();
+		ClapTrap(std::string name);
 		ClapTrap(const ClapTrap &clap);
-		ClapTrap	&operator = (const ClapTrap &clap);
+		ClapTrap &operator = (const ClapTrap &clap);
 		~ClapTrap();
-
-		void			attack(const std::string &target);
-		void			takeDamage(unsigned int amount);
-		void			beRepaired(unsigned int amount);
-		void			setHit(unsigned int n);
-		void			setEnergy(unsigned int n);
-		void			setAtk(unsigned int n);
-		unsigned int	getHit(void);
-		unsigned int	getEnergy(void);
-		unsigned int	getAtk(void);
+		void	attack(const std::string &target);
+		void	takeDamage(unsigned int amount);
+		void	beRepaired(unsigned int amount);
 };
 
 #endif

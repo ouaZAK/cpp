@@ -1,34 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/01 19:51:58 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/08/01 20:06:33 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
-Fixed::Fixed(void) : fix(0)
+const int Fixed::frac = 8;
+
+Fixed::Fixed()
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "default constructor called" << std::endl;
+	fix = 0;
 }
 
-Fixed::Fixed(const Fixed &fP) : fix(fP.fix) // copy 
+Fixed::Fixed(const Fixed &fP)
 {
 	std::cout << "copy constructor called" << std::endl;
+	*this = fP;
 }
 
-Fixed	&Fixed::operator=(const Fixed &fP)
+Fixed &Fixed::operator = (const Fixed &fP)
 {
 	std::cout << "copy assignement operator called" << std::endl;
-	this->fix = fP.getRawBits(); // or just fix = fp.getrawbit()
-	return (*this); // return reference (*this) is reference in copy assignement otherwise its a dereference
+	setRawBits(fP.getRawBits());
+	return (*this);
 }
 
-Fixed::~Fixed(void)
+Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "destructor called" << std::endl;
 }
 
-int		Fixed::getRawBits(void) const
+int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
-	return (this->fix);
+	std::cout << "getRawBits member function called"<< std::endl;
+	return (fix);
 }
 
 void	Fixed::setRawBits(int const raw)
 {
-	this->fix = raw;
+	fix = raw;
 }

@@ -1,11 +1,10 @@
 NAME = PhoneBook
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=thread
+FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 SRC =	main.cpp \
-		adding.cpp \
-		check.cpp \
-		display.cpp
+		Contact.cpp \
+		PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

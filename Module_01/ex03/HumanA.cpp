@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 12:12:01 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/07/31 15:17:18 by zouaraqa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "HumanA.hpp"
 
-void	HumanA::attack()
+HumanA::HumanA(std::string name, Weapon &wep) : name(name), a(wep)
 {
-	if (!(this->wepA) || this->wepA->get_type() == "")
-	{
-		std::cout	<< this->name << " attacks with their " 
-					<< "weapon" << std::endl;
-	}
-	else
-		std::cout	<< this->name << " attacks with their " 
-					<< this->wepA->get_type() << std::endl;
 }
+
+HumanA::~HumanA()
+{
+}
+
+void	HumanA::attack() const
+{
+	std::cout << name << " attacks with their " << a.getType() << std::endl;
+}
+

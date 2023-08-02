@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:44:29 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/07/31 11:52:57 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/07/30 13:26:43 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/07/31 12:46:53 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
-int main()
+#include "Contact.hpp"
+
+class PhoneBook
 {
-	Zombie	*x;
+	private:
+		Contact contacts[8];
+	public:
+		PhoneBook();
+		~PhoneBook();
+		int		check_valid(std::string av, int n);
+		int		check(std::string av);
+		void	adding(std::string av, int i, int);
+		void	display(int n);
+};
 
-	x = zombieHorde(3, "zak");
-	for (int i = 0; i < 3; i++)
-		x[i].annouce();	
-	delete []x;
-	return (0);
-}
+#endif
