@@ -22,47 +22,47 @@
 
 //###############################
 
-//abstract
-// class AAnimal //A for abstract Animal
-// {
-// 	protected:
-// 		std::string type;
-// 	public:
-// 		virtual void	annouce(const std::string &str) = 0; //need to be virtual and does not have an implementation in the base class
-// };
-
-// class Dog : public Animal
-// {
-// 	public:
-// 		virtual void	annouce(const std::string &str) // the derived class must have the function and its implementation
-// 		{
-// 			std::cout << "bye dog " << str << std::endl;
-// 		}
-// };
-
-//###############################
-//interface      //have only have pure methode
-class IAnimal
+// abstract
+class AAnimal //A for abstract Animal
 {
-	// protected:          // interface cant have an attribute
-	// 	std::string type;
+	protected:
+		std::string type;
 	public:
-		virtual void	annouce(const std::string &str) = 0;
-		virtual void	bark(const std::string &str) = 0; 
+		virtual void	annouce(const std::string &str) = 0; //need to be virtual and does not have an implementation in the base class
 };
 
-class Dog : public IAnimal
+class Dog : public AAnimal
 {
 	public:
 		virtual void	annouce(const std::string &str) // the derived class must have the function and its implementation
 		{
-			std::cout << "bye si " << str << std::endl;
-		}
-		virtual void	bark(const std::string &str) // the derived class must have the function and its implementation
-		{
-			std::cout << "lala " << str << std::endl;
+			std::cout << "bye dog " << str << std::endl;
 		}
 };
+
+//###############################
+//interface      //have only have pure methode
+// class IAnimal
+// {
+// 	// protected:          // interface cant have an attribute
+// 	// 	std::string type;
+// 	public:
+// 		virtual void	annouce(const std::string &str) = 0;
+// 		virtual void	bark(const std::string &str) = 0; 
+// };
+
+// class Dog : public IAnimal
+// {
+// 	public:
+// 		virtual void	annouce(const std::string &str) // the derived class must have the function and its implementation
+// 		{
+// 			std::cout << "bye si " << str << std::endl;
+// 		}
+// 		virtual void	bark(const std::string &str) // the derived class must have the function and its implementation
+// 		{
+// 			std::cout << "lala " << str << std::endl;
+// 		}
+// };
 
 
 int main()
@@ -78,19 +78,19 @@ int main()
 
 //##################
 	//abstract
-	//// AAnimal *a = new AAnimal; cant do that because abstract class cant have an instance 
-	// AAnimal *a = new Dog;
-	// Dog *b = new Dog;
+	// AAnimal *a = new AAnimal; cant do that because abstract class cant have an instance 
+	AAnimal *a = new Dog;
+	Dog *b = new Dog;
 
-	// a->annouce("ayaa");
-	// b->annouce("ayaa");
+	a->annouce("ayaa");
+	b->annouce("ayaa");
 
 //###############
 	//interface
 	//IAnimal *a = new IAnimal; cant do that either
 	// IAnimal *c = new Dog; cant do that interface cant have an instance
-	Dog *a = new Dog;
+	// Dog *a = new Dog;
 
-	a->annouce("z");
-	a->bark("jaja");
+	// a->annouce("z");
+	// a->bark("jaja");
 }
