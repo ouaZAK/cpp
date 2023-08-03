@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:43:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 10:47:19 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/03 13:05:51 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 Cat::Cat()
 {
 	type = "Cat";
+	b = new Brain();
 	std::cout << "Cat default constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat &cat) : Animal(cat)
 {
 	type = cat.type;
+	// delete cat.b;
+	b = new Brain(*cat.b);
 	std::cout << "Cat copy constructor called" << std::endl;
 }
 
 Cat	&Cat::operator=(const Cat &cat)
 {
 	type = cat.type;
+	// delete cat.b;
+	b = new Brain(*cat.b); //dereference *cat
 	return (*this);
 }
 

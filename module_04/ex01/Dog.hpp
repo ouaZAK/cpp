@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 19:43:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 10:47:31 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/08/02 19:43:38 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/08/03 11:48:12 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-#define CAT_HPP
+#ifndef Dog_HPP
+#define Dog_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
-class Cat : public Animal
+class Dog : public Animal
 {
+	private:
+		Brain *b;
 	public:
-		Cat();
-		Cat(const Cat &cat);
-		Cat &operator=(const Cat &cat);
-		~Cat();
+		Dog();
+		Dog(const Dog &dog);
+		Dog &operator=(const Dog &dog);
+		~Dog();
 		virtual void		makeSound(void) const;
 		virtual std::string getType(void) const;
 };
