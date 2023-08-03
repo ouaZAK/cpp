@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:43:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 12:21:30 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:56:57 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Cat : public Animal
 		Cat &operator=(const Cat &cat);
 		~Cat();
 		virtual void		makeSound(void) const;
-		virtual std::string getType(void) const;
+		std::string getType(void) const;
 };
 
 #endif

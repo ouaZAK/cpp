@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 11:17:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 11:39:22 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:25:31 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class WrongCat : public WrongAnimal
 		WrongCat(const WrongCat &cat);
 		WrongCat &operator=(const WrongCat &cat);
 		~WrongCat();
-		void		makeSound(void) const;
+		void				makeSound(void) const;
 		virtual std::string getType(void) const;
 };
 

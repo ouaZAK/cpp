@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:43:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 13:05:51 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:58:18 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ Cat::Cat()
 Cat::Cat(const Cat &cat) : Animal(cat)
 {
 	type = cat.type;
-	// delete cat.b;
 	b = new Brain(*cat.b);
 	std::cout << "Cat copy constructor called" << std::endl;
 }
@@ -30,13 +29,14 @@ Cat::Cat(const Cat &cat) : Animal(cat)
 Cat	&Cat::operator=(const Cat &cat)
 {
 	type = cat.type;
-	// delete cat.b;
-	b = new Brain(*cat.b); //dereference *cat
+	delete (b);
+	b = new Brain(*cat.b); //dereference the pointer *b in cat so the Brain &brain = *cat.b
 	return (*this);
 }
 
 Cat::~Cat()
 {
+	delete (b);
 	std::cout << "Cat destructor called" << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:56:43 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/01 19:33:52 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:13:17 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->name = name;
 	hp = 100;
-	ep = 100;
 	ad = 30;
 	std::cout << "frag " << name << " asignement constructor called" << std::endl;
 }
@@ -30,7 +29,6 @@ FragTrap::FragTrap(const FragTrap &frag) : ClapTrap(frag)
 {
 	name = frag.name;
 	hp = frag.hp;
-	ep = frag.ep;
 	ad = frag.ad;
 	std::cout << "frag copy constructor called" << std::endl;
 }
@@ -39,7 +37,6 @@ FragTrap	&FragTrap::operator = (const FragTrap &frag)
 {
 	name = frag.name;
 	hp = frag.hp;
-	ep = frag.ep;
 	ad = frag.ad;
 	return (*this);
 }
