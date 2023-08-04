@@ -28,7 +28,7 @@ class AAnimal //A for abstract Animal
 	protected:
 		std::string type;
 	public:
-		virtual void	annouce(const std::string &str) = 0; //need to be virtual and does not have an implementation in the base class
+		virtual void	annouce(const std::string &str) = 0; //need to be virtual because derived Dog has the same function, and does not have an implementation in the base class
 };
 
 class Dog : public AAnimal
@@ -78,8 +78,9 @@ int main()
 
 //##################
 	//abstract
-	// AAnimal *a = new AAnimal; cant do that because abstract class cant have an instance 
+	// AAnimal *a = new AAnimal; //cant do that because abstract class cant have an instance 
 	AAnimal *a = new Dog;
+	AAnimal *v;
 	Dog *b = new Dog;
 
 	a->annouce("ayaa");
@@ -87,10 +88,11 @@ int main()
 
 //###############
 	//interface
-	//IAnimal *a = new IAnimal; cant do that either
-	// IAnimal *c = new Dog; cant do that interface cant have an instance
+	// IAnimal *a = new IAnimal; //cant do that either
+	// IAnimal *c = new Dog;
 	// Dog *a = new Dog;
 
+	// c->bark("j");
 	// a->annouce("z");
 	// a->bark("jaja");
 }
