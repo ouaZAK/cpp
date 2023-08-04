@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/04 09:49:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 16:37:53 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/08/04 16:07:12 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/08/04 18:10:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef MATERIASOURCE_HPP
+#define MATERIASOURCE_HPP
 
-#include <iostream>
-#include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
 
-class AMateria
+class MateriaSource : public IMateriaSource
 {
-	protected:
-		std::string type;
 	public:
-		AMateria();
-		AMateria(std::string const &type);
-		AMateria(const AMateria &type);
-		AMateria &operator = (const AMateria &type);
-		~AMateria();
-		std::string const & getType() const;
-		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
+		MateriaSource();
+		MateriaSource(std::string const &name);
+		MateriaSource(const MateriaSource &type);
+		MateriaSource &operator = (const MateriaSource &type);
+		~MateriaSource();
+		virtual void learnMateria(AMateria*);
+		virtual AMateria* createMateria(std::string const &type);
 };
 
 #endif

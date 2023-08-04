@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:57:02 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 10:33:00 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:21:27 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class Cure : public AMateria
 {
 	protected:
-	
+		std::string cure;
 	public:
 		Cure();
 		Cure(std::string const & cure);
