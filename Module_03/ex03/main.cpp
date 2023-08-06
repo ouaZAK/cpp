@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:53:55 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 15:45:37 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:48:28 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int main()
 {
 	DiamondTrap x("zak");
-	DiamondTrap y(x);
-	y.whoAmI();
+	// DiamondTrap y(x);
+	// y.whoAmI();
 	std::cout << "----------\n";
 	// x.whoAmI();
 	x.attack("la");

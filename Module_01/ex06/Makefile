@@ -1,12 +1,9 @@
-NAME = poly
+NAME = harlFilter
 CC = c++
 RM = rm -rf
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SRC =	main.cpp \
-		AMateria.cpp \
-		Character.cpp \
-		Cure.cpp \
-		Ice.cpp
+		Harl.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:56:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 18:45:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/06 09:24:58 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ Ice::~Ice()
 	std::cout << "Ice destructor called" << std::endl;
 }
 
-void Ice::use(ICharacter& target)
+std::string  const &Ice::getType() const
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	return (ice);
 }
 
-Ice* Ice::clone()const
+Ice* Ice::clone() const
 {
 	Ice *i = new Ice;
 	return (i);
+}
+
+void Ice::use(ICharacter& target)
+{
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

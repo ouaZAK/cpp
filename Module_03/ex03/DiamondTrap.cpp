@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:49:52 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 15:29:05 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/05 14:54:17 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@ DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
 {
 	name = "z";
 	ClapTrap::name = "z_clap_name";
+	hp = FragTrap::hp;
+	ep = ScavTrap::ep;
+	ad = FragTrap::ad;
 	std::cout << "diam default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
+DiamondTrap::DiamondTrap(const std::string &name)  : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
 	ClapTrap::name = name + "_clap_name";
 	this->name = name;
 	hp = FragTrap::hp;
 	ep = ScavTrap::ep;
 	ad = FragTrap::ad;
+	// std::cout << hp << " "<< ep<< " " << ad<< std::endl;
 	std::cout << "diam " << name << " asignement constructor called" << std::endl;
 }
 

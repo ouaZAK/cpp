@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:58:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 18:44:59 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:28:15 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ Cure::~Cure()
 	std::cout << "Cure destructor called" << std::endl;
 }
 
-void Cure::use(ICharacter& target)
+std::string  const &Cure::getType() const
 {
-	std::cout << "* heals" << target.getName() << 's wounds *' << std::endl;
+	return (cure);
 }
 
 Cure* Cure::clone() const
 {
 	Cure *c = new Cure;
 	return (c);
+}
+
+void Cure::use(ICharacter& target)
+{
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

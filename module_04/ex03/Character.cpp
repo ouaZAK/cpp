@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:35 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 18:47:07 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:30:30 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,27 @@ Character::Character(std::string const &name) : name(name)
 
 Character::Character(const Character &character) : name(character.name)
 {
-	for (int i = 0; i < 4; i++)
-		slot[i] = character.slot[i]->clone();
+	*this = character;
 	std::cout << "Character assignement constructor called" << std::endl;
 }
 
 Character &Character::operator = (const Character &character)
 {
 	name = character.name;
+	for (int i = 0; i < 4; i++)
+	{
+		if (slot[i])
+			delete (slot[i]);
+		slot[i] = character.slot[i]->clone();
+	}
 	return (*this);
 }
 
 Character::~Character()
 {
+	for (int i = 0; i < 4; i++)
+		if (slot[i])
+			delete (slot[i]);
 	std::cout << "Character destructor called" << std::endl;
 }
 

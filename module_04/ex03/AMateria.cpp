@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:49:18 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/04 18:43:39 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:09:30 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ AMateria &AMateria::operator = (const AMateria &type)
 AMateria::~AMateria()
 {
 	std::cout << "AMateria destructor called" << std::endl;
+}
+
+std::string  const &AMateria::getType() const
+{
+	return (type);
+}
+
+void AMateria::use(ICharacter& target)
+{
+	std::cout << "the " << target.getName() << "is used" << std::endl;
 }
