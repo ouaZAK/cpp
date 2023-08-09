@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:49:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 16:20:27 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:48:16 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 #include "ICharacter.hpp"
 
-class ICharacter;
+class ICharacter; //forward declaration to avoid circular dependencies
 
 class AMateria
 {

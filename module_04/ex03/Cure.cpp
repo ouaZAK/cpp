@@ -6,23 +6,23 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:58:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 16:28:15 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:02:29 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure() : cure("none")
+Cure::Cure() : AMateria("cure"), cure("cure")
 {
 	std::cout << "Cure default constructor called" << std::endl;
 }
 
-Cure::Cure(std::string const &cure) : cure(cure)
+Cure::Cure(std::string const &cure) : AMateria(cure), cure(cure)
 {
 	std::cout << "Cure custom constructor called" << std::endl;
 }
 
-Cure::Cure(const Cure &cure) : cure(cure.cure)
+Cure::Cure(const Cure &cure) : AMateria(cure), cure(cure.cure)
 {
 	std::cout << "Cure copy constructor called" << std::endl;
 }
@@ -45,7 +45,7 @@ std::string  const &Cure::getType() const
 
 Cure* Cure::clone() const
 {
-	Cure *c = new Cure;
+	Cure *c = new Cure(*this);
 	return (c);
 }
 

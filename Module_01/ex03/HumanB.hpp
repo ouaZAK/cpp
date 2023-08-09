@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:12:09 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/07/31 15:24:24 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:57:16 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class HumanB
 {
 	private:
-		Weapon		*b;
+		Weapon		*wep;
 		std::string name;
 
 	public:

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:35 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 16:30:30 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:10:29 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ Character &Character::operator = (const Character &character)
 
 Character::~Character()
 {
-	for (int i = 0; i < 4; i++)
-		if (slot[i])
-			delete (slot[i]);
 	std::cout << "Character destructor called" << std::endl;
 }
 
@@ -62,7 +59,10 @@ void Character::equip(AMateria* m)
 	for (int i = 0; i < 4; i++)
 	{
 		if (!slot[i])
+		{
 			slot[i] = m;
+			break ;
+		}
 	}
 }
 

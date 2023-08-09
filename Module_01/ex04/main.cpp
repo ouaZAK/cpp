@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:13:45 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 09:29:32 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:53:35 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,22 @@ int main(int ac, char **av)
 		if (outF.fail())
 			return (3);
 		
+		size_t x;
+
 		str = av[2];
 		while (1)
 		{
 			std::getline(inpF, strFull);
 			strFull = strFull + '\n';
-			size_t x =  strFull.find(av[2], 0);
-			if (x != strFull.npos)
+			x = strFull.find(av[2], 0);
+			while (x != strFull.npos)
 			{
-				strFull.erase(x, str.length());
-				strFull.insert(x, av[3]);	
+				x = strFull.find(av[2], 0);
+				if (x != strFull.npos)
+				{
+					strFull.erase(x, str.length());
+					strFull.insert(x, av[3]);	
+				}
 			}
 			outF << strFull;
 			if (inpF.eof())

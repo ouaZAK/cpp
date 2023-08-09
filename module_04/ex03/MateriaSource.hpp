@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:07:12 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 09:51:44 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/06 18:30:36 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 #include "IMateriaSource.hpp"
 #include "AMateria.hpp"
 
+class AMateria;
+
 class MateriaSource : public IMateriaSource
 {
 	protected:
 		AMateria *slot[4]; 
 	public:
 		MateriaSource();
-		MateriaSource(std::string const &name);
+		// MateriaSource(std::string const &name);
 		MateriaSource(const MateriaSource &type);
 		MateriaSource &operator = (const MateriaSource &type);
-		~MateriaSource();
+		virtual ~MateriaSource();
 		virtual void learnMateria(AMateria*);
 		virtual AMateria* createMateria(std::string const &type);
 };

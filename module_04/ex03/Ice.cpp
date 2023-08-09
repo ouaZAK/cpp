@@ -6,23 +6,23 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:56:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 09:24:58 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:02:48 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice() : ice("none")
+Ice::Ice() : AMateria("ice"), ice("ice")
 {
 	std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(std::string const &ice) : ice(ice)
+Ice::Ice(std::string const &ice) : AMateria(ice), ice(ice)
 {
 	std::cout << "Ice custom constructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &ice) : ice(ice.ice)
+Ice::Ice(const Ice &ice) : AMateria(ice), ice(ice.ice)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
 }
@@ -45,7 +45,7 @@ std::string  const &Ice::getType() const
 
 Ice* Ice::clone() const
 {
-	Ice *i = new Ice;
+	Ice *i = new Ice(*this);
 	return (i);
 }
 

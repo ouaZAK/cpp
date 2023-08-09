@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:44:08 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/07/31 13:07:36 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:32:37 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ class Zombie
 		Zombie(std::string name);
 		~Zombie();
 		void		annouce(void);
-		void		set_name(std::string name);
-		std::string	get_name(void);
 };
 
 Zombie* zombieHorde( int N, std::string name );
