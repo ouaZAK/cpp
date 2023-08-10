@@ -19,9 +19,14 @@ int main()
 	std::string *ptr;
 	std::string &ref = *ptr; //A reference must always be initialized with an object, not a pointer
 	std::string* &ref = ptr; // This creates a reference to the pointer 'ptr'
-
+	
 	// Harl test;
 	// void (Harl::*ex)() = &Harl::lala;
+//#########
+//or different way to declare ptr to fun 
+//  void (Harl::*f)(std::string name);
+	// f = &Harl::complain;
+	// (a.*f)("zak");
 
 	// (test.*ex)();
 }
