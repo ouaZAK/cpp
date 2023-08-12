@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:12:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/09 16:09:00 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:36:24 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 HumanA::HumanA(std::string name, Weapon &wep) : name(name), wep(wep)
 {
+	this->wep = wep;
 }
 
 HumanA::~HumanA()
