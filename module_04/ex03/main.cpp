@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:34:44 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/10 13:00:34 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:44:39 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 
-int main()
+int _main()
 {
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
@@ -34,4 +34,9 @@ int main()
 	delete me;
 	delete src;
 	return 0;
+}
+int main()
+{
+	_main();
+	system("leaks poly");
 }

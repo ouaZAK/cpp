@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:35 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/07 11:10:29 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:45:11 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ Character::Character() : name("none")
 {
 	std::cout << "Character default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
+	{
 		slot[i] = NULL;
+		save[i] = NULL;
+	}
 }
 
 Character::Character(std::string const &name) : name(name)
 {
 	for (int i = 0; i < 4; i++)
+	{
 		slot[i] = NULL;
+		save[i] = NULL;
+	}
 	std::cout << "Character custom constructor called" << std::endl;
 }
 
@@ -57,6 +63,9 @@ std::string const &Character::getName() const
 void Character::equip(AMateria* m)
 {
 	for (int i = 0; i < 4; i++)
+		if (save[i])
+			delete(save[i]);
+	for (int i = 0; i < 4; i++)
 	{
 		if (!slot[i])
 		{
@@ -70,7 +79,7 @@ void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4 && slot[idx])
 	{
-		save = slot[idx]; //leaks should be here
+		save[idx] = slot[idx];
 		slot[idx] = NULL;
 	}
 }

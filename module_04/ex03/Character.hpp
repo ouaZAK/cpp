@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:25 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 09:33:09 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:38:10 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Character : public ICharacter
 	private:
 		std::string name;
 		AMateria *slot[4];
-		AMateria *save;
+		AMateria *save[4];
 	public:
 		Character();
 		Character(const std::string &name);
