@@ -1,30 +1,62 @@
 #include <iostream>
 class A
 {
-	public :
+	private:
 		int y;
-		static const int x; 
-		A operator++()
+	public :
+		A();
+		
+		A(int x)
 		{
-			++y;
-			return (*this);
+			std::cout << "custom const called\n";
+			y = x;
 		}
-		A operator++(int)
+		A(const A &b)
 		{
-			A t;
-			t.y = y; // y = 0;
-			y++; // y = 1;
-			return (t);
+			std::cout << "copy const called\n";
+			y = b.y;
 		}
+		~A()
+		{
+			std::cout << "des called\n";
+		}
+		int geter()
+		{
+			return (y);
+		}
+		void print()
+		{
+			std::cout << " called\n";
+		}
+		// static const int x; 
+		// A operator++()
+		// {
+		// 	++y;
+		// 	return (*this);
+		// }
+		// A operator++(int)
+		// {
+		// 	A t;
+		// 	t.y = y; // y = 0;
+		// 	y++; // y = 1;
+		// 	return (t);
+		// }
 };
 
-const int A::x = 9;
-
+A::A()
+{
+	std::cout << "const called\n";
+	y = 5;
+}
+// const int A::x = 9;
 int main()
 {
-	A a,b;
-	a.y = 0;
-	b = a++;
-	std::cout << b.y << " a= " << a.y;
+
+	A b(0);
+	A a(b);
+	a.print();
+	int x = a.geter();
+	// b = a++;
+	std::cout  << x << std::endl;
 	return (0);
 }

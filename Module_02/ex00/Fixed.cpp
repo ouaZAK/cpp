@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:51:58 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/02 14:45:40 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:04:06 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 const int Fixed::frac = 8;
 
-Fixed::Fixed()
+Fixed::Fixed() : fix(0)
 {
-	fix = 0;
 	std::cout << "default constructor called" << std::endl;
 }
 

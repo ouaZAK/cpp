@@ -15,7 +15,17 @@ class A
 		{
 			std::cout << name << std::endl;
 		}
+		void set(std::string str)
+		{
+			name = str;
+		}
+
 };
+std::ostream &operator<< (std::ostream &out, const A &n)
+{
+	out << n.set("zzz");
+	return (out);
+}
 
 int main()
 {

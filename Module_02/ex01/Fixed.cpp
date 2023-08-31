@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:51:58 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/02 16:02:29 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:22:31 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 const int Fixed::frac = 8;
 
-Fixed::Fixed()
+Fixed::Fixed() : fix(0)
 {
-	fix = 0;
 	std::cout << "default constructor called" << std::endl;
 }
 
@@ -27,6 +26,7 @@ Fixed::Fixed(const int n) : fix(n << frac)
 
 Fixed::Fixed(const float n) : fix(roundf(n * (1 << frac)))
 {
+	std::cout << fix << std::endl;
 	std::cout << "float constructor called" << std::endl;
 }
 
@@ -60,7 +60,7 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)fix / (float)(1 << frac));
+	return ((float)(fix / (1 << frac)));
 }
 
 int	Fixed::toInt(void) const

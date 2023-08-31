@@ -56,3 +56,18 @@ int main()
 }
 
 */
+#include <sstream>
+#include <strstream>
+
+
+int main()
+{
+	std::stringstream s;
+
+	std::string c = "   1.5k";
+	std::string f;
+	s << c ;
+	s >> f;
+
+	std::cout << f << std::endl;
+}
