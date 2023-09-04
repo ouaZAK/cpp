@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:58:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/03 13:20:51 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:15:33 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 Bureaucrat::Bureaucrat() : name("none"), grade(0)
 {
 	std::cout << "default constructor called" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
+{
+	if (grade < 1)
+		throw (Bureaucrat::GradeTooHighException());
+	else if (grade > 150)
+		throw (Bureaucrat::GradeTooLowException());
+	std::cout << "custom constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bur)
@@ -27,11 +36,6 @@ Bureaucrat &Bureaucrat::operator = (const Bureaucrat &bur)
 {
 	grade = bur.getGrade();
 	return (*this);
-}
-
-Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
-{
-	std::cout << "custom constructor called" << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -65,12 +69,12 @@ void	Bureaucrat::dec(void)
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Bureaucrat::GradeTooHighException");
+	return ("GradeTooHigh");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Bureaucrat::GradeTooLowException");
+	return ("GradeTooLow");
 }
 
 std::ostream &operator << (std::ostream &out, const Bureaucrat &bur)

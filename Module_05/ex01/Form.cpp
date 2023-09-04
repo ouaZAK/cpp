@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 10:08:27 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:11:44 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ const char *Form::GradeTooLowException::what() const throw()
 
 void	Form::beSigned(Bureaucrat bur)
 {
-	std::cout << bur.getGrade() << " " <<sign_grade << std::endl;
 	if (bur.getGrade() > sign_grade)
 		throw(Form::GradeTooLowException());
 	signe = true;

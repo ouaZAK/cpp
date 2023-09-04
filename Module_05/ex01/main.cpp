@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:50:49 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 10:22:18 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:11:34 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main()
 {
 	try
 	{
-		Bureaucrat b("z", 49);
+		Bureaucrat b("z", 1);
 		Form	f("a", 50, 50);
 
 		// b.inc();

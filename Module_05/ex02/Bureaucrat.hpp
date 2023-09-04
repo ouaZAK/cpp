@@ -6,13 +6,16 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:03 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 10:27:10 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:56:17 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include "AForm.hpp"
 #include <iostream>
+
+class AForm;
 
 class Bureaucrat
 {
@@ -31,13 +34,14 @@ class Bureaucrat
 		int					getGrade() const;
 		void				inc();
 		void				dec();
-		// void				signForm(Form form) const;
-		
+		void				signForm(AForm form) const;
+
 		class GradeTooHighException
 		{
 			public:
 				const char *what() const throw();
 		};
+
 		class GradeTooLowException
 		{
 			public:
