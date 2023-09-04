@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/03 15:07:15 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:08:27 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Form::Form(const Form &form) : name(form.name), sign_grade(form.sign_grade), exe
 
 Form &Form::operator = (const Form &form)
 {
-	//what to do
+	signe = form.getSigne();
 	return (*this);
 }
 
@@ -43,11 +43,12 @@ const std::string	Form::getName(void) const
 	return (name);
 }
 
-const int	Form::getSignGrade(void) const
+int	Form::getSignGrade(void) const
 {
 	return (sign_grade);
 }
-const int	Form::getExecGrade(void) const
+
+int	Form::getExecGrade(void) const
 {
 	return (exec_grade);
 }
@@ -59,12 +60,20 @@ bool	Form::getSigne(void) const
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Form::GradeTooHighException");
+	return ("GradeTooHigh");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Form::GradeTooLowException");
+	return ("GradeTooLow");
+}
+
+void	Form::beSigned(Bureaucrat bur)
+{
+	std::cout << bur.getGrade() << " " <<sign_grade << std::endl;
+	if (bur.getGrade() > sign_grade)
+		throw(Form::GradeTooLowException());
+	signe = true;
 }
 
 std::ostream &operator << (std::ostream &out, const Form &form)
