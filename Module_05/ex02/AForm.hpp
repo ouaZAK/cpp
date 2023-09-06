@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:08 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 12:52:09 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:44:48 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 class Bureaucrat;
 

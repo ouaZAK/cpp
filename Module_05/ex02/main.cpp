@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:50:49 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 13:00:35 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:51:02 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int main()
 {
 	try
 	{
-		Bureaucrat b("z", 150);
-		AForm *a = new PresidentialPardonForm("home");
+		Bureaucrat b("z", 15);
+		AForm *a = new RobotomyRequestForm("home");
 
 		// a->execute(b);
 		b.executeForm(*a);
