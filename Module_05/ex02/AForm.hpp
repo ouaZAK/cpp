@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:08 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:42:54 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:52:09 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <fstream>
 
 class Bureaucrat;
 
@@ -37,8 +38,9 @@ class AForm
 		int					getExecGrade(void) const;
 		bool				getSigne(void) const;
 		void				beSigned(Bureaucrat bur);
-		virtual void		execute(Bureaucrat const & executor) const = 0;
-		
+		void				execute(Bureaucrat const & executor) const;
+		virtual void		executing() const = 0;
+
 		class GradeTooHighException
 		{
 			public:

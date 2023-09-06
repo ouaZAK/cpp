@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:31:22 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:47:34 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ const char *AForm::GradeTooLowException::what() const throw()
 
 void	AForm::beSigned(Bureaucrat bur)
 {
-	std::cout << bur.getGrade() << " " <<sign_grade << std::endl;
+	// std::cout << bur.getGrade() << " " <<sign_grade << std::endl;
 	if (bur.getGrade() > sign_grade)
 		throw(AForm::GradeTooLowException());
 	signe = true;
@@ -83,4 +83,11 @@ std::ostream &operator << (std::ostream &out, const AForm &form)
 		<< "executed : " << form.getExecGrade() << "\n"
 		<< "signed : " << form.getSigne() << std::endl;
 	return (out);
+}
+
+void	AForm::execute(Bureaucrat const & executor) const
+{
+	if (!getSigne() && executor.getGrade() > getExecGrade())
+		throw (AForm::GradeTooLowException());
+	executing();
 }

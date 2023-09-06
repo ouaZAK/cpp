@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:17:56 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:52:08 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:48:44 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 
 class PresidentialPardonForm : public AForm
 {
+	private:
+		std::string target;
 	public:
 		PresidentialPardonForm();
 		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm &pre);
 		PresidentialPardonForm &operator = (const PresidentialPardonForm &pre);
 		~PresidentialPardonForm();
-		void	execute(Bureaucrat const & executor) const;
+		void	executing(void) const;
+
 };

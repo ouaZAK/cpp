@@ -4,7 +4,11 @@ RM = rm -rf
 FLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
 SRC =	main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp
+		AForm.cpp \
+		PresidentialPardonForm.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp
+
 OBJ = $(SRC:.cpp=.o)
 
 %.o:%.cpp

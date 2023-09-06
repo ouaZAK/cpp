@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:03 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:56:17 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/06 08:58:18 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ class Bureaucrat
 		int					getGrade() const;
 		void				inc();
 		void				dec();
-		void				signForm(AForm form) const;
+		void				signForm(AForm *form) const;
+		void				executeForm(AForm const & form);
 
 		class GradeTooHighException
 		{
