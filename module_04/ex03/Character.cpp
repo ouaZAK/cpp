@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:35 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/31 14:45:11 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:02:32 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,31 @@ Character &Character::operator = (const Character &character)
 	for (int i = 0; i < 4; i++)
 	{
 		if (slot[i])
+		{
 			delete (slot[i]);
-		slot[i] = character.slot[i]->clone();
+			slot[i] = NULL;
+		}
+		if (slot[i] && character.slot[i])
+			slot[i] = character.slot[i]->clone();
 	}
 	return (*this);
 }
 
 Character::~Character()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		if (slot[i])
+		{
+			delete(slot[i]);
+			slot[i] = NULL;
+		}
+		if (save[i])
+		{
+			delete(save[i]);
+			save[i] = NULL;
+		}
+	}
 	std::cout << "Character destructor called" << std::endl;
 }
 
@@ -62,15 +79,23 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-	for (int i = 0; i < 4; i++)
-		if (save[i])
-			delete(save[i]);
-	for (int i = 0; i < 4; i++)
+	if (m)
 	{
-		if (!slot[i])
+		for (int i = 0; i < 4; i++)
 		{
-			slot[i] = m;
-			break ;
+			if (save[i])
+			{
+				delete(save[i]);
+				save[i] = NULL;
+			}
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			if (!slot[i])
+			{
+				slot[i] = m->clone();
+				break ;
+			}
 		}
 	}
 }
