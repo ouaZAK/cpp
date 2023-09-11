@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:36:35 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/08 11:02:32 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:42:07 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ Character::Character(std::string const &name) : name(name)
 
 Character::Character(const Character &character) : name(character.name)
 {
+	for (int i = 0; i < 4; i++)
+	{
+		slot[i] = NULL;
+		save[i] = NULL;
+	}
 	*this = character;
 	std::cout << "Character assignement constructor called" << std::endl;
 }
