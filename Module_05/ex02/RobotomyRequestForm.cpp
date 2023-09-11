@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:26:10 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 16:01:19 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:49:52 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void	RobotomyRequestForm::executing(void) const
 {
-	if (time(nullptr) % 2)
+	static int i;
+
+	if (i % 2)
 		std::cout << "Makes some drilling noises. " << target <<" has been robotomized" << std::endl;
 	else
 		std::cout << "the robotomy failed." << std::endl;
+	i++;
 }

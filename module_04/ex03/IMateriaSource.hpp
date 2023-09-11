@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 11:31:20 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 18:31:07 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:42:46 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define INATERIASOURCE_HPP
 
 #include "AMateria.hpp"
-
-class AMateria;
 
 class IMateriaSource
 {

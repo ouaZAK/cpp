@@ -6,12 +6,16 @@ class A
 	private:
 		int age;
 	protected:
-		std::string name;
 	public:
+		std::string name;
+	A(){}
 		A(std::string name){std::cout << "A const created"<<std::endl;}
 		~A(){std::cout << "A Dest created"<<std::endl;}
-		int get();
-
+		virtual int get() = 0;
+		void fun(A &ref)
+		{
+			std::cout << ref.name;
+		}
 };
 
 class C : public A
@@ -19,11 +23,16 @@ class C : public A
 	protected:
 		int x;
 	public:
-		C(){std::cout << "C const created"<<std::endl;}
+		C(const std::string &name) : name(name){std::cout << "C const created"<<std::endl;}
 		~C(){std::cout << "C Dest created"<<std::endl;}
 		int y;
+		
+		int get()
+		{
+			return (1);
+		}
 };
-// class D : public C, public B
+// class D : public A
 // {
 // 	protected:
 // 		int z;
@@ -36,6 +45,7 @@ class C : public A
 // 		// 	C::x = b;
 // 		// 	std::cout << B::get() << std::endl;
 // 		// }
+// 		func()
 // 		int zz;
 // };
 
@@ -45,9 +55,12 @@ class C : public A
 // }
 
 
+
+
 int main()
 {
-	// D c1;
-	C test;
+	// D s;
+	A *me = new C("z");
+	me->fun(*me);
 	return (0);
 }

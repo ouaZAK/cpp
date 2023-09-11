@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:07:12 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/10 11:24:47 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:42:52 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 #include "IMateriaSource.hpp"
 #include "AMateria.hpp"
-
-class AMateria;
 
 class MateriaSource : public IMateriaSource
 {

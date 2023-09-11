@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 12:24:34 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 15:13:05 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:46:35 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator = (const ShrubberyCreatio
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << "destructor called" << std::endl;
-}
-
-void	executing1(const std::string target)
-{
-	std::cout <<target << " tree\n";
 }
 
 void	ShrubberyCreationForm::executing(void) const

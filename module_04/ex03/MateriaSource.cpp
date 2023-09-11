@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:10:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/10 11:27:25 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:38:55 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ MateriaSource::~MateriaSource()
 void MateriaSource::learnMateria(AMateria* m)
 {
 	if (m)
+	{
 		for (int i = 0; i < 4; i++)
 		{
 			if (!slot[i])
@@ -54,7 +55,8 @@ void MateriaSource::learnMateria(AMateria* m)
 				break;
 			}
 		}
-	delete m;
+	}
+	delete (m);
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
