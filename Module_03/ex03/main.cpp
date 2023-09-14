@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:53:55 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/05 12:48:28 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/13 10:28:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 int main()
 {
 	DiamondTrap x("zak");
+	std::cout << "----------\n";
+	x.attack("lala");
+	x.guardGate();
+	x.whoAmI();
+	x.takeDamage(5);
+	x.highFiveGuys();
+	x.beRepaired(1);
 	// DiamondTrap y(x);
 	// y.whoAmI();
 	std::cout << "----------\n";
 	// x.whoAmI();
-	x.attack("la");
-	// DiamondTrap y(x);
-	x.whoAmI();
-	std::cout << "----------\n";
+	// x.attack("la");
+	// // DiamondTrap y(x);
+	// x.whoAmI();
 	
 	// y.attack("la");
 	// DiamondTrap y(x);
