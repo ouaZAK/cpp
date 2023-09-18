@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:08:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/18 16:42:17 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:50:26 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,38 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
+void	check_invalid(const std::string &str, char c)
+{
+	size_t	pos;
+	int		count;
+
+	count = 0;
+	pos = str.find(c, 0);
+	while (pos != std::string::npos)
+	{
+		count++;
+		pos = str.find(c, pos + 1);
+	}
+	if (count != 1 && count != 0)
+		throw ScalarConverter::Impossible();
+}
+
+void	check_digit(const std::string &str)
+{
+	for(std::string::const_iterator i = str.begin(); i != str.end(); i++)
+	{
+		if (*i != '.' && *i != '+' && *i != '-')
+			if (std::isdigit(str[*i]))
+			{
+				std::cout << "\ni = " << *i<<std::endl;//check here need to throw inpossible
+				throw (ScalarConverter::Impossible());
+			}
+	}
+}
+
 int	is_char(const std::string &str)
 {
-	int	y;
+	int		y;
 
 	if (str.length() == 1 && !std::isdigit(str[0]))
 	{
@@ -47,10 +76,14 @@ double	get_double(const std::string &str)
 {
 	double	x;
 	char 	*endPtr;
-	
+
 	x = is_char(str);
 	if (x != -1)
 		return (x);
+	check_digit(str);
+	check_invalid(str, '.');
+	check_invalid(str, '-');
+	check_invalid(str, '+');
 	x = std::strtod(str.c_str(), &endPtr);
 	if (endPtr == str)
 		throw (ScalarConverter::Impossible());
@@ -81,7 +114,7 @@ void char_conv(const std::string &str)
 	}
 	catch(const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout <<e.what() << std::endl;
 	}
 }
 
@@ -153,6 +186,7 @@ void	double_conv(const std::string &str)
 
 void	ScalarConverter::convert(const std::string &str)
 {
+	
 	char_conv(str);
 	int_conv(str);
 	float_conv(str);
