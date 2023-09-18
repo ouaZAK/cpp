@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:08:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/18 12:03:37 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:42:17 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,29 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
+int	is_char(const std::string &str)
+{
+	int	y;
+
+	if (str.length() == 1 && !std::isdigit(str[0]))
+	{
+		y = static_cast<int>(str[0]);
+		return (y);
+	}
+	return (-1);
+}
+
 double	get_double(const std::string &str)
 {
 	double	x;
 	char 	*endPtr;
 	
+	x = is_char(str);
+	if (x != -1)
+		return (x);
 	x = std::strtod(str.c_str(), &endPtr);
 	if (endPtr == str)
-		throw (std::exception());//error
-		// std::cout << "no conversion happened" << std::endl;
+		throw (ScalarConverter::Impossible());
 	return (x);
 }
 
@@ -51,7 +65,7 @@ char	get_char(const std::string &str)
 	x = get_double(str);
 	y = static_cast<int>(x);
 	if (y >= 126 || y <= 32)
-		throw (std::exception());//overflow or nonprintable
+		throw (ScalarConverter::NonDisplayable());
 	return (y);
 }
 
@@ -63,11 +77,11 @@ void char_conv(const std::string &str)
 	try
 	{
 		c = get_char(str);
-		std::cout << c << std::endl;
+		std::cout << "\'" << c << "\'" <<  std::endl;
 	}
 	catch(const std::exception &e)
 	{
-		std::cout << "Non displayable" << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 }
 
@@ -85,7 +99,7 @@ void	int_conv(const std::string &str)
 	}
 	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;//error
+		std::cout << e.what() << std::endl;
 	}
 }
 
@@ -99,14 +113,18 @@ void	float_conv(const std::string &str)
 	{
 		d = get_double(str);
 		f = static_cast<float>(d);
-		std::cout << f ;
 		if (str.find('.', 0) == std::string::npos)
-			std::cout << ".0";
+			std::cout << std::fixed << std::setprecision(1);
+		else if (str.find('.', 0) != std::string::npos && str.find('f', 0) != std::string::npos)
+			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		else
+			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
+		std::cout << f ;
 		std::cout << "f" << std::endl;
 	}
 	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;//error
+		std::cout << "nanf " << std::endl;
 	}
 }
 
@@ -118,14 +136,18 @@ void	double_conv(const std::string &str)
 	try
 	{
 		d = get_double(str);
-		std::cout << d;
 		if (str.find('.', 0) == std::string::npos)
-			std::cout << ".0";
+			std::cout << std::fixed << std::setprecision(1);
+		else if (str.find('.', 0) != std::string::npos && str.find('f', 0) != std::string::npos)
+			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		else
+			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
+		std::cout << d;
 		std::cout << std::endl;
 	}
 	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "nan" << std::endl;
 	}
 }
 
