@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:18:17 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/18 16:28:50 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:12:43 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 #include <iostream>
 #include <iomanip>
+#include <limits.h>
 
 class ScalarConverter
 {
 	private:
 		std::string str;
-	public:
 		ScalarConverter();
+	public:
 		ScalarConverter(const ScalarConverter &sca);
 		ScalarConverter &operator=(const ScalarConverter &sca);
 		~ScalarConverter();

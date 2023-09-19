@@ -6,13 +6,13 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:08:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/18 17:50:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:13:13 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-
-ScalarConverter::ScalarConverter() : str("empty")
+#include <cctype>
+ScalarConverter::ScalarConverter()
 {
 }
 
@@ -31,7 +31,7 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-void	check_invalid(const std::string &str, char c)
+int	repeated_char(const std::string &str, char c)
 {
 	size_t	pos;
 	int		count;
@@ -41,30 +41,51 @@ void	check_invalid(const std::string &str, char c)
 	while (pos != std::string::npos)
 	{
 		count++;
+		if (c != 'f' && !str[pos + 1])
+			throw (ScalarConverter::Impossible());
 		pos = str.find(c, pos + 1);
 	}
+	return (count);
+}
+
+void	check_invalid(const std::string &str, char c)
+{
+	int count;
+
+	count = repeated_char(str, c);
+	if (count != 1 && count != 0)
+		throw ScalarConverter::Impossible();
+
+	count = repeated_char(str, 'f');
+	if (count != 1 && count != 0)
+		throw ScalarConverter::Impossible();
+
+	count = repeated_char(str, '-');
+	count += repeated_char(str, '+');
 	if (count != 1 && count != 0)
 		throw ScalarConverter::Impossible();
 }
 
 void	check_digit(const std::string &str)
 {
-	for(std::string::const_iterator i = str.begin(); i != str.end(); i++)
-	{
-		if (*i != '.' && *i != '+' && *i != '-')
-			if (std::isdigit(str[*i]))
-			{
-				std::cout << "\ni = " << *i<<std::endl;//check here need to throw inpossible
+	for (std::string::const_iterator i = str.begin(); i != str.end(); i++)
+		if (*i != '.' && *i != '+' && *i != '-' && *i != 'f')
+			if (!std::isdigit(*i))
 				throw (ScalarConverter::Impossible());
-			}
-	}
+}
+
+bool	check_inf(const std::string &str)
+{
+	if (str == "-inff" || str == "+inff" || str == "inff" || str == "inf" || str == "-inf" || str == "+inf")
+		return (true);
+	return (false);
 }
 
 int	is_char(const std::string &str)
 {
 	int		y;
 
-	if (str.length() == 1 && !std::isdigit(str[0]))
+	if ((str.length() == 1 && !std::isdigit(str[0])) || !str.length())//!strlenghth for "" to print '\0'
 	{
 		y = static_cast<int>(str[0]);
 		return (y);
@@ -82,8 +103,6 @@ double	get_double(const std::string &str)
 		return (x);
 	check_digit(str);
 	check_invalid(str, '.');
-	check_invalid(str, '-');
-	check_invalid(str, '+');
 	x = std::strtod(str.c_str(), &endPtr);
 	if (endPtr == str)
 		throw (ScalarConverter::Impossible());
@@ -109,6 +128,8 @@ void char_conv(const std::string &str)
 	std::cout << "char: ";
 	try
 	{
+		if (check_inf(str))
+			throw (ScalarConverter::Impossible());
 		c = get_char(str);
 		std::cout << "\'" << c << "\'" <<  std::endl;
 	}
@@ -122,11 +143,15 @@ void	int_conv(const std::string &str)
 {
 	double	d;
 	int		i;
-	
+
 	std::cout << "int: ";
 	try
 	{
+		if (check_inf(str))
+			throw (ScalarConverter::Impossible());
 		d = get_double(str);
+		if (d > INT_MAX || d < INT_MIN)
+			throw (ScalarConverter::Impossible());
 		i = static_cast<int>(d);
 		std::cout << i << std::endl;
 	}
@@ -142,6 +167,11 @@ void	float_conv(const std::string &str)
 	float	f;
 
 	std::cout << "float: ";
+	if (check_inf(str))
+	{
+		std::cout << str <<std::endl;
+		return ;
+	}
 	try
 	{
 		d = get_double(str);
@@ -166,6 +196,11 @@ void	double_conv(const std::string &str)
 	double	d;
 
 	std::cout << "double ";
+	if (check_inf(str))
+	{
+		std::cout << str <<std::endl;
+		return ;
+	}
 	try
 	{
 		d = get_double(str);
