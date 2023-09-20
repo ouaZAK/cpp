@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/19 16:14:23 by zouaraqa          #+#    #+#              #
-#    Updated: 2023/09/20 08:20:38 by zouaraqa         ###   ########.fr        #
+#    Created: 2023/09/20 09:00:17 by zouaraqa          #+#    #+#              #
+#    Updated: 2023/09/20 09:24:34 by zouaraqa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = c++
 RM = rm -rf
 FLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
 SRC =	main.cpp \
-		Serializer.cpp
+		Base.cpp \
+		IdGen.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

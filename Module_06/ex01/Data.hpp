@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 07:46:34 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/20 08:51:39 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/09/20 08:52:45 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/09/20 08:53:37 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
+#pragma once
 
-int main()
-{
-	uintptr_t	y;
-	Data		d;
-	
-	d.x = 123;
-	y = Serializer::serialize(&d);
-	Data*	ptr = Serializer::deserialize(y);
+#include <iostream>
 
-	std::cout << "ptr: " << ptr->x << std::endl;
-	std::cout << "address ptr: " << ptr << std::endl;
-	std::cout << "address y: " << &y << std::endl;
-	return (0);
-}
+struct Data {
+	uintptr_t	x;
+};

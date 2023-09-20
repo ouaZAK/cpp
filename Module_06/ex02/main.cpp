@@ -5,24 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 07:46:34 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/20 08:51:39 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/09/20 09:00:10 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/09/20 11:40:54 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
+#include "IdGen.hpp"
 
 int main()
 {
-	uintptr_t	y;
-	Data		d;
+	Base *ptr;
+	Base p;
 	
-	d.x = 123;
-	y = Serializer::serialize(&d);
-	Data*	ptr = Serializer::deserialize(y);
-
-	std::cout << "ptr: " << ptr->x << std::endl;
-	std::cout << "address ptr: " << ptr << std::endl;
-	std::cout << "address y: " << &y << std::endl;
+	ptr = generate();
+	identify(ptr);
+	identify(p);
 	return (0);
 }
