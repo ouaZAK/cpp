@@ -1,5 +1,5 @@
 #include <iostream>
-
+/*
 template <typename T>
 void swap(T &a, T &b)
 {
@@ -44,5 +44,51 @@ int main()
 	
 	int arr[3] = {1,2,300};
 	f<int>(arr, 3, func<const int>);
+	return (0);
+}*/
+
+
+/*
+#################################
+when you define member functions for a class template, you need to specify 
+the template parameter <T> along with the class name Array to indicate that 
+this function is a member of the Array class template and not just a standalone function.
+#################################
+*/
+
+template <typename T> 
+class Array 
+{
+	private:
+		T *ptr;
+		int x;
+	public:
+		Array(T arr[], int x);
+		void	print();
+};
+
+template <typename T>
+Array<T>::Array(T arr[], int x) : x(x)
+{
+	ptr = new T[3];
+	for (int i = 0; i < x; i++)
+		ptr[i] = arr[i];
+}
+
+template <typename T>
+void	Array<T>::print()
+{
+	for (int i = 0; i < x; i++)
+		std::cout << "here : "<< ptr[i] << std::endl;
+}
+
+int main()
+{
+	int arr[3] = {1,2,3};
+
+	Array<int> a(arr, 3);
+	a.print();
+	int *b = new int();
+	std::cout << b[44] << std::endl;
 	return (0);
 }

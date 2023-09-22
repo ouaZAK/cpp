@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:43:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 18:58:18 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 08:08:07 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Cat	&Cat::operator=(const Cat &cat)
 {
 	type = cat.type;
 	delete (b);
-	b = new Brain(*cat.b); //dereference the pointer *b in cat so the Brain &brain = *cat.b
+	b = new Brain(*cat.b);//dereference the pointer *b in cat so the Brain &brain = *cat.b
 	return (*this);
 }
 
