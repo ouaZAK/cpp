@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:08 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 10:19:44 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:53:39 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ class Form
 		bool				getSigne(void) const;
 		void				beSigned(Bureaucrat bur);
 		
-		class GradeTooHighException
+		class GradeTooHighException : public std::exception
 		{
 			public:
 				const char *what() const throw();
 		};
 
-		class GradeTooLowException
+		class GradeTooLowException : public std::exception
 		{
 			public:
 				const char *what() const throw();

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:51:03 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 08:57:44 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:52:59 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ class Bureaucrat
 		
 		void	signForm(Form form) const;
 		
-		class GradeTooHighException
+		class GradeTooHighException : public std::exception
 		{
 			public:
 				const char *what() const throw();
 		};
-		class GradeTooLowException
+		class GradeTooLowException : public std::exception
 		{
 			public:
 				const char *what() const throw();

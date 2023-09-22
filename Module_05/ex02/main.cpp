@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:50:49 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 15:51:02 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:52:14 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ int main()
 
 		// a->execute(b);
 		b.executeForm(*a);
-	}
-	catch (Bureaucrat::GradeTooHighException &ex)
-	{
-		std::cerr << ex.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException &ex)
-	{
-		std::cerr << ex.what() << std::endl;
-	}
-	catch (AForm::GradeTooLowException &ex)
-	{
-		std::cerr << ex.what() << std::endl;
 	}
 	catch (std::exception &e)
 	{

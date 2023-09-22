@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:08 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 14:44:48 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:54:03 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ class AForm
 		void				execute(Bureaucrat const & executor) const;
 		virtual void		executing() const = 0;
 
-		class GradeTooHighException
+		class GradeTooHighException : public std::exception
 		{
 			public:
 				const char *what() const throw();
 		};
 
-		class GradeTooLowException
+		class GradeTooLowException : public std::exception
 		{
 			public:
 				const char *what() const throw();

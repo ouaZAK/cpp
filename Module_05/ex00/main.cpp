@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:50:49 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/03 13:09:34 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:53:24 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ int main()
 		b.inc();
 		std::cout << b;
 	}
-	catch (Bureaucrat::GradeTooHighException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException &e)
+	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
