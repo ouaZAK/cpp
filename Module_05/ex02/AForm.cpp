@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/11 13:51:56 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:50:09 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ AForm::AForm(std::string name, const int sg, const int eg) : name(name), sign_gr
 
 AForm::AForm(const AForm &form) : name(form.name), sign_grade(form.sign_grade), exec_grade(form.exec_grade)
 {
+	*this = form;
 	std::cout << "copy constructor called" << std::endl;
 }
 
