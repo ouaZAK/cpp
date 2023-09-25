@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 08:59:16 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/06 09:20:21 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:16:08 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,46 @@
 
 int _main()
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	// const Animal *x[4];
 	
-	const Animal *x[4];
-	for (int i = 0; i < 4; i++)
-	{
-		if (i < (4 / 2))
-			x[i] = new Dog();
-		else
-			x[i] = new Cat();
-	}
+	// for (int i = 0; i < 4; i++)
+	// {
+	// 	if (i < (4 / 2))
+	// 		x[i] = new Dog();
+	// 	else
+	// 		x[i] = new Cat();
+	// }
+	
+	// std::cout << "----------\n";
+	// for (int i = 0; i < 4; i++)
+	// 	x[i]->makeSound();
+	// std::cout << "----------\n";
+	
+	// for (int i = 0; i < 4; i++)
+	// 	delete (x[i]);
 
-	for (int i = 0; i < 4; i++)
-		delete (x[i]);
-	// Cat a,b;
-	// a = b;
-	// Dog x,y;
-	// x = y;
-	// delete i;
-	// i = j;
-	// std::cout << "i = "<< a.getType() << "\n" << "j = "<< b.getType() <<std::endl;
+	Cat *a = new Cat;
+	Cat *b = new Cat;
+	// Cat a;
+	// Cat b;
+	*b = *a;
+	// std::cout << "i = "<< b->getType() 
+	// 		<< "\n" 
+	// 		<< "j = "<< b->getType() <<std::endl;
 
 	std::cout << "----------\n";
-	// std::cout << "i = "<< i << "\n" << "j = "<< j <<std::endl;
+	b->makeSound();
 	std::cout << "----------\n";
 	
-	delete j;//s
-	delete i;
-	
+	delete b;
+	delete a;
 	return (0);
 }
 
 int main()
 {
 	_main();
-	system("leaks poly");
+	std::cout << "----------\n";
+	system("leaks -q poly");
+	std::cout << "----------\n";
 }

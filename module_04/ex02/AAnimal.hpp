@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:44:50 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/08/03 19:43:45 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:24:29 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class AAnimal
 		AAnimal(const AAnimal &animal);
 		AAnimal &operator=(const AAnimal &animal);
 		virtual ~AAnimal();
-		virtual void		makeSound(void) const = 0;
-		std::string			getType(void) const;
+		virtual void	makeSound(void) const = 0;
+		std::string		getType(void) const;
 };
 
 #endif
