@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 10:34:44 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/11 10:48:53 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:11:36 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int _main()
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	ICharacter* bob = new Character("bob");
+	std::cout << "---------  --------" << std::endl;
 	me->use(0, *bob);
 	me->use(1, *bob);
+	std::cout << "---------  --------" << std::endl;
 	delete bob;
 	delete me;
 	delete src;

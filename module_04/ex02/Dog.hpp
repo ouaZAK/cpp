@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:43:38 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/25 12:21:52 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:45:53 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Dog : public AAnimal
 		Dog &operator=(const Dog &dog);
 		~Dog();
 		virtual void	makeSound(void) const;
-		std::string getType(void) const;
+		std::string		getType(void) const;
 };
 
 #endif

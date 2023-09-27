@@ -59,15 +59,35 @@ int main()
 #include <sstream>
 #include <strstream>
 
-
+class A
+{
+	public:
+		int x ;
+		A(int x):x(x){}
+		A operator+=(const A &a)
+		{
+			x += a.x;
+			return *this;
+		}
+};
+std::ostream &operator <<(std::ostream &out, const A &a)
+{
+	out << a.x;
+	return out;
+}
 int main()
 {
-	std::stringstream s;
 
-	std::string c = "   1.5k";
-	std::string f;
-	s << c ;
-	s >> f;
+	A a(0),b(2),c(3),d(3);
 
-	std::cout << f << std::endl;
+	a += b += c += d;
+	std::cout << a << b  << "\n";
+	// std::stringstream s;
+
+	// std::string c = "   1.5k";
+	// std::string f;
+	// s << c ;
+	// s >> f;
+
+	// std::cout << f << std::endl;
 }
