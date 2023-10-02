@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:08:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/19 16:13:13 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:21:39 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	repeated_char(const std::string &str, char c)
 	while (pos != std::string::npos)
 	{
 		count++;
-		if (c != 'f' && !str[pos + 1])
+		if (c != 'f' && !str[pos + 1])// check for something in the end if its not f like 0+
 			throw (ScalarConverter::Impossible());
 		pos = str.find(c, pos + 1);
 	}
 	return (count);
 }
 
-void	check_invalid(const std::string &str, char c)
+void	check_invalid(const std::string &str)
 {
 	int count;
 
-	count = repeated_char(str, c);
+	count = repeated_char(str, '.');
 	if (count != 1 && count != 0)
 		throw ScalarConverter::Impossible();
 
@@ -102,7 +102,7 @@ double	get_double(const std::string &str)
 	if (x != -1)
 		return (x);
 	check_digit(str);
-	check_invalid(str, '.');
+	check_invalid(str);
 	x = std::strtod(str.c_str(), &endPtr);
 	if (endPtr == str)
 		throw (ScalarConverter::Impossible());
