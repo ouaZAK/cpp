@@ -62,26 +62,31 @@ int main()
 class A
 {
 	public:
-		int x ;
-		A(int x):x(x){}
-		A operator+=(const A &a)
+	int x;
+	void	di()
+	{
+		x = 0;
+	}
+		void	dis()
 		{
-			x += a.x;
-			return *this;
+			// int x = 10;
+			std::cout << x << "hahah" << std::endl;
 		}
+		// void	dis1()
+		// {
+		// 	std::cout << x << std::endl;
+		// }
 };
-std::ostream &operator <<(std::ostream &out, const A &a)
-{
-	out << a.x;
-	return out;
-}
+
+
 int main()
 {
+	A *ptr = NULL;
+	ptr->dis();
+	// A a(0),b(2),c(3),d(3);
 
-	A a(0),b(2),c(3),d(3);
-
-	a += b += c += d;
-	std::cout << a << b  << "\n";
+	// a += b += c += d;
+	// std::cout << a << b  << "\n";
 	// std::stringstream s;
 
 	// std::string c = "   1.5k";

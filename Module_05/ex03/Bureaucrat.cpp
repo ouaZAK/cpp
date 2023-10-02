@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:58:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/06 10:51:09 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:21:48 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	Bureaucrat::signForm(AForm *form) const
 	}
 	catch(AForm::GradeTooLowException &e)
 	{
-		// std::cerr << e.what() << std::endl;
 		std::cout	<< name << " couldn't sign " << form->getName()
 					<< " because " << e.what() << std::endl;
 	}
