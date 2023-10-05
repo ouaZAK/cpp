@@ -5,26 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 10:26:56 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/02 16:27:33 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/05 10:53:11 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/05 11:59:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Whatever.hpp"
+#include "easyfind.hpp"
 
 int main()
 {
-	int a = 2;
-	int b = 3;
-	::swap( a, b );
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-	std::string c = "chaine1";
-	std::string d = "chaine2";
-	::swap(c, d);
-	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	std::vector<int>v;
+	const int x = 96;
+
+	for (int i = 96; i < 100; i++)
+		v.push_back(i);
+
+	try
+	{
+		easyFind(v, x);
+		std::cout << "the number " << x << " exist" << std::endl; 
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "it doesn't exist" << std::endl;
+	}
+	
 	return (0);
 }

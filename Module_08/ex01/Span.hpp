@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 10:30:16 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/02 16:27:37 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/05 12:00:07 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/05 16:10:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
-template <typename T>
-void	swap(T &a, T &b)
+class Span
 {
-	std::swap(a, b);
-}
+	private:
+		unsigned int N;
+	public:
+		std::vector<int>arr;
+		Span();
+		Span(unsigned int n);
+		Span(const Span &sp);
+		Span &operator = (const Span &sp);
+		~Span();
 
-template <typename T>
-const T &min(const T &a, const T &b)
-{
-	return (b <= a ? b : a);
-}
-
-template <typename T>
-const T &max(const T &a, const T &b)
-{
-	return (b >= a ? b : a);
-}
+		void	addNumber(int x);
+		int		shortestSpan();
+		int		longestSpan();
+};

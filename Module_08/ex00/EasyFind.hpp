@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 10:30:16 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/02 16:27:37 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/05 11:58:33 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/05 11:59:46 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-
+#include <vector>
 template <typename T>
-void	swap(T &a, T &b)
+void easyFind(const T &t, const int &i)
 {
-	std::swap(a, b);
-}
-
-template <typename T>
-const T &min(const T &a, const T &b)
-{
-	return (b <= a ? b : a);
-}
-
-template <typename T>
-const T &max(const T &a, const T &b)
-{
-	return (b >= a ? b : a);
+	if (std::find(t.begin(), t.end(), i) == t.end())
+		throw (std::exception());
 }
