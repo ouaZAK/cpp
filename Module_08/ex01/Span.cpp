@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:00:00 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/07 09:16:37 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/07 09:18:00 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ void	Span::addNumbers(std::vector<int>&v)
 	
 	it = arr.begin();
 	arr.insert(it, v.begin(), v.end());
-
-	// it = arr.begin();
-	// for(; it != arr.end(); it++)
-	// 	std::cout << *it << " ";
-	// std::cout << '\n';
 }
 
 int	Span::shortestSpan()
