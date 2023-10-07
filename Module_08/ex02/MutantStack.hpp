@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Span.hpp                                           :+:      :+:    :+:   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 12:00:07 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/06 15:57:37 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/06 10:14:52 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/06 11:38:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <iosteram>
 
-class Span
+template <typename T>
+class MutantStack
 {
 	private:
-		unsigned int N;
-		std::vector<int>arr;
+		
 	public:
-		Span();
-		Span(unsigned int n);
-		Span(const Span &sp);
-		Span &operator = (const Span &sp);
-		~Span();
-
-		void	addNumber(int x);
-		void	addNumbers(std::vector<int>&v);
-		int		shortestSpan();
-		int		longestSpan();
-		std::vector<int>	getArr();
+		MutantStack();
+		MutantStack(const MutantStack &mut);
+		MutantStack &operator=(const MutantStack &mut);
+		~MutantStack();
 };
