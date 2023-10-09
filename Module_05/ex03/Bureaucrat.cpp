@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:58:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/02 10:21:48 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:07:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &bur)
 
 Bureaucrat &Bureaucrat::operator = (const Bureaucrat &bur)
 {
-	grade = bur.getGrade();
+	if (this != &bur)
+		grade = bur.getGrade();
 	return (*this);
 }
 
@@ -77,12 +78,6 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return ("GradeTooLow");
 }
 
-std::ostream &operator << (std::ostream &out, const Bureaucrat &bur)
-{
-	out << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
-	return (out);
-}
-
 void	Bureaucrat::signForm(AForm *form) const
 {
 	try
@@ -108,4 +103,10 @@ void	Bureaucrat::executeForm(AForm const & form)
 	{
 		std::cout << "couldn't execute the form \"" << form.getName()<< "\", " << e.what() << std::endl;
 	}
+}
+
+std::ostream &operator << (std::ostream &out, const Bureaucrat &bur)
+{
+	out << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
+	return (out);
 }

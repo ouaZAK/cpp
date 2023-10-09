@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:58:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:15:33 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:21:53 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &bur)
 
 Bureaucrat &Bureaucrat::operator = (const Bureaucrat &bur)
 {
-	grade = bur.getGrade();
+	if (this != &bur)
+		grade = bur.getGrade();
 	return (*this);
 }
 

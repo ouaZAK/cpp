@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:44 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:03:03 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,23 @@ Form::Form() : name("none"), sign_grade(0), exec_grade(0), signe(false)
 
 Form::Form(std::string name, const int sg, const int eg) : name(name), sign_grade(sg), exec_grade(eg)
 {
+	if (sign_grade < 1)
+		throw (Form::GradeTooHighException());
+	else if (sign_grade > 150)
+		throw (Form::GradeTooLowException());
 	std::cout << "custom constructor called" << std::endl;
 }
 
 Form::Form(const Form &form) : name(form.name), sign_grade(form.sign_grade), exec_grade(form.exec_grade)
 {
+	*this = form;
 	std::cout << "copy constructor called" << std::endl;
 }
 
 Form &Form::operator = (const Form &form)
 {
-	signe = form.getSigne();
+	if (this != &form)
+		signe = form.getSigne();
 	return (*this);
 }
 

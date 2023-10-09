@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 13:19:04 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/22 14:50:09 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:03:11 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ AForm::AForm() : name("none"), sign_grade(0), exec_grade(0), signe(false)
 
 AForm::AForm(std::string name, const int sg, const int eg) : name(name), sign_grade(sg), exec_grade(eg)
 {
+	if (sign_grade < 1)
+		throw (AForm::GradeTooHighException());
+	else if (sign_grade > 150)
+		throw (AForm::GradeTooLowException());
 	std::cout << "custom constructor called" << std::endl;
 }
 
@@ -30,7 +34,8 @@ AForm::AForm(const AForm &form) : name(form.name), sign_grade(form.sign_grade), 
 
 AForm &AForm::operator = (const AForm &form)
 {
-	signe = form.getSigne();
+	if (this != &form)
+		signe = form.getSigne();
 	return (*this);
 }
 
@@ -71,7 +76,6 @@ const char *AForm::GradeTooLowException::what() const throw()
 
 void	AForm::beSigned(Bureaucrat bur)
 {
-	// std::cout << bur.getGrade() << " " <<sign_grade << std::endl;
 	if (bur.getGrade() > sign_grade)
 		throw(AForm::GradeTooLowException());
 	signe = true;

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 10:15:22 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/14 11:54:11 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:49:05 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ Intern::~Intern()
 
 AForm	*Intern::makeForm(std::string formName, std::string target)
 {
-	std::string arr[3] = {"presidential pardon", "Shrubbery Creation", "Robotomy Request"};
+	std::string arr[3] = {"Presidential Pardon", "Shrubbery Creation", "Robotomy Request"};
 	AForm *form[3] = {new PresidentialPardonForm(target), new ShrubberyCreationForm(target), new RobotomyRequestForm(target)};
 	for (int i = 0; i < 3; i++)
 	{
@@ -49,6 +49,8 @@ AForm	*Intern::makeForm(std::string formName, std::string target)
 			return (form[i]);
 		}	
 	}
+	for (int y = 0; y < 3; y++)
+		delete form[y];
 	std::cout << "no matching form" << std::endl;
 	return (nullptr);
 }

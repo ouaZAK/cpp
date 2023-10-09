@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:58:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/04 10:09:57 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:02:54 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &bur)
 
 Bureaucrat &Bureaucrat::operator = (const Bureaucrat &bur)
 {
-	grade = bur.getGrade();
+	if (this != &bur)
+		grade = bur.getGrade();
 	return (*this);
 }
 
@@ -77,12 +78,6 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return ("GradeTooLow");
 }
 
-std::ostream &operator << (std::ostream &out, const Bureaucrat &bur)
-{
-	out << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
-	return (out);
-}
-
 void	Bureaucrat::signForm(Form form) const
 {
 	try
@@ -92,8 +87,13 @@ void	Bureaucrat::signForm(Form form) const
 	}
 	catch(Form::GradeTooLowException &e)
 	{
-		// std::cerr << e.what() << std::endl;
 		std::cout	<< name << " couldn't sign " << form.getName()
 					<< " because " << e.what() << std::endl;
 	}
+}
+
+std::ostream &operator << (std::ostream &out, const Bureaucrat &bur)
+{
+	out << bur.getName() << ", bureaucrat grade " << bur.getGrade() << "." << std::endl;
+	return (out);
 }
