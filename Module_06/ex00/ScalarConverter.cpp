@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:08:01 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/02 16:21:39 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:27:03 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	get_char(const std::string &str)
 
 	x = get_double(str);
 	y = static_cast<int>(x);
-	if (y >= 126 || y <= 32)
+	if (!std::isprint(y))
 		throw (ScalarConverter::NonDisplayable());
 	return (y);
 }
@@ -179,7 +179,12 @@ void	float_conv(const std::string &str)
 		if (str.find('.', 0) == std::string::npos)
 			std::cout << std::fixed << std::setprecision(1);
 		else if (str.find('.', 0) != std::string::npos && str.find('f', 0) != std::string::npos)
-			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		{
+			if (str[str.find('.', 0) + 1] == 'f')
+				std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
+			else
+				std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		}
 		else
 			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
 		std::cout << f ;
@@ -204,10 +209,15 @@ void	double_conv(const std::string &str)
 	try
 	{
 		d = get_double(str);
-		if (str.find('.', 0) == std::string::npos)
+		if (str.find('.', 0) == std::string::npos)//meand number dont have '.'
 			std::cout << std::fixed << std::setprecision(1);
-		else if (str.find('.', 0) != std::string::npos && str.find('f', 0) != std::string::npos)
-			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		else if (str.find('.', 0) != std::string::npos && str.find('f', 0) != std::string::npos)//means there is . and f
+		{
+			if (str[str.find('.', 0) + 1] == 'f')//check if f is after f like 1.f
+				std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
+			else
+				std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 2);
+		}
 		else
 			std::cout << std::fixed << std::setprecision(str.length() - str.find('.', 0) - 1);
 		std::cout << d;
