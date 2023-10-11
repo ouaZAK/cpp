@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:46:05 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/11 11:18:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:46:16 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 template <typename T>
 Array<T>::Array()
 {
+	std::cout <<"lalala\n";
 	myArr = new T();
 	n = 0;
 }

@@ -6,16 +6,16 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:53:11 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/05 11:59:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:53:35 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
+#include "EasyFind.hpp"
 
 int main()
 {
-	std::vector<int>v;
-	const int x = 96;
+	std::vector<int> v;
+	const int x = 95;
 
 	for (int i = 96; i < 100; i++)
 		v.push_back(i);

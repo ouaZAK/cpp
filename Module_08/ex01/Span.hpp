@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:00:07 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/06 15:57:37 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:55:15 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Span
 {
 	private:
 		unsigned int N;
-		std::vector<int>arr;
+		std::vector<int> arr;
 	public:
 		Span();
 		Span(unsigned int n);

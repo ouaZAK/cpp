@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 11:04:51 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/21 12:32:54 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:12:07 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	myFunc(T &ar)
 
 template <typename T>
 void	iter(T *arr, int length, void (*func)(T &ar))
+{
+	for (int i = 0; i < length; i++)
+		(*func)(arr[i]);
+}
+
+template <typename T>
+void	iter(const T *arr,const int length, void (*func)(const T &ar))
 {
 	for (int i = 0; i < length; i++)
 		(*func)(arr[i]);
