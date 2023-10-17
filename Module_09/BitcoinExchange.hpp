@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:00:10 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/14 12:56:19 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/13 09:15:12 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "IdGen.hpp"
+#pragma once
 
-int main()
-{
-	Base *ptr = new A();
-	Base p;
-	
-	ptr = generate();
-	identify(ptr);
-	identify(p);
-	return (0);
-}
+#include <iostream>
+#include <fstream>

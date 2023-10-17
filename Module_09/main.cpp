@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:00:10 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/14 12:56:19 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/13 09:06:55 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/13 09:14:14 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "IdGen.hpp"
+#include "BitcoinExchange.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-	Base *ptr = new A();
-	Base p;
+	if (ac != 2)
+	{
+		std::cout << "enter 1 <file>.txt" << std::endl;
+		return (0);
+	}
 	
-	ptr = generate();
-	identify(ptr);
-	identify(p);
 	return (0);
 }

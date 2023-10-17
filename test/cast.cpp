@@ -1,10 +1,68 @@
 #include <iostream>
 
+class A 
+{
+	public:
+		int z;
+		virtual ~A(){};
+		operator float()
+		{
+			z = 77;
+			return (static_cast<float>(z));
+		}
+};
+class B:public A {public:int x;};
+class C:public A {public:int y;};
+
 int main()
 {
-	int x;
-	float y= 1.1F;
-	std::cout << y << std::endl;
+	B b;
+	C c;
+	A *a = dynamic_cast<A *>(&b);
+	A *aa = dynamic_cast<A *>(&c);
+	B *bb = dynamic_cast<B *>(a);
+	if (!bb)
+		std::cout << "failed\n";
+	else
+	{
+		bb->x = 2;
+	std::cout << bb->x << std::endl;
+	}
+	if (!a)
+		std::cout << "failed\n";
+	else
+		a->z=9;
+	std::cout << a->z << std::endl;
+	try
+	{
+		C &d = dynamic_cast<C &>(*aa);
+		d.y = 8;
+	std::cout << d.y << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	int p;
+	// p[0] = 10;
+	// int &m = p[0];
+	float x;
+	x = reinterpret_cast<float>(p);
+	std::cout << "here ->>>" << x << std::endl;
+
+	A a1;
+	float h =a1;
+	std::cout << h<< std::endl; 
+
+	int k = -1;
+	void *s = &k;
+	int *pt = static_cast<int *>(s);
+	int i = *pt; 
+	std::cout << i ;
+	// int x;
+	// float y= 1.1F;
+	// std::cout << y << std::endl;
 	// x = static_cast<int>(y);
 	// std::cout << x << std::endl;
 	// std::cout << "------------------\n";

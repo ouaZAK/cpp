@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 08:59:16 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/09/25 12:16:08 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:44:12 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,20 @@ int _main()
 	// for (int i = 0; i < 4; i++)
 	// 	delete (x[i]);
 
-	Cat *a = new Cat;
-	Cat *b = new Cat;
+	Animal *a = new Cat;
+	a->makeSound();
+	delete a;
 	// Cat a;
 	// Cat b;
-	*b = *a;
 	// std::cout << "i = "<< b->getType() 
 	// 		<< "\n" 
 	// 		<< "j = "<< b->getType() <<std::endl;
 
-	std::cout << "----------\n";
-	b->makeSound();
-	std::cout << "----------\n";
+	// std::cout << "----------\n";
+	// b->makeSound();
+	// std::cout << "----------\n";
 	
-	delete b;
-	delete a;
+	// delete b;
 	return (0);
 }
 

@@ -5,18 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/20 09:00:17 by zouaraqa          #+#    #+#              #
-#    Updated: 2023/10/14 12:52:18 by zouaraqa         ###   ########.fr        #
+#    Created: 2023/10/13 09:08:43 by zouaraqa          #+#    #+#              #
+#    Updated: 2023/10/13 09:12:42 by zouaraqa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cast
+NAME = btc
 CC = c++
 RM = rm -rf
-FLAGS = -Wall -Wextra -Werror -std=c++98# -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
 SRC =	main.cpp \
-		Base.cpp \
-		IdGen.cpp
+		BitcoinExchange.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

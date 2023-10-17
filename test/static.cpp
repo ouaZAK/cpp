@@ -2,6 +2,7 @@
 class A
 {
 	private:
+		static const int x; 
 		int y;
 	public :
 		A();
@@ -24,11 +25,11 @@ class A
 		{
 			return (y);
 		}
-		void print()
+		static void print()
 		{
+			x;
 			std::cout << " called\n";
 		}
-		// static const int x; 
 		// A operator++()
 		// {
 		// 	++y;

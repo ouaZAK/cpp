@@ -23,7 +23,10 @@ int main()
 	Harl test;
 	// void (Harl::*ex)() = &Harl::lala;
 	// (test.*ex)();
-
+	int y = 7;
+	int const &x = y;
+	y = 8;
+	x = 9;//cant do this because x in const but we can change value of variable refered to
 //#########
 //or different way to declare ptr to fun 
  void (Harl::*f)();
