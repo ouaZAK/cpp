@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/13 09:15:12 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/18 10:41:43 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,3 +14,26 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <map>
+
+class BitcoinExchange
+{
+	private:
+		std::map<std::string, double>	map;
+		std::string 					line;
+		std::string						tmp;
+		std::string						av1;
+		double							d;
+		BitcoinExchange();
+	public:
+		BitcoinExchange(char *av);
+		BitcoinExchange(const BitcoinExchange &bitc);
+		BitcoinExchange &operator=(const BitcoinExchange &bit);
+		~BitcoinExchange();
+
+		void	btc();
+		void	checkErrors() const;
+		// void	get_data();
+		// void	get_inp();
+};
