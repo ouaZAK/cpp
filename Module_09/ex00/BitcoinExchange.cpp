@@ -6,13 +6,11 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/19 11:20:32 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:47:57 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
-double BitcoinExchange::d = 0;
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -35,6 +33,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &bitc)
 	line = bitc.line;
 	tmp = bitc.tmp;
 	av1 = bitc.av1;
+	d = bitc.d;
 	return (*this);
 }
 
@@ -165,10 +164,26 @@ void	BitcoinExchange::reading()
 	}
 }
 
+void	BitcoinExchange::storeData()
+{
+	inpF.open("Data.csv");
+	if (!inpF.is_open())
+		thrpwing("Error: could not open Data.scv file.");
+	std::getline(inpF, line);
+	if (line.empty())
+		throwing("Error: empty file");
+	while (std::getline(inpF, line))
+	{
+		d = std::strtod(line.substr(line.find(',', 0).c_str(), line.size() - line.find(',', 0)));
+		map.insert(make_pair(line.substr(0, line.find(',', 0)), d));
+	}
+}
+
 void	BitcoinExchange::btc()
 {
 	try
 	{
+		BitcoinExchange::storData();
 		inpF.open(av1);
 		if (!inpF.is_open())
 			throwing("Error: could not open file.");
