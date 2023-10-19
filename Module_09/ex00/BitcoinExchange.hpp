@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/18 15:17:09 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:23:51 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class BitcoinExchange
 		double							d;
 		bool							empty;
 		BitcoinExchange();
+		void	reading();
 	public:
 		BitcoinExchange(char *av);
 		BitcoinExchange(const BitcoinExchange &bitc);
@@ -35,7 +36,6 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void	btc();
-		void	checkErrors();
 		// void	get_data();
 		// void	get_inp();
 };
