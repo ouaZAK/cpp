@@ -6,11 +6,13 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/19 11:05:04 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:20:32 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+double BitcoinExchange::d = 0;
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -33,7 +35,6 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &bitc)
 	line = bitc.line;
 	tmp = bitc.tmp;
 	av1 = bitc.av1;
-	d = bitc.d;
 	return (*this);
 }
 
@@ -46,13 +47,11 @@ void	throwing(std::string str)
 	throw (str);
 }
 
-void	checkValue(std::string &str)
+void	BitcoinExchange::checkValue(std::string &str)
 {
-	int count;
-	int qCount;
+	int qCount = 0;
+	int count = 0;
 
-	count = 0;
-	qCount = 0;
 	for (std::string::iterator it = str.begin(); it != str.end(); it++)
 	{
 		if (*it != '.' && *it != '-' && *it != '+')
@@ -76,7 +75,7 @@ void	checkValue(std::string &str)
 			throwing("Error: not a number");
 	}
 
-	double d = std::strtod(str.c_str(), NULL);
+	d = std::strtod(str.c_str(), NULL);
 	if (d > 1000)
 		throwing("Error: too large a numbe.");
 }
@@ -140,6 +139,9 @@ void	checkDate(std::string &str)
 void	BitcoinExchange::reading()
 {
 	size_t n;
+	std::string strV;
+	std::string strD;
+
 	while (std::getline(inpF, line))
 	{
 		try
@@ -148,13 +150,13 @@ void	BitcoinExchange::reading()
 			n = line.find(" | ", 0);
 			if (n == std::string::npos)
 				throwing("Error: bad input => " + line.substr(0, line.size()));
-			std::string str = line.substr(n + 3, (line.size() - (n + 3)));
-			if (str.empty())
+			strV = line.substr(n + 3, (line.size() - (n + 3)));
+			if (strV.empty())
 				throwing("Error: not a number");
-			checkValue(str);
-			str = line.substr(0, n);
-			checkDate(str);
-			std::cout << str << " => " << line << std::endl;
+			checkValue(strV);
+			strD = line.substr(0, n);
+			checkDate(strD);
+			std::cout << strD << " => " << strV << " = " << d << std::endl;
 		}
 		catch(std::string &e)
 		{
@@ -187,4 +189,7 @@ void	BitcoinExchange::btc()
 }
 
 // void	BitcoinExchange::get_data();
-// void	BitcoinExchange::get_inp();
+// void	BitcoinExchange::getDouble()
+// {
+// 	return (d);
+// }
