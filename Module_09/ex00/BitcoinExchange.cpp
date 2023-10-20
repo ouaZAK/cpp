@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/19 14:47:57 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/20 09:28:04 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	BitcoinExchange::checkValue(std::string &str)
 				throwing("Error: not a number");
 		if (*it == '.')
 		{
-			if ((!std::isdigit(*(it - 1)) && !std::isdigit(*(it + 1))) || (it + 1) == str.end() || it == str.begin())
+			if ((!std::isdigit(*(it - 1)) && !std::isdigit(*(it + 1))) || (it + 1) == str.end() || it == str.begin())//check if k.k or .1 or 1. 
 				throwing("Error: not a number");
 			count++;
 		}
 		if (*it == '-' || *it == '+')
 		{
 			qCount++;
-			if (it != str.begin())
+			if (it != str.begin())// if - is not in begin like 1- or 1+2
 				throwing("Error: not a number");
 			else if (it == str.begin() && *it != '+')
 				throwing("Error: not a positive number.");
@@ -140,6 +140,7 @@ void	BitcoinExchange::reading()
 	size_t n;
 	std::string strV;
 	std::string strD;
+	std::map<std::string, double>::iterator it;
 
 	while (std::getline(inpF, line))
 	{
@@ -155,35 +156,45 @@ void	BitcoinExchange::reading()
 			checkValue(strV);
 			strD = line.substr(0, n);
 			checkDate(strD);
-			std::cout << strD << " => " << strV << " = " << d << std::endl;
+			it = map.upper_bound(strD);
+			if (it != map.begin())
+				it--;
+			std::cout << strD << " => " << strV << " = " << (d * it->second) << std::endl;
 		}
 		catch(std::string &e)
 		{
 			std::cout << e << std::endl;
 		}
 	}
+	inpF.close();
 }
 
 void	BitcoinExchange::storeData()
 {
+	std::string date;
+	size_t		len;
+
 	inpF.open("Data.csv");
 	if (!inpF.is_open())
-		thrpwing("Error: could not open Data.scv file.");
+		throwing("Error: could not open Data.scv file.");
 	std::getline(inpF, line);
 	if (line.empty())
 		throwing("Error: empty file");
 	while (std::getline(inpF, line))
 	{
-		d = std::strtod(line.substr(line.find(',', 0).c_str(), line.size() - line.find(',', 0)));
-		map.insert(make_pair(line.substr(0, line.find(',', 0)), d));
+		date = line.substr(0, 10);
+		len = line.size() - line.find(',', 0) - 1;
+		d = std::strtod(line.substr(11, len).c_str() , NULL);
+		map.insert(std::make_pair(date, d));
 	}
+	inpF.close();
 }
 
 void	BitcoinExchange::btc()
 {
 	try
 	{
-		BitcoinExchange::storData();
+		BitcoinExchange::storeData();
 		inpF.open(av1);
 		if (!inpF.is_open())
 			throwing("Error: could not open file.");

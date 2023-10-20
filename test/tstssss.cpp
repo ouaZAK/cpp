@@ -59,25 +59,36 @@
 #include <iomanip>
 int main(int ac, char **av)
 {
-	std::string av1 = av[1];
-	std::ifstream inpF(av1);
-	if (!inpF.is_open())
-		return (1);
+	// std::string av1 = av[1];
+	// std::ifstream inpF(av1);
+	// if (!inpF.is_open())
+	// 	return (1);
 	std::map<std::string, double> map;
 	std::string line;
 	std::string tmp;
 	double		d;
 
-	std::getline(inpF, line);
-	while (std::getline(inpF, line))
-	{
-		tmp = line.substr(0, 10);
-		d = std::strtod(line.substr(11, line.size()).c_str(), NULL);
-		map.insert(std::make_pair(tmp, d));
-	}
-	std::map<std::string, double>::iterator it = map.begin();
-	for (; it != map.end(); it++)
-		std::cout << it->first << " | " << std::fixed << std::setprecision(2) << it->second << std::endl;
+	// std::getline(inpF, line);
+	// while (std::getline(inpF, line))
+	// {
+	// 	tmp = line.substr(0, 10);
+	// 	d = std::strtod(line.substr(11, line.size()).c_str(), NULL);
+	// 	map.insert(std::make_pair(tmp, d));
+	// }
+	std::map<std::string, double>::iterator it;
+	// std::map<std::string, double>::iterator it = map.begin();
+	// for (; it != map.end(); it++)
+	// 	std::cout << it->first << " | " << std::fixed << std::setprecision(2) << it->second << std::endl;
+	
+	std::string str1 = "2011-01-03";
+	std::string str2 = "2011-01-04";
+	map["2011-01-07"] = 2;
+	map["2011-01-02"] = 3;
+	map["2011-01-05"] = 3;
+	it = map.lower_bound("2011-01-09");
+	if (it == map.end())
+		it--;
+	std::cout << it->first << " " << it->second << '\n';
 	// std::string s1 = "2011-01-01,5";
 	// size_t i = s1.find(',', 0);
 	// std::cout << i << std::endl;
