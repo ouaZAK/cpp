@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/20 08:04:36 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/20 10:24:04 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ class BitcoinExchange
 		std::string 					line;
 		std::string						tmp;
 		std::string						av1;
-		double					d;
 		bool							empty;
+		double							d;
 
 		BitcoinExchange();
 		void	storeData();

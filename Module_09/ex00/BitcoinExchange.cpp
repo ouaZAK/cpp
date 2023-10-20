@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/20 09:28:04 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/20 10:51:34 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &bitc)
 	line = bitc.line;
 	tmp = bitc.tmp;
 	av1 = bitc.av1;
+	empty = bitc.empty;
 	d = bitc.d;
 	return (*this);
 }
@@ -65,7 +66,7 @@ void	BitcoinExchange::checkValue(std::string &str)
 		if (*it == '-' || *it == '+')
 		{
 			qCount++;
-			if (it != str.begin())// if - is not in begin like 1- or 1+2
+			if (it != str.begin() || (it == str.begin() && str.size() == 1))// if - is not in begin like 1- or 1+2 or only +
 				throwing("Error: not a number");
 			else if (it == str.begin() && *it != '+')
 				throwing("Error: not a positive number.");
@@ -213,9 +214,3 @@ void	BitcoinExchange::btc()
 		std::cout << e << std::endl;
 	}
 }
-
-// void	BitcoinExchange::get_data();
-// void	BitcoinExchange::getDouble()
-// {
-// 	return (d);
-// }
