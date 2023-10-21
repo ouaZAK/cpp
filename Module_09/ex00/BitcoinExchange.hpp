@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/20 10:24:04 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:17:40 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <cmath>
 #include <map>
 
-#include <iomanip>
 class BitcoinExchange
 {
 	private:

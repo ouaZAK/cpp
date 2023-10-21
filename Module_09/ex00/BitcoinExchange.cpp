@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/20 10:51:34 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/21 07:45:49 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	BitcoinExchange::checkValue(std::string &str)
 				throwing("Error: not a number");
 		if (*it == '.')
 		{
-			if ((!std::isdigit(*(it - 1)) && !std::isdigit(*(it + 1))) || (it + 1) == str.end() || it == str.begin())//check if k.k or .1 or 1. 
+			if ((!std::isdigit(*(it - 1)) && !std::isdigit(*(it + 1))))//check if '.' is alone 
 				throwing("Error: not a number");
 			count++;
 		}
@@ -160,6 +160,7 @@ void	BitcoinExchange::reading()
 			it = map.upper_bound(strD);
 			if (it != map.begin())
 				it--;
+			d *= it->second;
 			std::cout << strD << " => " << strV << " = " << (d * it->second) << std::endl;
 		}
 		catch(std::string &e)
