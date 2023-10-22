@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 07:55:52 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/22 09:09:49 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:22:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ double	RPN::whichSign(std::string::iterator &it, std::vector<double>::iterator v
 
 void	RPN::readLine()
 {
-	int count = 0;
+	bool	sign = false;
+	int		count = 0;
 	for (std::string::iterator it = line.begin(); it != line.end(); it++)
 	{
 		while (*it == ' ')
@@ -83,6 +84,7 @@ void	RPN::readLine()
 			break;
 		if (*it == '-' || *it == '+' || *it == '*' || *it == '/')
 		{
+			sign = true;
 			if (v.size() < 2)
 				throw ("Error: bad input");
 			d = whichSign(it, v.end());
@@ -97,7 +99,7 @@ void	RPN::readLine()
 		// std::cout << v.back() << "     {" << str << "}" << "   cout [" << count << "]" << "  find [" << line.find(' ', count) << "]" << '\n';
 		count++;
 	}
-	if (v.size() != 1)
+	if (v.size() != 1 || (v.size() == 1 && !sign))
 		throw ("Error: bad input");
 }
 
