@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 07:55:52 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/22 09:22:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/23 07:48:01 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ RPN::~RPN()
 void	checkError(std::string &line)
 {
 	if (line.empty())
-		throw ("Error: empty argument");
+		throw (std::invalid_argument("Error: empty argument"));
 	for (std::string::iterator it = line.begin(); it != line.end(); it++)
 		if (*it != '+' && *it != '-' && *it != '*' && *it != '/' && *it != ' ')
 			if (!std::isdigit(*it))
-				throw ("Error: invalid input");
+				throw (std::invalid_argument("Error: invalid input"));
 }
 
 double	RPN::whichSign(std::string::iterator &it, std::vector<double>::iterator vit)
@@ -86,7 +86,7 @@ void	RPN::readLine()
 		{
 			sign = true;
 			if (v.size() < 2)
-				throw ("Error: bad input");
+				throw (std::invalid_argument("Error: bad input"));
 			d = whichSign(it, v.end());
 			v.pop_back();
 			v.pop_back();
@@ -96,11 +96,10 @@ void	RPN::readLine()
 		}
 		str = line.substr(count, line.find(' ', count) - count);
 		v.push_back(std::strtod(str.c_str(), NULL));
-		// std::cout << v.back() << "     {" << str << "}" << "   cout [" << count << "]" << "  find [" << line.find(' ', count) << "]" << '\n';
 		count++;
 	}
 	if (v.size() != 1 || (v.size() == 1 && !sign))
-		throw ("Error: bad input");
+		throw (std::invalid_argument("Error: bad input"));
 }
 
 void	RPN::calculate()
@@ -112,8 +111,8 @@ void	RPN::calculate()
 		
 		std::cout << v.back() << '\n';
 	}
-	catch(const char *e)
+	catch(std::exception &e)
 	{
-		std::cout << e << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 }

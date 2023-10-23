@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/21 07:45:49 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/23 07:47:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ BitcoinExchange::~BitcoinExchange()
 
 void	throwing(std::string str)
 {
-	throw (str);
+	throw (std::invalid_argument(str));
 }
 
 void	BitcoinExchange::checkValue(std::string &str)
@@ -77,7 +77,7 @@ void	BitcoinExchange::checkValue(std::string &str)
 
 	d = std::strtod(str.c_str(), NULL);
 	if (d > 1000)
-		throwing("Error: too large a numbe.");
+		throwing("Error: too large a number.");
 }
 
 bool	checkDigit(std::string &str, int n)
@@ -160,12 +160,11 @@ void	BitcoinExchange::reading()
 			it = map.upper_bound(strD);
 			if (it != map.begin())
 				it--;
-			d *= it->second;
 			std::cout << strD << " => " << strV << " = " << (d * it->second) << std::endl;
 		}
-		catch(std::string &e)
+		catch(std::exception &e)
 		{
-			std::cout << e << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	inpF.close();
@@ -206,7 +205,7 @@ void	BitcoinExchange::btc()
 		else if (line != "date | value")
 			throwing("Error: enter <date | value>");
 		empty = true;
-		BitcoinExchange::reading();
+		reading();
 		if (empty)
 			throwing("Error: empty file");
 	}
