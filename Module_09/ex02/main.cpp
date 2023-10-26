@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:04:51 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/26 08:44:37 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/23 07:54:14 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/23 07:54:25 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "PmergeMe.hpp"
 
-#include <iostream>
-
-template <typename T>
-void	myFunc(T ar)
+int main(int ac, char **av)
 {
-	std::cout << "arr : " << ar << std::endl;
-}
+	if (ac != 2)
+	{
+		std::cout << "Error: enter <one argument>" << std::endl;
+		return (0);
+	}
 
-template <typename Y, typename T>
-void	iter(Y *arr, int length, void (*func)(T ar))
-{
-	for (int i = 0; i < length; i++)
-		(*func)(arr[i]);
+	return (0);
 }

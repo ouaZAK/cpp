@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/23 07:47:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/23 08:41:07 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void	BitcoinExchange::btc()
 	try
 	{
 		BitcoinExchange::storeData();
-		inpF.open(av1);
+		inpF.open(av1.c_str());
 		if (!inpF.is_open())
 			throwing("Error: could not open file.");
 		std::getline(inpF, line);

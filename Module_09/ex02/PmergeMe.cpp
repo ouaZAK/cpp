@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:04:51 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/26 08:44:37 by zouaraqa         ###   ########.fr       */
+/*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
+/*   Updated: 2023/10/23 07:54:05 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "PmergeMe.hpp"
 
-#include <iostream>
-
-template <typename T>
-void	myFunc(T ar)
+PmergeMe::PmergeMe()
 {
-	std::cout << "arr : " << ar << std::endl;
 }
 
-template <typename Y, typename T>
-void	iter(Y *arr, int length, void (*func)(T ar))
+PmergeMe::PmergeMe(const PmergeMe &mer)
 {
-	for (int i = 0; i < length; i++)
-		(*func)(arr[i]);
+	if (this != &mer)
+		*this = mer;
+}
+PmergeMe &PmergeMe::operator=(const PmergeMe &mer)
+{
+	(void)mer;
+	return (*this);
+}
+
+PmergeMe::~PmergeMe()
+{
 }
