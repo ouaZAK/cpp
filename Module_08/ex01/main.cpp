@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:17:12 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/07 09:04:13 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:42:46 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int main()
 	unsigned int x = 5;
 	try
 	{
-		Span sp = Span(5);
-		
+		Span sp = Span(x);
+
 		sp.addNumber(6);
 		sp.addNumber(3);
 		sp.addNumber(17);

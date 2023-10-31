@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:53:11 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/11 13:53:35 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:38:24 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main()
 {
 	std::vector<int> v;
-	const int x = 95;
+	const int x = 96;
 
 	for (int i = 96; i < 100; i++)
 		v.push_back(i);

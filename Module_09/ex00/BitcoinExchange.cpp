@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/23 08:41:07 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/30 07:50:08 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,8 @@ void	BitcoinExchange::btc()
 		if (empty)
 			throwing("Error: empty file");
 	}
-	catch(std::string &e)
+	catch(std::exception &e)
 	{
-		std::cout << e << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 }

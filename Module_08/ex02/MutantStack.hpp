@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 10:14:52 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/07 11:20:51 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:26:10 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ class MutantStack : public std::stack<T>
 		MutantStack(){};
 		MutantStack(const MutantStack &mut)
 		{
-			*this = mut;
+			if (this != &mut)
+				*this = mut;
 		}
 		MutantStack &operator=(const MutantStack &mut)
 		{
@@ -32,7 +33,7 @@ class MutantStack : public std::stack<T>
 			return (*this);
 		}
 		~MutantStack(){};
-		
+
 		iterator	begin()
 		{
 			return (this->c.begin());
