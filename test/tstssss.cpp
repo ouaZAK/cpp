@@ -76,9 +76,9 @@ int main(int ac, char **av)
 	// 	map.insert(std::make_pair(tmp, d));
 	// }
 	std::map<std::string, double>::iterator it;
-	// std::map<std::string, double>::iterator it = map.begin();
-	// for (; it != map.end(); it++)
-	// 	std::cout << it->first << " | " << std::fixed << std::setprecision(2) << it->second << std::endl;
+	std::map<std::string, double>::iterator it = map.begin();
+	for (; it != map.end(); it++)
+		std::cout << it->first << " | " << std::fixed << std::setprecision(2) << it->second << std::endl;
 	
 	std::string str1 = "2011-01-03";
 	std::string str2 = "2011-01-04";

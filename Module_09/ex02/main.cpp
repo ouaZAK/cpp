@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:54:14 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/31 09:16:47 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/01 09:45:44 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ int main(int ac, char **av)
 	try
 	{
 		PmergeMe merge(av);
-
-		std::deque< std::deque<int> > tmp = merge.getPairs();
-		std::deque< std::deque<int> >::iterator it;
-		for (it = tmp.begin(); it != tmp.end(); it++)
-			std::cout << "[" << *it << "] " ;
-		std::cout << '\n';
 	}
 	catch(const std::exception& e)
 	{
