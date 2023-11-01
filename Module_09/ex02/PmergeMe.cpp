@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/01 12:27:31 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:51:01 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	PmergeMe::recursion()
 	size_t x = pair.size()  / 2;
 	for (pit = pair.begin(); pit != pair.end(); pit++)
 	{
-		while (pit->first.front() && pair.size() > x)
+		while (!pit->first.empty() && pair.size() > x)
 		{
 			stock.first.push_back(pit->first.front());
 			stock.first.push_back(pit->second.front());
@@ -72,7 +72,7 @@ void	PmergeMe::recursion()
 	// while(1);
 	for (pit = pair.begin(); pit != pair.end(); pit++)//segfult
 	{
-		while (pit->first.front() && pair.size() > 0)
+		while (!pit->first.empty() && pair.size() > 0)
 		{
 			stock.second.push_back(pit->first.front());
 			stock.second.push_back(pit->second.front());
@@ -82,15 +82,23 @@ void	PmergeMe::recursion()
 
 	
 	std::deque<int>::iterator i;
-	i = stock.first.begin();
-	std::cout << "[";
-	for (i = stock.first.begin(); i != stock.first.end(); i++)
-		std::cout << *i << ' ';
-	std::cout  << ",";
-	i = stock.second.begin();
-	for (i = stock.second.begin(); i != stock.second.end(); i++)
-		std::cout << *i << ' ';
-	std::cout  << "]";
+	pit = pair.begin();
+	// std::copy(stock.first.begin(), stock.first.end(), pit->first.begin());
+	// for (i = stock.first.begin(); i != stock.first.end(); i++)
+	// {
+	// 	pit->first.push_back(*i);
+	// 	pit++;
+	// }
+	// pit = pair.begin();
+	// for (i = stock.second.begin(); i != stock.second.end(); i++)
+	// {
+	// 	pit->second.push_back(*i);
+	// 	pit++;
+	// }
+	if (pair.begin() != pair.end())
+		std::cout << pit->first.front() << '\n';
+	for (pit = pair.begin(); pit != pair.end(); pit++)
+		std::cout << "la >> " << pit->first.front() << " ," << pit->second.front() << '\n';
 	// recursion();
 }
 
