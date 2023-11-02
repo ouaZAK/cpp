@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/01 11:54:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/02 08:51:26 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class PmergeMe
 		std::deque<int>			tmpDeque;
 		std::string 			str;
 		pairsOfDeque			pair;
+		pairsOfDeque			nextPair;
 		std::pair<std::deque<int>, std::deque<int> > stock;
 		pairsOfDeque::iterator	pit;
 		dequeOfDeque			dequeNbrs;

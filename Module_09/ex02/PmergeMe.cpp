@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/01 13:51:01 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:33:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	PmergeMe::checkAndStock()
 
 void	PmergeMe::recursion()
 {
+	nbr++;
+	std::cout << nbr << '\n';
 	//sort pairs
 	for (pit = pair.begin(); pit != pair.end(); pit++)
 		if (pit->first.back() > pit->second.back())
@@ -45,6 +47,7 @@ void	PmergeMe::recursion()
 	{
 		copyFirst = pair.back().first;
 		copySecond = pair.back().second;
+	std::cout << "rest:             [" << copyFirst.front() << ", " << copySecond.front() << "]\n";
 		pair.pop_back();
 	}
 	
@@ -58,31 +61,69 @@ void	PmergeMe::recursion()
 	//copy to stock of pairs
 	if (pair.size() == 1)
 		return ;
-	pit = pair.begin();
-	size_t x = pair.size()  / 2;
-	for (pit = pair.begin(); pit != pair.end(); pit++)
-	{
-		while (!pit->first.empty() && pair.size() > x)
-		{
-			stock.first.push_back(pit->first.front());
-			stock.first.push_back(pit->second.front());
-			pair.pop_front();
-		}
-	}
-	// while(1);
-	for (pit = pair.begin(); pit != pair.end(); pit++)//segfult
-	{
-		while (!pit->first.empty() && pair.size() > 0)
-		{
-			stock.second.push_back(pit->first.front());
-			stock.second.push_back(pit->second.front());
-			pair.pop_front();
-		}
-	}
 
-	
-	std::deque<int>::iterator i;
+	std::deque<int>::iterator dit,dit2;
+	// dit = pair.front().first.begin();
 	pit = pair.begin();
+	
+	while (pit != pair.end())
+	{
+		dit = pit->first.begin();
+		// dit = pair.front().first.begin();
+		for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
+		{
+			stock.first.push_back(*dit);
+		// std::cout << *dit << ' ' << *(++dit) << '\n';
+		}
+		
+			// stock.first.push_back(*dit2);
+		// for (dit = pit->second.begin(), dit2 = pit->second.begin(); dit != pit->second.begin(); dit++)
+		// {
+		// 	stock.first.push_back(*dit);
+		// 	stock.first.push_back(*dit2);
+		// }
+		// if (pit == pair.end())
+		// 	break;
+		// for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
+		// 	stock.second.push_back(*dit);
+		// for (dit = pit->second.begin(); dit != pit->second.begin(); dit++)
+		// 	stock.second.push_back(*dit);
+		nextPair.push_back(stock);
+		// for (std::deque<int>::iterator i = stock.first.begin(); i != stock.first.end(); i++)
+		// 	std::cout << *i << ' ';
+		// for (std::deque<int>::iterator i = stock.second.begin(); i != stock.second.end(); i++)
+		// 	std::cout << *i << ' ';
+		// std::cout << '\n';
+		stock.first.clear();
+		stock.second.clear();
+		pit++;
+	}
+	// size_t x = pair.size() / 2;
+	// for (pit = pair.begin(); pit != pair.end(); pit++)
+	// {
+	// 	while (!pit->first.empty() && pair.size() > x)
+	// 	{
+	// 		stock.first.push_back(pit->first.front());
+	// 		stock.first.push_back(pit->second.front());
+	// 		pair.pop_front();
+	// 	}
+	// }
+	// // while(1);
+	// for (pit = pair.begin(); pit != pair.end(); pit++)//segfult
+	// {
+	// 	while (!pit->first.empty() && pair.size() > 0)
+	// 	{
+	// 		stock.second.push_back(pit->first.front());
+	// 		stock.second.push_back(pit->second.front());
+	// 		pair.pop_front();
+	// 	}
+	// }
+
+
+	pair.clear();
+	pair = nextPair;
+	pit = pair.begin();
+	// pair.insert(pit, stock);
 	// std::copy(stock.first.begin(), stock.first.end(), pit->first.begin());
 	// for (i = stock.first.begin(); i != stock.first.end(); i++)
 	// {
@@ -95,10 +136,18 @@ void	PmergeMe::recursion()
 	// 	pit->second.push_back(*i);
 	// 	pit++;
 	// }
-	if (pair.begin() != pair.end())
-		std::cout << pit->first.front() << '\n';
+	// if (pair.begin() != pair.end())
+	// 	std::cout << pit->first.front() << '\n';
 	for (pit = pair.begin(); pit != pair.end(); pit++)
-		std::cout << "la >> " << pit->first.front() << " ," << pit->second.front() << '\n';
+	{
+	std::cout << "[";
+		for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
+			std::cout << *dit << " ";
+		std::cout << ',';
+		for (dit = pit->second.begin(); dit != pit->second.end(); dit++)
+			std::cout << *dit << "]";
+	}
+	std::cout << "\n";
 	// recursion();
 }
 
@@ -130,6 +179,7 @@ PmergeMe::PmergeMe(char **av)
 		pair.push_back(std::make_pair(*it, *(it + 1)));
 		it += 2;
 	}
+	nbr = -1;
 	PmergeMe::recursion();
 }
 
