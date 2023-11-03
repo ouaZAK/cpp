@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/03 11:59:43 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:04:30 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	PmergeMe::checkAndStock()
 
 void	PmergeMe::recursion()
 {
+	//need it to be in stack frame of eache rec
+	// pairOfDeque						tmpSimplePair;
+
 	nbr++;
 	std::cout << "\ndept;      	      " << nbr << '\n';
 
@@ -103,7 +106,7 @@ void	PmergeMe::recursion()
 	}
 	std::cout << "\n";
 	recursion();
-	std::cout << "back to " << nbr-- << '\n';
+	std::cout << "back to " << nbr-- << "    tmp is [" << tmpSimplePair.first.front() << ',' << tmpSimplePair.second.front() << "]\n";
 }
 
 PmergeMe::PmergeMe(char **av)

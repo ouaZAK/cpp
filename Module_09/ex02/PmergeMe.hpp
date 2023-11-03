@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/03 11:53:15 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:02:17 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ class PmergeMe
 		dequeOfDeque					NbrsOfDeq;
 		dequeOfDeque::iterator			ddIt;
 		pairOfDeque						simplePair;
-		pairOfDeque						tmpSimplePair;
 		deque							RestOfDeq;
 		deque							FirstOfSimplePair;
 		deque							SecondOfSimplePair;
