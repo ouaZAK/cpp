@@ -9,6 +9,8 @@ void	rec(dequeOfPair &pair, dequeOfPair &tmpPair, pears &stock)
 	std::deque<int>::iterator it;
 
 	dequeOfPair::iterator pit;
+	if (pair.size() == 1)
+		return ;
 	std::cout << "bef     ";
 	for (pit = pair.begin(); pit != pair.end(); pit++)
 	{
@@ -21,36 +23,24 @@ void	rec(dequeOfPair &pair, dequeOfPair &tmpPair, pears &stock)
 		std::cout << "]";
 	}
 	std::cout << '\n';
+
 	for (pit = pair.begin(); pit != pair.end(); pit++)
 	{
-		int i = 0;
 		// std::cout << ' ';
-		while (i < 2)
-		{
 			for (it = pit->first.begin(); it != pit->first.end(); it++)
-			{
-				// std::cout << *it << " is pushed to first \n";
 				stock.first.push_back(*it);
-			}
-			// std::cout << ",\n";
 			for (it = pit->second.begin(); it != pit->second.end(); it++)
-			{
-				// std::cout << *it << " is pushed to first \n";
 				stock.first.push_back(*it);
-			}
-			for (it = pit->second.begin(); it != pit->second.end(); it++)
-			{
-				// std::cout << *it << " is pushed to first \n";
+
+			pit++;
+			if (pit == pair.end())
+				break;
+	
+			for (it = pit->first.begin(); it != pit->first.end(); it++)
 				stock.second.push_back(*it);
-			}
-			// std::cout << ",\n";
 			for (it = pit->second.begin(); it != pit->second.end(); it++)
-			{
-				// std::cout << *it << " is pushed to first \n";
 				stock.second.push_back(*it);
-			}
-			i++;
-		}
+
 		std::cout << stock.first.back() << " " << stock.second.back() << '\n';
 			tmpPair.push_back(stock);
 			stock.first.clear();
@@ -70,6 +60,10 @@ void	rec(dequeOfPair &pair, dequeOfPair &tmpPair, pears &stock)
 		std::cout << "]";
 	}
 	std::cout << '\n';
+
+	pair = tmpPair;
+	tmpPair.clear();
+	rec(pair, tmpPair, stock);
 }
 
 int main()
@@ -84,10 +78,9 @@ int main()
 		for (int x = 0; x < 3; x++)
 			stock.second.push_back(x + 3 + i);
 		pair.push_back(stock);
-		
+
 		stock.first.clear();
 		stock.second.clear();
-
 	}
 
 	rec(pair, tmpPair, stock);

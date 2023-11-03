@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/02 11:33:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:35:59 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,130 +25,83 @@ void	PmergeMe::checkAndStock()
 	std::stringstream ss;
 	ss << str;
 	ss >> nbr;
-	tmpDeque.push_back(nbr);
-	dequeNbrs.push_back(tmpDeque);
-	tmpDeque.clear();
+	TmpOfDeq.push_back(nbr);
+	NbrsOfDeq.push_back(TmpOfDeq);
+	TmpOfDeq.clear();
 }
 
 void	PmergeMe::recursion()
 {
 	nbr++;
-	std::cout << nbr << '\n';
+	std::cout << "dept;      	      " << nbr << '\n';
+
 	//sort pairs
-	for (pit = pair.begin(); pit != pair.end(); pit++)
-		if (pit->first.back() > pit->second.back())
-			std::swap(pit->first, pit->second);
+	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
+		if (dpdIt->first.back() > dpdIt->second.back())
+			std::swap(dpdIt->first, dpdIt->second);
 
 	//print
 	print2();
-	
 	//must be pair
-	if (pair.size() % 2 != 0 && pair.size() != 1)
+	if (mainPairs.size() % 2 != 0 && mainPairs.size() != 1)
 	{
-		copyFirst = pair.back().first;
-		copySecond = pair.back().second;
-	std::cout << "rest:             [" << copyFirst.front() << ", " << copySecond.front() << "]\n";
-		pair.pop_back();
+		simplePair = mainPairs.back();
+		mainPairs.pop_back();
+		// FirstOfSimplePair = mainPairs.back().first;
+		// SecondOfSimplePair = mainPairs.back().second;
+	std::cout << "RestOfDeq:             [" << simplePair.first.front() << ", " << simplePair.second.front() << "]\n";
 	}
 	
 	//print
-	if (pair.size() % 2 != 0 && pair.size() != 1)
+	if (mainPairs.size() % 2 != 0 && mainPairs.size() != 1)
 		print();
 	else
 		print2();
 	
 	// std::cout << pair.size() << '\n';
 	//copy to stock of pairs
-	if (pair.size() == 1)
+	if (mainPairs.size() == 1)
 		return ;
-
-	std::deque<int>::iterator dit,dit2;
-	// dit = pair.front().first.begin();
-	pit = pair.begin();
-	
-	while (pit != pair.end())
+	copyOfPairs.clear();
+	for (dpdIt = mainPairs.begin(); (dpdIt ) != mainPairs.end(); dpdIt += 2)
 	{
-		dit = pit->first.begin();
-		// dit = pair.front().first.begin();
-		for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
+		for (dit = dpdIt->first.begin(); dit != dpdIt->first.end(); dit++)
 		{
-			stock.first.push_back(*dit);
-		// std::cout << *dit << ' ' << *(++dit) << '\n';
+			simplePair.first.push_back(*dit);
+			// std::cout << simplePair.first.back() << '\n';
 		}
-		
-			// stock.first.push_back(*dit2);
-		// for (dit = pit->second.begin(), dit2 = pit->second.begin(); dit != pit->second.begin(); dit++)
-		// {
-		// 	stock.first.push_back(*dit);
-		// 	stock.first.push_back(*dit2);
-		// }
-		// if (pit == pair.end())
-		// 	break;
-		// for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
-		// 	stock.second.push_back(*dit);
-		// for (dit = pit->second.begin(); dit != pit->second.begin(); dit++)
-		// 	stock.second.push_back(*dit);
-		nextPair.push_back(stock);
-		// for (std::deque<int>::iterator i = stock.first.begin(); i != stock.first.end(); i++)
-		// 	std::cout << *i << ' ';
-		// for (std::deque<int>::iterator i = stock.second.begin(); i != stock.second.end(); i++)
-		// 	std::cout << *i << ' ';
-		// std::cout << '\n';
-		stock.first.clear();
-		stock.second.clear();
-		pit++;
+		for (dit = dpdIt->second.begin(); dit != dpdIt->second.end(); dit++)
+		{
+			simplePair.first.push_back(*dit);
+			// std::cout << simplePair.first.back() << '\n';
+		}
+		for (dit = (dpdIt + 1)->first.begin(); dit != (dpdIt + 1)->first.end(); dit++)
+		{
+			simplePair.second.push_back(*dit);
+			// std::cout << simplePair.second.back() << '\n';
+		}
+		for (dit = (dpdIt + 1)->second.begin(); dit != (dpdIt + 1)->second.end(); dit++)
+			simplePair.second.push_back(*dit);
+		copyOfPairs.push_back(simplePair);
+		simplePair.first.clear();
+		simplePair.second.clear();
 	}
-	// size_t x = pair.size() / 2;
-	// for (pit = pair.begin(); pit != pair.end(); pit++)
-	// {
-	// 	while (!pit->first.empty() && pair.size() > x)
-	// 	{
-	// 		stock.first.push_back(pit->first.front());
-	// 		stock.first.push_back(pit->second.front());
-	// 		pair.pop_front();
-	// 	}
-	// }
-	// // while(1);
-	// for (pit = pair.begin(); pit != pair.end(); pit++)//segfult
-	// {
-	// 	while (!pit->first.empty() && pair.size() > 0)
-	// 	{
-	// 		stock.second.push_back(pit->first.front());
-	// 		stock.second.push_back(pit->second.front());
-	// 		pair.pop_front();
-	// 	}
-	// }
 
-
-	pair.clear();
-	pair = nextPair;
-	pit = pair.begin();
-	// pair.insert(pit, stock);
-	// std::copy(stock.first.begin(), stock.first.end(), pit->first.begin());
-	// for (i = stock.first.begin(); i != stock.first.end(); i++)
-	// {
-	// 	pit->first.push_back(*i);
-	// 	pit++;
-	// }
-	// pit = pair.begin();
-	// for (i = stock.second.begin(); i != stock.second.end(); i++)
-	// {
-	// 	pit->second.push_back(*i);
-	// 	pit++;
-	// }
-	// if (pair.begin() != pair.end())
-	// 	std::cout << pit->first.front() << '\n';
-	for (pit = pair.begin(); pit != pair.end(); pit++)
+	mainPairs = copyOfPairs;
+	copyOfPairs.clear();
+	std::cout << "final:                ";
+	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
 	{
 	std::cout << "[";
-		for (dit = pit->first.begin(); dit != pit->first.end(); dit++)
+		for (dit = dpdIt->first.begin(); dit != dpdIt->first.end(); dit++)
 			std::cout << *dit << " ";
 		std::cout << ',';
-		for (dit = pit->second.begin(); dit != pit->second.end(); dit++)
-			std::cout << *dit << "]";
+		for (dit = dpdIt->second.begin(); dit != dpdIt->second.end(); dit++)
+			std::cout << *dit << ' ';
+		std::cout << "]";
 	}
 	std::cout << "\n";
-	// recursion();
+	recursion();
 }
 
 PmergeMe::PmergeMe(char **av)
@@ -158,26 +111,26 @@ PmergeMe::PmergeMe(char **av)
 		str = static_cast<std::string>(av[i]);
 		PmergeMe::checkAndStock();
 	}
-	
+
 	//print
 	std::cout << "at start:         ";
-	for (it = dequeNbrs.begin(); it != dequeNbrs.end(); it++)
-		std::cout << "\"" << *it << "\" " ;
+	for (ddIt = NbrsOfDeq.begin(); ddIt != NbrsOfDeq.end(); ddIt++)
+		std::cout << "\"" << *ddIt << "\" " ;
 	std::cout << '\n';
 
-	if (dequeNbrs.size() % 2)
+	if (NbrsOfDeq.size() % 2)
 	{
-		rest.push_back(dequeNbrs.back().back());
-		dequeNbrs.pop_back();
-		std::cout << "rest:             \"" << rest.front() << "\"\n";
+		RestOfDeq.push_back(NbrsOfDeq.back().back());
+		NbrsOfDeq.pop_back();
+		std::cout << "RestOfDeq:             \"" << RestOfDeq.front() << "\"\n";
 	}
 
-	//create first pair
-	it = dequeNbrs.begin();
-	while (it != dequeNbrs.end())
+	//create first mainPairs
+	ddIt = NbrsOfDeq.begin();
+	while (ddIt != NbrsOfDeq.end())
 	{
-		pair.push_back(std::make_pair(*it, *(it + 1)));
-		it += 2;
+		mainPairs.push_back(std::make_pair(*ddIt, *(ddIt + 1)));
+		ddIt += 2;
 	}
 	nbr = -1;
 	PmergeMe::recursion();
@@ -208,20 +161,20 @@ std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec)
 }
 std::deque< std::deque<int> > PmergeMe::getdequeNbrs()
 {
-	return dequeNbrs;
+	return NbrsOfDeq;
 }
 void	PmergeMe::print()
 {
 	std::cout << "make dequeNbrs:   ";
-	for (pit = pair.begin(); pit != pair.end(); pit++)
-		std::cout << "[" << pit->first.front() << ", " << pit->second << "] ";
-	std::cout << '\n' << "tmp:            \"" << copyFirst.front() << ' ' << copySecond.front() << "\"\n";
+	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
+		std::cout << "[" << dpdIt->first.front() << ", " << dpdIt->second << "] ";
+	std::cout << '\n' << "tmp:            \"" << simplePair.first.front() << ' ' << simplePair.second.front() << "\"\n";
 }
 void	PmergeMe::print2()
 {
-	std::cout << "first pairs:      ";
-	for (pit = pair.begin(); pit != pair.end(); pit++)
-		std::cout << "[" << pit->first.front() << ", " << pit->second << "] ";
+	std::cout << "first mainPairs:      ";
+	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
+		std::cout << "[" << dpdIt->first.front() << ", " << dpdIt->second << "] ";
 	std::cout << '\n';
 }
 //#################

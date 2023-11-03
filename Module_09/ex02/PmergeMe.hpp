@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/02 08:51:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:09:36 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,27 @@
 #include <list>
 #include <sstream>
 
-typedef std::deque< std::pair< std::deque<int>, std::deque<int> > > pairsOfDeque;
+typedef std::deque< std::pair< std::deque<int>, std::deque<int> > > dequeOfPairsOfDeque;
+typedef std::pair< std::deque<int>, std::deque<int> > pairOfDeque;
 typedef std::deque< std::deque<int> > dequeOfDeque;
-
+typedef	std::deque<int> deque;
 
 class PmergeMe
 {
 	private:
-		std::deque<int>			rest;
-		std::deque<int>			copyFirst;
-		std::deque<int>			copySecond;
-		std::deque<int>			tmpDeque;
-		std::string 			str;
-		pairsOfDeque			pair;
-		pairsOfDeque			nextPair;
-		std::pair<std::deque<int>, std::deque<int> > stock;
-		pairsOfDeque::iterator	pit;
-		dequeOfDeque			dequeNbrs;
-		dequeOfDeque::iterator	it;
-		int						nbr;
+		dequeOfPairsOfDeque				mainPairs;
+		dequeOfPairsOfDeque				copyOfPairs;
+		dequeOfPairsOfDeque::iterator	dpdIt;
+		dequeOfDeque					NbrsOfDeq;
+		dequeOfDeque::iterator			ddIt;
+		pairOfDeque						simplePair;
+		deque							RestOfDeq;
+		deque							FirstOfSimplePair;
+		deque							SecondOfSimplePair;
+		deque							TmpOfDeq;
+		deque::iterator					dit;
+		std::string 					str;
+		int								nbr;
 		PmergeMe();
 	public:
 		PmergeMe(char **av);
