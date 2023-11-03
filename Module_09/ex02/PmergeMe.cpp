@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/03 11:35:59 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:59:43 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	PmergeMe::checkAndStock()
 void	PmergeMe::recursion()
 {
 	nbr++;
-	std::cout << "dept;      	      " << nbr << '\n';
+	std::cout << "\ndept;      	      " << nbr << '\n';
 
 	//sort pairs
 	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
@@ -45,11 +45,11 @@ void	PmergeMe::recursion()
 	//must be pair
 	if (mainPairs.size() % 2 != 0 && mainPairs.size() != 1)
 	{
-		simplePair = mainPairs.back();
+		tmpSimplePair = mainPairs.back();
 		mainPairs.pop_back();
 		// FirstOfSimplePair = mainPairs.back().first;
 		// SecondOfSimplePair = mainPairs.back().second;
-	std::cout << "RestOfDeq:             [" << simplePair.first.front() << ", " << simplePair.second.front() << "]\n";
+	std::cout << "RestOfDeq:             [" << tmpSimplePair.first.front() << ", " << tmpSimplePair.second.front() << "]\n";
 	}
 	
 	//print
@@ -62,6 +62,7 @@ void	PmergeMe::recursion()
 	//copy to stock of pairs
 	if (mainPairs.size() == 1)
 		return ;
+
 	copyOfPairs.clear();
 	for (dpdIt = mainPairs.begin(); (dpdIt ) != mainPairs.end(); dpdIt += 2)
 	{
@@ -102,6 +103,7 @@ void	PmergeMe::recursion()
 	}
 	std::cout << "\n";
 	recursion();
+	std::cout << "back to " << nbr-- << '\n';
 }
 
 PmergeMe::PmergeMe(char **av)
