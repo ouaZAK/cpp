@@ -47,7 +47,6 @@ void	rec(dequeOfPair &pair, dequeOfPair &tmpPair, pears &stock)
 			stock.second.clear();
 	}
 
-
 	std::cout << "after     ";
 	for (pit = tmpPair.begin(); pit != tmpPair.end(); pit++)
 	{

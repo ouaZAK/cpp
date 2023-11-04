@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/03 12:02:17 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:57:02 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ class PmergeMe
 		dequeOfDeque					NbrsOfDeq;
 		dequeOfDeque::iterator			ddIt;
 		pairOfDeque						simplePair;
+		pairOfDeque						splitedPair;
 		deque							RestOfDeq;
 		deque							FirstOfSimplePair;
 		deque							SecondOfSimplePair;
 		deque							TmpOfDeq;
-		deque::iterator					dit;
+		deque::iterator					dIt;
 		std::string 					str;
 		int								nbr;
 		PmergeMe();
@@ -46,8 +47,8 @@ class PmergeMe
 		~PmergeMe();
 		void	checkAndStock();
 		void	recursion();
-		void	print();
-		void	print2();
+		void	print(int x);
+		void	print(pairOfDeque tmpSimplePair);
 		std::deque< std::deque<int> > getdequeNbrs();
 };
 
