@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/04 13:04:59 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:34:10 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,8 @@ PmergeMe::PmergeMe()
 {
 }
 
-void	PmergeMe::checkAndStock()
-{
-	std::string::iterator it;
-	for (it = str.begin(); it != str.end(); it++)
-		if (!std::isdigit(*it))
-			throw (std::invalid_argument("Error: invalid argument"));
-	std::stringstream ss;
-	ss << str;
-	ss >> nbr;
-	TmpOfDeq.push_back(nbr);
-	NbrsOfDeq.push_back(TmpOfDeq);
-	TmpOfDeq.clear();
-}
-
 void	PmergeMe::recursion()
 {
-	//need it to be in stack frame of eache rec
 	pairOfDeque						tmpSimplePair;
 
 	nbr++;
@@ -62,6 +47,7 @@ void	PmergeMe::recursion()
 	else
 		print(1);
 
+	//######### return from rec
 	if (mainPairs.size() == 1)
 		return ;
 
@@ -93,17 +79,23 @@ void	PmergeMe::recursion()
 	print(1);
 
 	recursion();
-	std::cout << "\nback to " << --nbr << ", " ;
+	std::cout << "\nback to " << nbr-- << ", " ;
 	if (!tmpSimplePair.first.empty())
 		print(tmpSimplePair);
 	else
 		std::cout << ".   tmp is   empty\n";
 	
-
+//----------------------------------------
 	//######## BACK FROM REC
 	size_t half;
 	size_t i;
-
+	if (mainPairs.size() % 2 != 0 && mainPairs.size() != 1)
+	{
+		std::cout << "la\n";
+		mainPairs.pop_back();
+		print(1);
+	}
+	//####### SPLIT MAINPAIRS
 	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
 	{
 		half = dpdIt->first.size() / 2;
@@ -137,6 +129,118 @@ void	PmergeMe::recursion()
 	//rpint
 	std::cout << "after spliting        ";
 	print(1);
+	if (mainPairs.size() == 1 && !tmpSimplePair.first.empty() && !tmpSimplePair.second.empty())
+	{
+		std::cout << "##########################\n";
+		if (mainPairs.front().second.back() < tmpSimplePair.second.back())
+			mainPairs.push_back(tmpSimplePair);
+		else
+			mainPairs.push_front(tmpSimplePair);
+		// deqOfSplitedPair.push_back(mainPairs.front().first.front());
+		// deqOfSplitedPair.push_back(mainPairs.front().second.front());
+		return;
+	}
+	deqOfSplitedPair.push_back(mainPairs.front().first);
+	deqOfSplitedPair.push_back(mainPairs.front().second);
+	dpdIt = mainPairs.begin();
+	dpdIt++;
+	for (; dpdIt != mainPairs.end(); dpdIt++)
+	{
+		deqOfSplitedPair.push_back(dpdIt->second);
+		pending.push_back(dpdIt->first);
+	}
+	
+	copyOfSplitedPair = deqOfSplitedPair;
+	for (pIt = pending.begin(); pIt != pending.end(); pIt++)
+	{
+		for (sIt = deqOfSplitedPair.begin(), sIt2 = copyOfSplitedPair.begin(); sIt + 1 != deqOfSplitedPair.end(); sIt++, sIt2++)
+		{
+			if (pIt->back() > sIt->back() && pIt->back() < (sIt + 1)->back())
+				copyOfSplitedPair.insert((sIt2 + 1), *pIt);
+			else if (sIt + 1 == deqOfSplitedPair.end())
+				copyOfSplitedPair.insert(copyOfSplitedPair.end(), *pIt);
+		}
+	}
+	std::cout  << "\n deq splited     [";
+	for (ddIt = deqOfSplitedPair.begin(); ddIt != deqOfSplitedPair.end(); ddIt++)
+	{
+		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
+			std::cout << *dIt << " ";
+		std::cout  << ", ";
+	}
+	std::cout  << "]";
+		std::cout  << "\n pending     [";
+	for (ddIt = pending.begin(); ddIt != pending.end(); ddIt++)
+	{
+		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
+			std::cout << *dIt << " ";
+		std::cout  << ", ";
+	}
+	std::cout  << "]\n";
+	pending.clear();
+	deqOfSplitedPair = copyOfSplitedPair;
+	copyOfSplitedPair = deqOfSplitedPair;
+	for (sIt = deqOfSplitedPair.begin(), sIt2 = copyOfSplitedPair.begin(); sIt + 1 != deqOfSplitedPair.end(); sIt++, sIt2++)
+	{
+		if (!tmpSimplePair.first.empty() && !tmpSimplePair.second.empty())
+		{
+			// std::cout << "#############  " << tmpSimplePair.first.back() << " " << tmpSimplePair.second.back() << '\n';
+			if (tmpSimplePair.second.back() > sIt->back() && tmpSimplePair.second.back() < (sIt + 1)->back())
+			{
+				copyOfSplitedPair.insert(sIt2 + 1, tmpSimplePair.first);
+				copyOfSplitedPair.insert(sIt2 + 2, tmpSimplePair.second);
+				tmpSimplePair.first.clear();
+				tmpSimplePair.second.clear();
+			}
+		}
+	}
+
+	deqOfSplitedPair = copyOfSplitedPair;
+	copyOfSplitedPair.clear();
+	
+	std::cout  << "\n deq splited     [";
+	for (ddIt = deqOfSplitedPair.begin(); ddIt != deqOfSplitedPair.end(); ddIt++)
+	{
+		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
+			std::cout << *dIt << " ";
+		std::cout  << ", ";
+	}
+	std::cout  << "]\n";
+	
+	// int y = 1;
+	for (ddIt = deqOfSplitedPair.begin(); ddIt != deqOfSplitedPair.end(); ddIt += 2)
+	{
+		// std::cout << "ha" << '\n';
+		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
+			simplePair.first.push_back(*dIt);
+		for (dIt = (ddIt + 1)->begin(); dIt != (ddIt + 1)->end(); dIt++)
+			simplePair.second.push_back(*dIt);
+		copyOfPairs.push_back(simplePair);
+		simplePair.first.clear();
+		simplePair.second.clear();
+	}
+
+	std::cout << "##### main befor  ";
+	print(1);
+	std::cout << "##### main       ";
+	
+	mainPairs = copyOfPairs;
+	print(1);
+		while (1);
+}
+
+void	PmergeMe::checkAndStock()
+{
+	std::string::iterator it;
+	for (it = str.begin(); it != str.end(); it++)
+		if (!std::isdigit(*it))
+			throw (std::invalid_argument("Error: invalid argument"));
+	std::stringstream ss;
+	ss << str;
+	ss >> nbr;
+	TmpOfDeq.push_back(nbr);
+	NbrsOfDeq.push_back(TmpOfDeq);
+	TmpOfDeq.clear();
 }
 
 PmergeMe::PmergeMe(char **av)
@@ -159,9 +263,9 @@ PmergeMe::PmergeMe(char **av)
 	//########  IF NOT PAIR STORE LAST NBR
 	if (NbrsOfDeq.size() % 2)
 	{
-		RestOfDeq.push_back(NbrsOfDeq.back().back());
+		TmpOfDeq.push_back(NbrsOfDeq.back().back());
 		NbrsOfDeq.pop_back();
-		std::cout << "RestOfDeq:            \"" << RestOfDeq.front() << "\"\n";
+		std::cout << "TmpOfDeq:            \"" << TmpOfDeq.front() << "\"\n";
 	}
 
 	//########  CREAT FIRST MAIN PAIRS
@@ -173,16 +277,33 @@ PmergeMe::PmergeMe(char **av)
 	}
 	nbr = -1;
 	PmergeMe::recursion();
+
+	//####### COPY PAIRS TO NBRS
+	for (dpdIt = mainPairs.begin(); dpdIt != mainPairs.end(); dpdIt++)
+	{
+		sortedNbrsOfDeq.push_back(dpdIt->first.back());
+		sortedNbrsOfDeq.push_back(dpdIt->second.back());
+	}
+
+	//print
+	std::cout << "SORTED NBRS           [";
+	for (dIt = sortedNbrsOfDeq.begin(); dIt != sortedNbrsOfDeq.end(); dIt++)
+	{
+			std::cout << *dIt << " ";
+	}
+		std::cout << "] ";
+	std::cout << '\n';
 }
 
 PmergeMe::PmergeMe(const PmergeMe &mer)
 {
-	if (this != &mer)
-		*this = mer;
+	*this = mer;
 }
+
 PmergeMe &PmergeMe::operator=(const PmergeMe &mer)
 {
-	(void)mer;
+	if (this != &mer)
+		(void)mer;
 	return (*this);
 }
 

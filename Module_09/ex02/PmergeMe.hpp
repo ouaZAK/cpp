@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/04 12:57:02 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:30:42 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,32 @@ class PmergeMe
 		dequeOfPairsOfDeque				mainPairs;
 		dequeOfPairsOfDeque				copyOfPairs;
 		dequeOfPairsOfDeque::iterator	dpdIt;
+		dequeOfDeque							deqOfSplitedPair;
+		dequeOfDeque							copyOfSplitedPair;
+		dequeOfDeque							pending;
 		dequeOfDeque					NbrsOfDeq;
 		dequeOfDeque::iterator			ddIt;
+		dequeOfDeque::iterator			pIt;
+		dequeOfDeque::iterator			sIt;
+		dequeOfDeque::iterator			sIt2;
 		pairOfDeque						simplePair;
 		pairOfDeque						splitedPair;
-		deque							RestOfDeq;
 		deque							FirstOfSimplePair;
 		deque							SecondOfSimplePair;
+		deque							sortedNbrsOfDeq;
 		deque							TmpOfDeq;
 		deque::iterator					dIt;
 		std::string 					str;
 		int								nbr;
+
 		PmergeMe();
+		void	recursion();
+		void	checkAndStock();
 	public:
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);
 		PmergeMe &operator=(const PmergeMe &mer);
 		~PmergeMe();
-		void	checkAndStock();
-		void	recursion();
 		void	print(int x);
 		void	print(pairOfDeque tmpSimplePair);
 		std::deque< std::deque<int> > getdequeNbrs();
