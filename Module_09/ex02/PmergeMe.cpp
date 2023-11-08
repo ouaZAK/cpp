@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/08 12:47:50 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:24:32 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,30 @@ void	PmergeMe::recursion()
 	
 	//CHECK IF ONLY 2 deq = COF (IT MEANS WE HAVE ONE PAIR)
 	if (check_cof())
+	{
+		if (!restDeq.empty())
+		{
+			for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
+			{
+				if (restDeq.back() < ddIt->back() && ddIt == mainDeq.begin())
+				{
+					mainDeq.insert(ddIt, restDeq);
+					break ;
+				}
+				if (restDeq.back() > ddIt->back() && restDeq.back() < (ddIt + 1)->back())
+				{
+					mainDeq.insert(ddIt + 1, restDeq);
+					break ;
+				}
+				if (restDeq.back() > ddIt->back() && ddIt + 1 == mainDeq.end())
+				{
+					mainDeq.insert(ddIt + 1, restDeq);
+					break ;
+				}
+			}
+		}
 		return ;
+	}
 		
 		
 	//CREATE PAIRS
@@ -169,8 +192,23 @@ void	PmergeMe::recursion()
 	if (!restDeq.empty())
 	{
 		for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
+		{
+			if (restDeq.back() < ddIt->back() && ddIt == mainDeq.begin())
+			{
+				mainDeq.insert(ddIt, restDeq);
+				break ;
+			}
 			if (restDeq.back() > ddIt->back() && restDeq.back() < (ddIt + 1)->back())
+			{
 				mainDeq.insert(ddIt + 1, restDeq);
+				break ;
+			}
+			if (restDeq.back() > ddIt->back() && ddIt + 1 == mainDeq.end())
+			{
+				mainDeq.insert(ddIt + 1, restDeq);
+				break ;
+			}
+		}
 	}
 	if (!pending.empty())
 	{
@@ -226,34 +264,34 @@ PmergeMe::PmergeMe(char **av)
 
 	if (mainDeq.size() == 1)
 		return ;
+
+	//print
 	std::cout << "at start:             ";
-	for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
-		std::cout << "\"" << *ddIt << "\" " ;
-	std::cout << '\n';
+	print(mainDeq);
+	
+	
 	if (mainDeq.size() % 2 != 0)
 	{
 		last = mainDeq.back();
 		mainDeq.pop_back();
 	}
 	//######## PRINT
-	std::cout << "after start:          ";
+	std::cout << "after stock last:     ";
 	print(mainDeq);
 
 	nbr = -1;
 	cof = 1;
-	
-	std::cout << "pairs:           ";
-	print(mainDeq);
 	std::cout << "\n-----------------------\n";
 	PmergeMe::recursion();
 	
-	std::cout << "\n------------###############-----------\n";
+	std::cout << "\n------------####### SORTED I GUESS ########-----------\n\n";
 
 	if (!last.empty())
 		for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
 			if (last.back() > ddIt->back() && last.back() < (ddIt + 1)->back())
 				mainDeq.insert(ddIt + 1, last);
 	print(mainDeq);
+	std::cout << '\n';
 }
 
 PmergeMe::PmergeMe(const PmergeMe &mer)
