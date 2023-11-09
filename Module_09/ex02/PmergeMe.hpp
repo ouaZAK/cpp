@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/08 12:58:47 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:57:34 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ class PmergeMe
 		std::string 			str;
 		size_t					cof;
 		int						nbr;
+		// int						count;
 		int						nbrPairEqualCof;
 
 		PmergeMe();
 		void	recursion();
 		void	checkAndStock();
 		bool	check_cof();
+		void	inserting(deque deq);
 	public:
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);
 		PmergeMe &operator=(const PmergeMe &mer);
 		~PmergeMe();
 		void	print(deqOfDeq mainDeq);
-		std::deque< std::deque<int> > getdequeNbrs();
 };
 
 std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec);
