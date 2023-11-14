@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/14 12:31:36 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/14 09:26:51 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ typedef	std::deque<int> deque;
 class PmergeMe
 {
 	private:
-		deque					mainDeq;
-		deqOfDeq				TmpDeq;
+		deqOfDeq				mainDeq;
+		deqOfDeq				TmpOfDeq;
 		deque					pair;
 		deque					last;
-		deque					last2;
 		deqOfDeq::iterator		pddIt;
 		deqOfDeq::iterator		ddIt;
 		deque::iterator			dIt;
@@ -45,16 +44,13 @@ class PmergeMe
 		void	checkAndStock();
 		bool	check_cof();
 		void	inserting(deque deq);
-		void	makePair();
-		void	copyToMainDeq();
-		void	creatMainChainPend();
+		bool	check_all_cof();
 	public:
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);
 		PmergeMe &operator=(const PmergeMe &mer);
 		~PmergeMe();
 		void	print(deqOfDeq mainDeq);
-		void	print(deque mainDeq);
 };
 
 std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec);
