@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/14 12:31:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:14:52 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,36 @@ void	printRest(deque restDeq, deque::iterator dIt)
 	for (dIt = restDeq.begin(); dIt != restDeq.end(); dIt++)
 		std::cout << *dIt << ", " ;
 	std::cout << "]\n";
+}
+void PmergeMe::printpendChain()
+{
+	std::cout << "\nmainchain : >> " ;
+	for (ddIt = mainChain.begin(); ddIt != mainChain.end(); ddIt++)
+	{
+		std::cout << *ddIt << ' ';
+	}
+	// std::cout << '\n';
+	
+	std::cout << "\npend :      >> " ;
+	if (!pend.empty())
+	{
+		for (pend::iterator it = pend.begin(); it != pend.end(); it++)
+		{
+			// std::cout << ++i << '\n';
+			for (dIt = it->first.begin(); dIt != it->first.end(); dIt++)
+			{
+			// std::cout << i++ << '\n';
+				
+				std::cout << *dIt;
+			}
+			std::cout << ' ';
+		}
+	}
+	std::cout << '\n';
+}
+bool	comp(deque d, deque d2)
+{
+	return (d.back() <= d2.back());
 }
 
 PmergeMe::PmergeMe()
@@ -84,7 +114,7 @@ print(TmpDeq);
 	}
 }
 
-void	PmergeMe::copyToMainDeq()
+void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
 {
 	mainDeq.clear();
 	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ddIt++)
@@ -94,7 +124,17 @@ void	PmergeMe::copyToMainDeq()
 
 void	PmergeMe::creatMainChainPend()
 {
-	
+	mainChain.push_back(TmpDeq.at(0));
+	mainChain.push_back(TmpDeq.at(1));
+	for (ddIt = (TmpDeq.begin() + 2); ddIt != TmpDeq.end(); ddIt += 2)
+	{
+		pendPair.second = mainChain.end();
+		pendPair.first = (*ddIt);
+		if (!(ddIt + 1)->empty())
+			pendPair.second = mainChain.insert(mainChain.end(), *(ddIt + 1));
+		pend.push_back(pendPair);
+		pendPair.first.clear();
+	}
 }
 
 
@@ -104,7 +144,7 @@ void	PmergeMe::recursion()
 	std::cout << "\ndept: " << ++nbr << '\n';
 	if (nbr != 0)
 		cof *= 2;
-	
+
 	//stock
 	if (mainDeq.size() % 2 != 0)
 	{
@@ -140,7 +180,7 @@ std::cout << "sorted: ";
 print(TmpDeq);
 	
 	//####### copy to maindeq
-	copyToMainDeq();
+	copyToMainDeq(TmpDeq);
 	
 	
 	if (!last.empty())
@@ -168,19 +208,46 @@ print(mainDeq);
 	std::cout << "size cof: " << cof << '\n' << "NOW WE GOnNA SPLIT TO PAIRS \n\n";
 	
 	makePair();
-	
 	creatMainChainPend();
 	
-	copyToMainDeq();
+	if (!last2.empty())
+	{
+		mainChain.push_back(last2);
+		last2.clear();
+	}
+
+//print
+std::cout << "------befor insert: ";
+printpendChain();
+
+	//inserting
+		for (pIt = pend.begin(); pIt != pend.end(); pIt++)
+		{
+			ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
+			ddItComp = mainChain.insert(ddIt, pIt->first);
+			for (pIt = pend.begin(); pIt != pend.end(); pIt++)
+			{
+				if (ddItComp < pIt->second)
+					*pIt->second++;
+			std::cout << "ha\n";
+			}
+		}
+//print
+std::cout << "-----after insert: ";
+	pend.clear();
+printpendChain();
+
+
+
+	copyToMainDeq(mainChain);
+	mainChain.clear();
 	TmpDeq.clear();
 	
-
 
 	
 //print
 std::cout << "maindeq: ";
 print(mainDeq);
-
 	// while (1);
 }
 //#####################################----------------------------------##########
@@ -211,17 +278,17 @@ PmergeMe::PmergeMe(char **av)
 //print
 std::cout << "at start:             ";
 print(mainDeq);
-	
+
 	nbr = -1;
 	cof = 1;
 	count = 0;
 	std::cout << "\n-----------------------\n";
 	//########## REC
 	PmergeMe::recursion();
-	
+
 	std::cout << "\n------------####### SORTED I GUESS ########-----------\n\n";
 
-	
+
 // 	if (!last.empty())
 // 		inserting(last);
 // // while
@@ -283,3 +350,4 @@ void	PmergeMe::print(deqOfDeq mainDeq)
 	std::cout << '\n';
 }
 //#################
+
