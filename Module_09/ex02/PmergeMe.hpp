@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/15 17:22:01 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:13:46 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class PmergeMe
 	private:
 		pend					pend;
 		pend::iterator			pIt;
+		pend::iterator			pIt2;
 		pendPair				pendPair;
 		deque					mainDeq;
 		deqOfDeq				TmpDeq;
@@ -36,7 +37,7 @@ class PmergeMe
 		deque					last;
 		deque					last2;
 		deqOfDeq::iterator		ddIt;
-		deqOfDeq::iterator		ddItComp;
+		deqOfDeq::iterator		posIt;
 		deque::iterator			dIt;
 		std::string 			str;
 		size_t					cof;
