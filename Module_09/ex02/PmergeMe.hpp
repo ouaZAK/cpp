@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/16 12:13:46 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:53:44 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ class PmergeMe
 		PmergeMe();
 		void	recursion();
 		void	checkAndStock();
-		bool	check_cof();
+		bool	continueRec();
 		void	inserting(deque deq);
 		void	makePair();
 		void	copyToMainDeq(deqOfDeq TmpDeq);
 		void	creatMainChainPend();
+		void	sorting();
+		void	inserting();
 	public:
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);
