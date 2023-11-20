@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/17 10:53:44 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:49:18 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <deque>
 #include <list>
 #include <sstream>
-
+#include <vector>
 
 typedef std::deque< std::pair< std::deque<int>, std::deque< std::deque<int> >::iterator > > pend;
 typedef std::pair< std::deque<int>, std::deque< std::deque<int> >::iterator > pendPair;
@@ -55,6 +55,8 @@ class PmergeMe
 		void	creatMainChainPend();
 		void	sorting();
 		void	inserting();
+		
+		void	update_pend(deqOfDeq::iterator it);
 	public:
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);

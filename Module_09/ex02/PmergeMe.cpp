@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/17 10:54:49 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:12:16 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	PmergeMe::makePair()
 {
 	TmpDeq.clear();
 	dIt = mainDeq.begin();
+	
 	while (dIt != mainDeq.end())
 	{
 		for (size_t i = 0; i < cof && dIt != mainDeq.end(); i++)
@@ -102,6 +103,10 @@ void	PmergeMe::creatMainChainPend()
 		last = TmpDeq.back();
 		TmpDeq.pop_back();
 	}
+	mainChain.clear();
+	pend.clear();
+	// mainChain.resize(TmpDeq.size());
+	// pend.resize(TmpDeq.size());
 	mainChain.push_back(TmpDeq.at(0));
 	mainChain.push_back(TmpDeq.at(1));
 	ddIt = TmpDeq.begin() + 2;
@@ -152,19 +157,25 @@ void	PmergeMe::inserting()
 	//####### inserting in mainchain
 	for (pIt = pend.begin(); pIt != pend.end(); pIt++)
 	{
+		
+		if (pIt->second > mainChain.end())
+			pIt->second = mainChain.end();
+		// std::cout << *pIt->second << '\n';
 		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
 		posIt = mainChain.insert(ddIt, pIt->first);
+		// pend.pop_front();
 		//if the second iterator we inserted is bigger than other it in the pend we must increment them by one because the position where we inserted is now decalat b w7da
 		for (pIt2 = pend.begin(); pIt2 != pend.end(); pIt2++)
 		{
 			if (pIt2->second >= posIt)
 			{
-				pIt2->second++;
-				if (pIt2->second >= mainChain.end())
-					pIt2->second = mainChain.end();
+				if (pIt2->second != mainChain.end())
+					++pIt2->second;
+					// pIt2->second = mainChain.end();
 			}
 		}
 	}
+
 	pend.clear();
 }
 
@@ -172,8 +183,9 @@ void	PmergeMe::inserting()
 void	PmergeMe::recursion()
 {
 	std::cout << "\ndept: " << ++nbr << '\n';
-	cof *= 2;
-	
+	if (nbr != 0)
+		cof *= 2;
+
 	//####### make pairs
 	makePair();
 	
@@ -203,7 +215,6 @@ std::cout << "maindeq: ";print(mainDeq);
 
 	std::cout << "//---------------------------------------------------//\n\n";
 	
-	cof /= 2;
 	std::cout << "\nback from " << nbr-- << "\n";
 	std::cout << "size cof: " << cof << '\n' << "NOW WE GOnNA SPLIT TO PAIRS \n\n";
 	
@@ -217,12 +228,11 @@ std::cout << "maindeq: ";print(mainDeq);
 // print
 std::cout << "------befor insert: ";printpendChain();
 
-	
 	//######### inserting
 	inserting();
 
-	// if nbr = -1 dont copy the last at the back
-	if (nbr != -1 && !last.empty())
+
+	if (!last.empty())
 	{
 		mainChain.push_back(last);
 		last.clear();
@@ -236,6 +246,7 @@ std::cout << "-----after insert: ";printpendChain();
 	//###### copy to maindeq
 	copyToMainDeq(mainChain);
 	mainChain.clear();
+	cof /= 2;
 }
 //#####################################----------------------------------##########
 
@@ -275,7 +286,7 @@ PmergeMe::PmergeMe(char **av)
 // print
 std::cout << "at start:             ";
 print(mainDeq);
-
+size_t x = mainDeq.size();
 	nbr = -1;
 	cof = 1;
 	count = 0;
@@ -287,8 +298,21 @@ print(mainDeq);
 
 //print
 print(mainDeq);
+size_t y = mainDeq.size();
+
 // 	std::cout << '\n';
 	std::cout << "count:  " <<  count << '\n';
+	if (x == y)
+	{
+		if (std::is_sorted(mainDeq.begin(), mainDeq.end()))
+			std::cout << "sorted\n";
+		else
+			std::cout << "not\n";
+	}
+	else
+		std::cout << "not\n";
+		
+	
 }
 
 PmergeMe::PmergeMe(const PmergeMe &mer)
