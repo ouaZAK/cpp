@@ -48,14 +48,18 @@ class PmergeMe
 		PmergeMe();
 		void	recursion();
 		void	checkAndStock();
-		bool	continueRec();
+		bool	continueRec(deqOfDeq& arr);
 		void	inserting(deque deq);
-		void	makePair();
 		void	copyToMainDeq(deqOfDeq TmpDeq);
-		void	creatMainChainPend();
-		void	sorting();
+		void	creatMainChainPend(deqOfDeq& arr);
+		void	sorting(deqOfDeq& arr);
 		void	inserting();
 		
+		deqOfDeq	makePair();
+		void		sort_pair_element(deque& temp);
+		void		insert();
+		void		update_iterator(deqOfDeq::iterator pos);
+	
 		void	update_pend(deqOfDeq::iterator it);
 	public:
 		PmergeMe(char **av);

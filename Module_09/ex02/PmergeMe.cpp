@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
 void	printRest(deque restDeq, deque::iterator dIt)
 {
 	std::cout << "after res :      [";
@@ -18,32 +19,21 @@ void	printRest(deque restDeq, deque::iterator dIt)
 		std::cout << *dIt << ", " ;
 	std::cout << "]\n";
 }
+
 void PmergeMe::printpendChain()
 {
 	std::cout << "\nmainchain : >> " ;
 	for (ddIt = mainChain.begin(); ddIt != mainChain.end(); ddIt++)
-	{
-		std::cout << *ddIt << ' ';
-	}
-	// std::cout << '\n';
-	
+		print(*ddIt);
 	std::cout << "\npend :      >> " ;
 	if (!pend.empty())
 	{
 		for (pend::iterator it = pend.begin(); it != pend.end(); it++)
-		{
-			// std::cout << ++i << '\n';
-			for (dIt = it->first.begin(); dIt != it->first.end(); dIt++)
-			{
-			// std::cout << i++ << '\n';
-				
-				std::cout << *dIt;
-			}
-			std::cout << ' ';
-		}
+			print(it->first);
 	}
 	std::cout << '\n';
 }
+
 bool	comp(deque a, deque b)
 {
 	return (a.back() <= b.back());
@@ -53,15 +43,13 @@ PmergeMe::PmergeMe()
 {
 }
 
-bool	PmergeMe::continueRec()
+bool	PmergeMe::continueRec(deqOfDeq& arr)
 {
-	ddIt = TmpDeq.begin();
-	//we have 2 elem with the ssame size of cof
+	ddIt = arr.begin();
 	if (ddIt->size() == cof && (ddIt + 1)->size() == cof)
 		ddIt += 2;
-	while (ddIt != TmpDeq.end())
+	while (ddIt != arr.end())
 	{
-		//if there is more than 2 elem with the same size of cof continu rec
 		if (ddIt->size() == cof && (ddIt + 1)->size() == cof)
 			return true;
 		++ddIt;
@@ -69,21 +57,31 @@ bool	PmergeMe::continueRec()
 	return (false);
 }
 
-void	PmergeMe::makePair()
+void	PmergeMe::sort_pair_element(deque& temp)
 {
-	TmpDeq.clear();
+	if (temp[0] > temp[1])
+		std::swap(temp.front(), temp.back());
+}
+
+deqOfDeq	PmergeMe::makePair()
+{
+	deqOfDeq 	arr;
+	deque 		temp;
+
 	dIt = mainDeq.begin();
-	
 	while (dIt != mainDeq.end())
 	{
 		for (size_t i = 0; i < cof && dIt != mainDeq.end(); i++)
 		{
-			pair.push_back(*dIt);
+			temp.push_back(*dIt);
 			++dIt;
 		}
-		TmpDeq.push_back(pair);
-		pair.clear();
+		if (temp.size() == 2)
+			sort_pair_element(temp);
+		arr.push_back(temp);
+		temp.clear();
 	}
+	return (arr);
 }
 
 void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
@@ -92,27 +90,21 @@ void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
 	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ddIt++)
 		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
 			mainDeq.push_back(*dIt);
-	TmpDeq.clear();
 }
 
-void	PmergeMe::creatMainChainPend()
+void	PmergeMe::creatMainChainPend(deqOfDeq& arr)
 {
-	//if last elem is not the size of cof we stock it in last so after we can insert it in mainchain
-	if (TmpDeq.back().size() != cof)
+	if (arr.back().size() != cof)
 	{
-		last = TmpDeq.back();
-		TmpDeq.pop_back();
+		last = arr.back();
+		arr.pop_back();
 	}
 	mainChain.clear();
 	pend.clear();
-	
-	// mainChain.resize(TmpDeq.size());
-	// pend.resize(TmpDeq.size());
-
-	mainChain.push_back(TmpDeq.at(0));
-	mainChain.push_back(TmpDeq.at(1));
-	ddIt = TmpDeq.begin() + 2;
-	while (ddIt != TmpDeq.end())
+	mainChain.push_back(arr.at(0));
+	mainChain.push_back(arr.at(1));
+	ddIt = arr.begin() + 2;
+	while (ddIt != arr.end())
 	{
 		pendPair.second = mainChain.end();
 		pendPair.first = (*ddIt);
@@ -121,32 +113,17 @@ void	PmergeMe::creatMainChainPend()
 			pendPair.second = mainChain.insert(mainChain.end(), *ddIt);
 		pend.push_back(pendPair);
 		pendPair.first.clear();
-		// we protect so we dont skip the tmpdeq.end() and stuck in loop infini
-		if (ddIt != TmpDeq.end())
+		if (ddIt != arr.end())
 			++ddIt;
 	}
 }
 
-void	PmergeMe::sorting()
+void	PmergeMe::sorting(deqOfDeq& arr)
 {
-	//####### sort pairs with only size 2
-	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ddIt++)
-		if (ddIt->size() == 2)
-		{
-		count++;
-			if (ddIt->front() > (ddIt)->back())
-				std::swap(ddIt->front(), ddIt->back());
-		}
-	
-//print
-std::cout << "sorted: ";
-print(TmpDeq);
-
-	//####### sort pairs
-	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ddIt++)
+	for (ddIt = arr.begin(); ddIt != arr.end(); ddIt++)
 	{
 		count++;
-		if ((ddIt + 1) == TmpDeq.end() || ddIt->size() != (ddIt + 1)->size())
+		if ((ddIt + 1) == arr.end() || ddIt->size() != (ddIt + 1)->size())
 			break;
 		if (ddIt->back() > (ddIt + 1)->back())
 			std::swap(*ddIt, *(ddIt + 1));
@@ -154,101 +131,38 @@ print(TmpDeq);
 	}
 }
 
-void	PmergeMe::inserting()
+void	PmergeMe::update_iterator(deqOfDeq::iterator pos)
 {
-	//####### inserting in mainchain
-	for (pIt = pend.begin(); pIt != pend.end(); pIt++)
+	pend::iterator it;
+
+	for (it = pend.begin(); it != pend.end(); ++it)
 	{
-		
-		// if (pIt->second > mainChain.end())
-			// pIt->second = mainChain.end();
-		// std::cout << *pIt->second << '\n';
-		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
-		posIt = mainChain.insert(ddIt, pIt->first);
-		// pend.pop_front();
-		//if the second iterator we inserted is bigger than other it in the pend we must increment them by one because the position where we inserted is now decalat b w7da
-		for (pIt2 = pend.begin(); pIt2 != pend.end(); pIt2++)
-		{
-			if (pIt2->second >= posIt)
-			{
-				pIt2->second++;
-				if (pIt2->second >= mainChain.end())
-					pIt2->second = mainChain.end();
-			}
-		}
+		if (pos >= it->second)
+			++it->second;
 	}
-	pend.clear();
 }
 
-//#####################################----------------------------------##########
-void	PmergeMe::recursion()
+void	PmergeMe::inserting()
 {
-	std::cout << "\ndept: " << ++nbr << '\n';
-	if (nbr != 0)
-		cof *= 2;
-
-	//####### make pairs
-	makePair();
-	
-//print
-std::cout << "tmpBEF: ";print(TmpDeq);
+	deqOfDeq::iterator pos;
 
 
-	//###### sort
-	sorting();
+	for (pIt = pend.begin(); pIt != pend.end(); pIt++)
+	{
+		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
+		pos = mainChain.insert(ddIt, pIt->first);
 
-
-//print	
-std::cout << "sorted: ";print(TmpDeq);
-	
-	
-	//####### copy to maindeq
-	copyToMainDeq(TmpDeq);
-	
-
-//print
-std::cout << "maindeq: ";print(mainDeq);
-
-	//check if there is more than 2 pairs with same size of cof continue the rec
-	if (continueRec())
-		recursion();
-	//---------------------------------------------------REC
-
-	std::cout << "//---------------------------------------------------//\n\n";
-	
-	std::cout << "\nback from " << nbr-- << "\n";
-	std::cout << "size cof: " << cof << '\n' << "NOW WE GOnNA SPLIT TO PAIRS \n\n";
-	
-	//####### make pairs
-	makePair();
-	
-	//####### create main cheain and pend
-	creatMainChainPend();
-
-
-// print
-std::cout << "------befor insert: ";printpendChain();
-
-	//######### inserting
-	inserting();
-
-
+		update_iterator(pos);
+	}
+	pend.clear();
 	if (!last.empty())
 	{
 		mainChain.push_back(last);
 		last.clear();
 	}
-
-
-// print
-std::cout << "-----after insert: ";printpendChain();
-
-
-	//###### copy to maindeq
-	copyToMainDeq(mainChain);
-	mainChain.clear();
-	cof /= 2;
 }
+
+//#####################################----------------------------------##########
 //#####################################----------------------------------##########
 
 void	PmergeMe::checkAndStock()
@@ -342,15 +256,14 @@ std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec)
 }
 void	PmergeMe::print(deque mainDeq)
 {
-		std::cout << "[";
+	std::cout << "[";
 	for (dIt = mainDeq.begin(); dIt != mainDeq.end(); dIt++)
 	{
 			std::cout << *dIt;
 			if (dIt + 1 != mainDeq.end())
 				std::cout << ", ";
 	}
-		std::cout << "] ";
-	std::cout << '\n';
+	std::cout << "] ";
 }
 void	PmergeMe::print(deqOfDeq mainDeq)
 {
@@ -367,4 +280,32 @@ void	PmergeMe::print(deqOfDeq mainDeq)
 	}
 	std::cout << '\n';
 }
-//#################
+
+void	PmergeMe::insert()
+{
+	deqOfDeq arr;
+
+	arr = makePair();
+	std::cout << "maindeq: ";print(arr);
+	creatMainChainPend(arr);
+	printpendChain();
+	inserting();
+	copyToMainDeq(mainChain);
+	mainChain.clear();
+	cof /= 2;
+}
+
+void	PmergeMe::recursion()
+{
+	deqOfDeq arr;
+
+	std::cout << "\ndept: " << ++nbr << '\n';
+	if (nbr != 0)
+		cof *= 2;
+	arr = makePair();
+	sorting(arr);
+	copyToMainDeq(arr);
+	if (continueRec(arr))
+		recursion();
+	insert();
+}
