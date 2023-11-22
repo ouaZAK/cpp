@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:00:10 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/14 12:56:19 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/22 09:57:08 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main()
 {
-	Base *ptr = new A();
+	Base *ptr;
 	Base p;
 	
 	ptr = generate();

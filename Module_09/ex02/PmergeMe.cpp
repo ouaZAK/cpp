@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/20 15:12:16 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:30:50 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,10 @@ void	PmergeMe::creatMainChainPend()
 	}
 	mainChain.clear();
 	pend.clear();
+	
 	// mainChain.resize(TmpDeq.size());
 	// pend.resize(TmpDeq.size());
+
 	mainChain.push_back(TmpDeq.at(0));
 	mainChain.push_back(TmpDeq.at(1));
 	ddIt = TmpDeq.begin() + 2;
@@ -158,8 +160,8 @@ void	PmergeMe::inserting()
 	for (pIt = pend.begin(); pIt != pend.end(); pIt++)
 	{
 		
-		if (pIt->second > mainChain.end())
-			pIt->second = mainChain.end();
+		// if (pIt->second > mainChain.end())
+			// pIt->second = mainChain.end();
 		// std::cout << *pIt->second << '\n';
 		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
 		posIt = mainChain.insert(ddIt, pIt->first);
@@ -169,13 +171,12 @@ void	PmergeMe::inserting()
 		{
 			if (pIt2->second >= posIt)
 			{
-				if (pIt2->second != mainChain.end())
-					++pIt2->second;
-					// pIt2->second = mainChain.end();
+				pIt2->second++;
+				if (pIt2->second >= mainChain.end())
+					pIt2->second = mainChain.end();
 			}
 		}
 	}
-
 	pend.clear();
 }
 

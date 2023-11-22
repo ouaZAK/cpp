@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:46:34 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/14 12:30:26 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:59:46 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int main()
 	Data		d;
 	
 	d.x = 123;
-	int x = 4;
-	int *ptr 
+	// int x = 4;
 	y = Serializer::serialize(&d);
 	Data*	ptr = Serializer::deserialize(y);
-
+	
 	std::cout << "ptr: " << ptr->x << std::endl;
 	std::cout << "address ptr: " << ptr << std::endl;
 	std::cout << "address y: " << &y << std::endl;
+	std::cout << "address y: " << y << std::endl;
 	return (0);
 }
