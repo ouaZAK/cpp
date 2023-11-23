@@ -13,62 +13,63 @@
 #pragma once
 
 #include <iostream>
-#include <deque>
+#include <vector>
 #include <list>
 #include <sstream>
 #include <vector>
 
-typedef std::deque< std::pair< std::deque<int>, std::deque< std::deque<int> >::iterator > > pend;
-typedef std::pair< std::deque<int>, std::deque< std::deque<int> >::iterator > pendPair;
-typedef std::deque< std::deque<int> > deqOfDeq;
-typedef	std::deque<int> deque;
+typedef std::vector< std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator > > pend;
+typedef std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator > pendPair;
+typedef std::vector< std::vector<int> > deqOfDeq;
+typedef	std::vector<int> vector;
 
 class PmergeMe
 {
 	private:
-		pend					pend;
-		pend::iterator			pIt;
-		pend::iterator			pIt2;
-		pendPair				pendPair;
-		deque					mainDeq;
-		deqOfDeq				TmpDeq;
-		deqOfDeq				mainChain;
-		deque					pair;
-		deque					last;
-		deque					last2;
-		deqOfDeq::iterator		ddIt;
-		deqOfDeq::iterator		posIt;
-		deque::iterator			dIt;
-		std::string 			str;
-		size_t					cof;
-		int						nbr;
-		int						count;
-		size_t					nbrPairEqualCof;
+		bool				check;
+		pend				pend;
+		pend::iterator		pIt;
+		pend::iterator		pIt2;
+		pendPair			pendPair;
+		vector				mainDeq;
+		deqOfDeq			TmpDeq;
+		deqOfDeq			mainChain;
+		vector				pair;
+		vector				last;
+		vector				last2;
+		deqOfDeq::iterator	ddIt;
+		deqOfDeq::iterator	posIt;
+		vector::iterator	dIt;
+		std::string 		str;
+		size_t				cof;
+		int					nbr;
+		int					count;
+		size_t				nbrPairEqualCof;
 
-		PmergeMe();
-		void	recursion();
-		void	checkAndStock();
-		bool	continueRec(deqOfDeq& arr);
-		void	inserting(deque deq);
-		void	copyToMainDeq(deqOfDeq TmpDeq);
-		void	creatMainChainPend(deqOfDeq& arr);
-		void	sorting(deqOfDeq& arr);
-		void	inserting();
-		
 		deqOfDeq	makePair();
-		void		sort_pair_element(deque& temp);
+		void		recursion();
+		void		checkAndStock();
+		bool		continueRec(deqOfDeq& arr);
+		void		inserting(vector deq);
+		void		copyToMainDeq(deqOfDeq TmpDeq);
+		void		creatMainChainPend(deqOfDeq& arr);
+		void		sorting(deqOfDeq& arr);
+		void		inserting();
+		void		sort_pair_element(vector& temp);
 		void		insert();
 		void		update_iterator(deqOfDeq::iterator pos);
+		void		update_pend(deqOfDeq::iterator it);
 	
-		void	update_pend(deqOfDeq::iterator it);
 	public:
+		PmergeMe();
 		PmergeMe(char **av);
 		PmergeMe(const PmergeMe &mer);
 		PmergeMe &operator=(const PmergeMe &mer);
 		~PmergeMe();
+		
 		void	print(deqOfDeq mainDeq);
-		void	print(deque mainDeq);
-void printpendChain();
+		void	print(vector mainDeq);
+		void	printpendChain();
 };
 
-std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec);
+std::ostream &operator<<(std::ostream &out, const std::vector<int> &dec);

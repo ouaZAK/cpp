@@ -12,7 +12,9 @@
 
 #include "PmergeMe.hpp"
 
-void	printRest(deque restDeq, deque::iterator dIt)
+int c = 0;
+
+void	printRest(vector restDeq, vector::iterator dIt)
 {
 	std::cout << "after res :      [";
 	for (dIt = restDeq.begin(); dIt != restDeq.end(); dIt++)
@@ -34,14 +36,13 @@ void PmergeMe::printpendChain()
 	std::cout << '\n';
 }
 
-bool	comp(deque a, deque b)
+bool	comp(vector a, vector b)
 {
+	++c;
 	return (a.back() <= b.back());
 }
 
-PmergeMe::PmergeMe()
-{
-}
+PmergeMe::PmergeMe(){}
 
 bool	PmergeMe::continueRec(deqOfDeq& arr)
 {
@@ -57,8 +58,9 @@ bool	PmergeMe::continueRec(deqOfDeq& arr)
 	return (false);
 }
 
-void	PmergeMe::sort_pair_element(deque& temp)
+void	PmergeMe::sort_pair_element(vector& temp)
 {
+	++c;
 	if (temp[0] > temp[1])
 		std::swap(temp.front(), temp.back());
 }
@@ -66,18 +68,23 @@ void	PmergeMe::sort_pair_element(deque& temp)
 deqOfDeq	PmergeMe::makePair()
 {
 	deqOfDeq 	arr;
-	deque 		temp;
+	vector 		temp;
 
 	dIt = mainDeq.begin();
 	while (dIt != mainDeq.end())
 	{
-		for (size_t i = 0; i < cof && dIt != mainDeq.end(); i++)
+		for (size_t i = 0; i < cof && dIt != mainDeq.end(); ++i)
 		{
 			temp.push_back(*dIt);
 			++dIt;
 		}
-		if (temp.size() == 2)
-			sort_pair_element(temp);
+		if (temp.size() == 2 && check == false)
+		{
+			++c;
+			if (temp[0] > temp[1])
+				std::swap(temp[0], temp[1]);
+			check = true;
+		}
 		arr.push_back(temp);
 		temp.clear();
 	}
@@ -87,13 +94,15 @@ deqOfDeq	PmergeMe::makePair()
 void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
 {
 	mainDeq.clear();
-	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ddIt++)
-		for (dIt = ddIt->begin(); dIt != ddIt->end(); dIt++)
+	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ++ddIt)
+		for (dIt = ddIt->begin(); dIt != ddIt->end(); ++dIt)
 			mainDeq.push_back(*dIt);
 }
 
 void	PmergeMe::creatMainChainPend(deqOfDeq& arr)
 {
+	deqOfDeq::iterator it;
+
 	if (arr.back().size() != cof)
 	{
 		last = arr.back();
@@ -101,33 +110,35 @@ void	PmergeMe::creatMainChainPend(deqOfDeq& arr)
 	}
 	mainChain.clear();
 	pend.clear();
-	mainChain.push_back(arr.at(0));
-	mainChain.push_back(arr.at(1));
-	ddIt = arr.begin() + 2;
-	while (ddIt != arr.end())
+	pend.reserve(mainDeq.size());
+	mainChain.reserve(mainDeq.size());
+	mainChain.push_back(arr[0]);
+	mainChain.push_back(arr[1]);
+	for (it = arr.begin() + 2; it != arr.end();)
 	{
 		pendPair.second = mainChain.end();
-		pendPair.first = (*ddIt);
-		++ddIt;
-		if (!ddIt->empty())
-			pendPair.second = mainChain.insert(mainChain.end(), *ddIt);
+		pendPair.first = *it;
+		++it;
+		if (it != arr.end())
+			pendPair.second = mainChain.insert(mainChain.end(), *it);
 		pend.push_back(pendPair);
 		pendPair.first.clear();
-		if (ddIt != arr.end())
-			++ddIt;
+		if (it != arr.end())
+			++it;
 	}
 }
 
 void	PmergeMe::sorting(deqOfDeq& arr)
 {
-	for (ddIt = arr.begin(); ddIt != arr.end(); ddIt++)
+	for (ddIt = arr.begin(); ddIt != arr.end(); ++ddIt)
 	{
-		count++;
 		if ((ddIt + 1) == arr.end() || ddIt->size() != (ddIt + 1)->size())
 			break;
 		if (ddIt->back() > (ddIt + 1)->back())
 			std::swap(*ddIt, *(ddIt + 1));
-		ddIt++;
+		++count;
+		++c;
+		++ddIt;
 	}
 }
 
@@ -137,7 +148,7 @@ void	PmergeMe::update_iterator(deqOfDeq::iterator pos)
 
 	for (it = pend.begin(); it != pend.end(); ++it)
 	{
-		if (pos >= it->second)
+		if (it->second >= pos) 
 			++it->second;
 	}
 }
@@ -146,20 +157,19 @@ void	PmergeMe::inserting()
 {
 	deqOfDeq::iterator pos;
 
-
-	for (pIt = pend.begin(); pIt != pend.end(); pIt++)
+	for (pIt = pend.begin(); pIt != pend.end();)
 	{
 		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
 		pos = mainChain.insert(ddIt, pIt->first);
-
+		pend.erase(pIt);
 		update_iterator(pos);
 	}
-	pend.clear();
-	if (!last.empty())
+	if (last.size())
 	{
 		mainChain.push_back(last);
 		last.clear();
 	}
+	pend.clear();
 }
 
 //#####################################----------------------------------##########
@@ -168,66 +178,44 @@ void	PmergeMe::inserting()
 void	PmergeMe::checkAndStock()
 {
 	std::string::iterator	it;
-	deque::iterator			dIt2;
+	vector::iterator			dIt2;
 
-	for (it = str.begin(); it != str.end(); it++)
+	for (it = str.begin(); it != str.end(); ++it)
 		if (!std::isdigit(*it))
 			throw (std::invalid_argument("Error: invalid argument"));
 
-	//stock nbrs
 	std::stringstream ss;
 	ss << str;
 	ss >> nbr;
 	mainDeq.push_back(nbr);
 
-	//check repeated
-	for (dIt = mainDeq.begin(); dIt != mainDeq.end(); dIt++)
-		for (dIt2 = dIt + 1; dIt2 != mainDeq.end(); dIt2++)
+	for (dIt = mainDeq.begin(); dIt != mainDeq.end(); ++dIt)
+		for (dIt2 = dIt + 1; dIt2 != mainDeq.end(); ++dIt2)
 			if (*dIt == *dIt2) 
 				throw (std::invalid_argument("Error: no duplicated numbers"));
 }
 
 PmergeMe::PmergeMe(char **av)
 {
+	check = false;
 	for (int i = 1; av[i]; i++)
 	{
 		str = static_cast<std::string>(av[i]);
 		PmergeMe::checkAndStock();
 	}
-
 	if (mainDeq.size() == 1)
 		return ;
-
-// print
-std::cout << "at start:             ";
-print(mainDeq);
-size_t x = mainDeq.size();
+	size_t x = mainDeq.size();
 	nbr = -1;
 	cof = 1;
-	count = 0;
 	std::cout << "\n-----------------------\n";
-	//########## REC
+
 	PmergeMe::recursion();
-
 	std::cout << "\n------------####### SORTED I GUESS ########-----------\n\n";
-
-//print
-print(mainDeq);
-size_t y = mainDeq.size();
-
-// 	std::cout << '\n';
-	std::cout << "count:  " <<  count << '\n';
-	if (x == y)
-	{
-		if (std::is_sorted(mainDeq.begin(), mainDeq.end()))
-			std::cout << "sorted\n";
-		else
-			std::cout << "not\n";
-	}
+	if (x == mainDeq.size() && std::is_sorted(mainDeq.begin(), mainDeq.end()))
+		std::cout << "sorted\n";
 	else
 		std::cout << "not\n";
-		
-	
 }
 
 PmergeMe::PmergeMe(const PmergeMe &mer)
@@ -242,19 +230,17 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &mer)
 	return (*this);
 }
 
-PmergeMe::~PmergeMe()
-{
-}
+PmergeMe::~PmergeMe(){}
 
-//remove this after #############
-std::ostream &operator<<(std::ostream &out, const std::deque<int> &dec)
+std::ostream &operator<<(std::ostream &out, const std::vector<int> &dec)
 {
-	std::deque<int>::const_iterator cit;
+	std::vector<int>::const_iterator cit;
 	for (cit = dec.begin(); cit != dec.end(); cit++)
 		out << *cit;
 	return (out);
 }
-void	PmergeMe::print(deque mainDeq)
+
+void	PmergeMe::print(vector mainDeq)
 {
 	std::cout << "[";
 	for (dIt = mainDeq.begin(); dIt != mainDeq.end(); dIt++)
@@ -265,6 +251,7 @@ void	PmergeMe::print(deque mainDeq)
 	}
 	std::cout << "] ";
 }
+
 void	PmergeMe::print(deqOfDeq mainDeq)
 {
 	for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
@@ -286,21 +273,18 @@ void	PmergeMe::insert()
 	deqOfDeq arr;
 
 	arr = makePair();
-	std::cout << "maindeq: ";print(arr);
 	creatMainChainPend(arr);
-	printpendChain();
 	inserting();
 	copyToMainDeq(mainChain);
-	mainChain.clear();
 	cof /= 2;
+	std::cout  << "comparison --> " << c << std::endl;
 }
 
 void	PmergeMe::recursion()
 {
 	deqOfDeq arr;
 
-	std::cout << "\ndept: " << ++nbr << '\n';
-	if (nbr != 0)
+	if (++nbr != 0)
 		cof *= 2;
 	arr = makePair();
 	sorting(arr);
