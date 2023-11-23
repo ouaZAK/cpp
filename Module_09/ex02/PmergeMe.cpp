@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/22 12:30:50 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:29:02 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	comp(vector a, vector b)
 
 PmergeMe::PmergeMe(){}
 
-bool	PmergeMe::continueRec(deqOfDeq& arr)
+bool	PmergeMe::continueRec(vecOfVec& arr)
 {
 	ddIt = arr.begin();
 	if (ddIt->size() == cof && (ddIt + 1)->size() == cof)
@@ -65,9 +65,9 @@ void	PmergeMe::sort_pair_element(vector& temp)
 		std::swap(temp.front(), temp.back());
 }
 
-deqOfDeq	PmergeMe::makePair()
+vecOfVec	PmergeMe::makePair()
 {
-	deqOfDeq 	arr;
+	vecOfVec 	arr;
 	vector 		temp;
 
 	dIt = mainDeq.begin();
@@ -84,7 +84,7 @@ deqOfDeq	PmergeMe::makePair()
 	return (arr);
 }
 
-void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
+void	PmergeMe::copyToMainDeq(vecOfVec TmpDeq)
 {
 	mainDeq.clear();
 	for (ddIt = TmpDeq.begin(); ddIt != TmpDeq.end(); ++ddIt)
@@ -92,9 +92,9 @@ void	PmergeMe::copyToMainDeq(deqOfDeq TmpDeq)
 			mainDeq.push_back(*dIt);
 }
 
-void	PmergeMe::creatMainChainPend(deqOfDeq& arr)
+void	PmergeMe::creatMainChainPend(vecOfVec& arr)
 {
-	deqOfDeq::iterator it;
+	vecOfVec::iterator it;
 
 	if (arr.back().size() != cof)
 	{
@@ -121,7 +121,7 @@ void	PmergeMe::creatMainChainPend(deqOfDeq& arr)
 	}
 }
 
-void	PmergeMe::sorting(deqOfDeq& arr)
+void	PmergeMe::sorting(vecOfVec& arr)
 {
 	for (ddIt = arr.begin(); ddIt != arr.end(); ++ddIt)
 	{
@@ -134,7 +134,7 @@ void	PmergeMe::sorting(deqOfDeq& arr)
 	}
 }
 
-void	PmergeMe::update_iterator(deqOfDeq::iterator pos)
+void	PmergeMe::update_iterator(vecOfVec::iterator pos)
 {
 	pend::iterator it;
 
@@ -147,7 +147,7 @@ void	PmergeMe::update_iterator(deqOfDeq::iterator pos)
 
 void	PmergeMe::inserting()
 {
-	deqOfDeq::iterator pos;
+	vecOfVec::iterator pos;
 	pend::iterator	end;
 	pend::iterator	start;
 	int	idx;
@@ -190,27 +190,20 @@ void	PmergeMe::inserting()
 
 void	PmergeMe::checkAndStock()
 {
-	std::string::iterator	it;
-	vector::iterator		dIt2;
-
-	for (it = str.begin(); it != str.end(); ++it)
-		if (!std::isdigit(*it))
-			throw (std::invalid_argument("Error: invalid argument"));
+	if (!std::isdigit(str.front()))
+		throw (std::invalid_argument("Error: invalid argument"));
 
 	std::stringstream ss;
+
 	ss << str;
 	ss >> nbr;
+	if (std::find(mainDeq.begin(), mainDeq.end(), nbr) != mainDeq.end())
+		throw (std::invalid_argument("Error: no duplicated numbers"));
 	mainDeq.push_back(nbr);
-
-	for (dIt = mainDeq.begin(); dIt != mainDeq.end(); ++dIt)
-		for (dIt2 = dIt + 1; dIt2 != mainDeq.end(); ++dIt2)
-			if (*dIt == *dIt2) 
-				throw (std::invalid_argument("Error: no duplicated numbers"));
 }
 
 PmergeMe::PmergeMe(char **av)
 {
-	check = false;
 	for (int i = 1; av[i]; i++)
 	{
 		str = static_cast<std::string>(av[i]);
@@ -218,13 +211,14 @@ PmergeMe::PmergeMe(char **av)
 	}
 	if (mainDeq.size() == 1)
 		return ;
-	size_t x = mainDeq.size();
 	nbr = -1;
 	cof = 1;
-	std::cout << "\n-----------------------\n";
+	size_t x = mainDeq.size();
+
 
 	PmergeMe::recursion();
-	std::cout << "\n------------####### SORTED I GUESS ########-----------\n\n";
+
+	
 	if (x == mainDeq.size() && std::is_sorted(mainDeq.begin(), mainDeq.end()))
 		std::cout << "sorted\n";
 	else
@@ -265,7 +259,7 @@ void	PmergeMe::print(vector mainDeq)
 	std::cout << "] ";
 }
 
-void	PmergeMe::print(deqOfDeq mainDeq)
+void	PmergeMe::print(vecOfVec mainDeq)
 {
 	for (ddIt = mainDeq.begin(); ddIt != mainDeq.end(); ddIt++)
 	{
@@ -283,7 +277,7 @@ void	PmergeMe::print(deqOfDeq mainDeq)
 
 void	PmergeMe::insert()
 {
-	deqOfDeq arr;
+	vecOfVec arr;
 
 	arr = makePair();
 	creatMainChainPend(arr);
@@ -295,7 +289,7 @@ void	PmergeMe::insert()
 
 void	PmergeMe::recursion()
 {
-	deqOfDeq arr;
+	vecOfVec arr;
 
 	if (++nbr != 0)
 		cof *= 2;
