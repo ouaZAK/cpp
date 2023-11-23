@@ -78,13 +78,6 @@ deqOfDeq	PmergeMe::makePair()
 			temp.push_back(*dIt);
 			++dIt;
 		}
-		if (temp.size() == 2 && check == false)
-		{
-			++c;
-			if (temp[0] > temp[1])
-				std::swap(temp[0], temp[1]);
-			check = true;
-		}
 		arr.push_back(temp);
 		temp.clear();
 	}
@@ -132,12 +125,11 @@ void	PmergeMe::sorting(deqOfDeq& arr)
 {
 	for (ddIt = arr.begin(); ddIt != arr.end(); ++ddIt)
 	{
+		++c;
 		if ((ddIt + 1) == arr.end() || ddIt->size() != (ddIt + 1)->size())
 			break;
 		if (ddIt->back() > (ddIt + 1)->back())
 			std::swap(*ddIt, *(ddIt + 1));
-		++count;
-		++c;
 		++ddIt;
 	}
 }
@@ -156,29 +148,50 @@ void	PmergeMe::update_iterator(deqOfDeq::iterator pos)
 void	PmergeMe::inserting()
 {
 	deqOfDeq::iterator pos;
+	pend::iterator	end;
+	pend::iterator	start;
+	int	idx;
 
-	for (pIt = pend.begin(); pIt != pend.end();)
+	long int jcb_stl[] =
 	{
-		ddIt = std::lower_bound(mainChain.begin(), pIt->second, pIt->first, &comp);
-		pos = mainChain.insert(ddIt, pIt->first);
-		pend.erase(pIt);
-		update_iterator(pos);
+        2, 2, 6, 10, 22, 42, 86, 170, 342, 682, 1366,
+        2730, 5462, 10922, 21846, 43690, 87382, 174762, 349526, 699050,
+        1398102, 2796202, 5592406, 11184810, 22369622, 44739242, 89478486,
+        178956970, 357913942, 715827882, 1431655766, 2863311530, 5726623062,
+        11453246122, 22906492246, 45812984490
+    };
+	idx = 0;
+	while (pend.size())
+	{
+		end = pend.begin();
+		start = pend.begin();
+		for (int i = 0; i < jcb_stl[idx] - 1 && start != pend.end(); ++i)
+			++start;
+		if (start == pend.end())
+			--start;
+		while (true)
+		{
+			pos = std::lower_bound(mainChain.begin(), start->second, start->first, comp);
+			pos = mainChain.insert(pos, start->first);
+			pend.erase(start);
+			update_iterator(pos);
+			if (start == end)
+				break ;
+			--start;
+		}
+		++idx;
 	}
 	if (last.size())
 	{
 		mainChain.push_back(last);
 		last.clear();
 	}
-	pend.clear();
 }
-
-//#####################################----------------------------------##########
-//#####################################----------------------------------##########
 
 void	PmergeMe::checkAndStock()
 {
 	std::string::iterator	it;
-	vector::iterator			dIt2;
+	vector::iterator		dIt2;
 
 	for (it = str.begin(); it != str.end(); ++it)
 		if (!std::isdigit(*it))
