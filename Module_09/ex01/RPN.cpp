@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 07:55:52 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/23 07:48:01 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:49:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	RPN::readLine()
 	int		count = 0;
 	for (std::string::iterator it = line.begin(); it != line.end(); it++)
 	{
+	std::cout << "[" << *it << "]\n";
+
 		while (*it == ' ')
 		{
 			count++;

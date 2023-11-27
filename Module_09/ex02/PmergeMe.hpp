@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/23 15:27:39 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/27 10:54:41 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <deque>
 #include <list>
 
 typedef std::vector< std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator > > pend;
@@ -23,10 +22,15 @@ typedef std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator >
 typedef std::vector< std::vector<int> > vecOfVec;
 typedef	std::vector<int> vector;
 
+typedef	std::list< std::pair< std::list<int>,  std::list< std::list<int> >::iterator > > pendList;
+typedef	std::pair< std::list<int>, std::list< std::list<int> >::iterator > pendPairL;
+typedef	std::list< std::list<int> > listOfList;
+typedef	std::list<int> list;
+
 class PmergeMe
 {
 	private:
-		vector				mainDeq;
+		vector				mainVec;
 		vecOfVec			mainChain;
 		pend				pend;
 		pend::iterator		pIt;
@@ -37,18 +41,41 @@ class PmergeMe
 		std::string 		str;
 		size_t				cof;
 		int					nbr;
+		vecOfVec::iterator	pos;
+		pend::iterator		begin;
+		pend::iterator		end;
 
 		vecOfVec	makePair();
-		void		recursion();
+		void		recursionVec();
 		void		checkAndStock();
 		bool		continueRec(vecOfVec& arr);
-		void		copyToMainDeq(vecOfVec TmpDeq);
+		void		copyToMainVec(vecOfVec TmpDeq);
 		void		creatMainChainPend(vecOfVec& arr);
 		void		sorting(vecOfVec& arr);
 		void		inserting();
-		void		sort_pair_element(vector& temp);
-		void		insert();
-		void		update_iterator(vecOfVec::iterator pos);
+		void		stockLast(vecOfVec& vec);
+		
+
+		list					mainLst;
+		listOfList				mainChainL;
+		pendList				pendList;
+		pendList::iterator		plIt;
+		pendPairL				pendPairL;
+		list					lastInList;
+		listOfList::iterator	llIt;
+		list::iterator			lIt;
+		listOfList::iterator	posL;
+		pendList::iterator		beginL;
+		pendList::iterator		endL;
+
+		listOfList	makePairList();
+		void		sorting(listOfList& list);
+		void		copyToMainLst(listOfList tmpLst);
+		bool		continueRec(listOfList &lst);
+		void		creatMainChainPend(listOfList &lst);
+		void		stockLast(listOfList &lst);
+		void		insertingList();
+		void		recursionList();
 	
 	public:
 		PmergeMe();
@@ -57,9 +84,11 @@ class PmergeMe
 		PmergeMe &operator=(const PmergeMe &mer);
 		~PmergeMe();
 		
-		void	print(vecOfVec mainDeq);
-		void	print(vector mainDeq);
+		void	print(vecOfVec mainVec);
+		void	print(vector mainVec);
 		void	printpendChain();
+		void	print(list mainVec);
+		void	print(listOfList mainVec);
 };
 
 std::ostream &operator<<(std::ostream &out, const std::vector<int> &dec);
