@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/27 15:22:58 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:22:08 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,13 @@ PmergeMe::PmergeMe(char **av)
 	std::cout << "Before: ";
 	print(mainVec);
 	// size_t x = mainVec.size();
-	std::clock_t	start;
-	std::clock_t	end;
 	
-	start = std::clock();
+	tstart = std::clock();
 	nbr = -1;
 	cof = 1;
 	recursionVec();
-	end = std::clock();
-	double time = static_cast<double>(end - start);
+	tend = std::clock();
+	time = static_cast<double>(tend - tstart);
 
 	std::cout << "\nAfter: ";
 	print(mainVec);
@@ -91,10 +89,10 @@ PmergeMe::PmergeMe(char **av)
 	cof = 1;
 	std::cout << "\nBefore: ";
 	print(mainLst);
-	start = std::clock();
+	tstart = std::clock();
 	recursionList();
-	end = std::clock();
-	time = end - start;
+	tend = std::clock();
+	time = static_cast<double>(tend - tstart);
 
 	std::cout << "\nAfter: ";
 	print(mainLst);
@@ -134,8 +132,7 @@ vecOfVec	PmergeMe::makePair()
 	vecOfVec 	vec;
 	vector 		tempVec;
 
-	dIt = mainVec.begin();
-	while (dIt != mainVec.end())
+	for (dIt = mainVec.begin(); dIt != mainVec.end();)
 	{
 		for (size_t i = 0; i < cof; ++i)
 		{

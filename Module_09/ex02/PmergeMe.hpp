@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/27 15:05:05 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:15:30 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ class PmergeMe
 		vector::iterator	dIt;
 		std::string 		str;
 		size_t				cof;
-		int					nbr;
-		int					count;
 		vecOfVec::iterator	pos;
 		pend::iterator		begin;
 		pend::iterator		end;
+		int					nbr;
+		int					count;
+
+		double				time;
+		std::clock_t		tstart;
+		std::clock_t		tend;
 
 		vecOfVec	makePair();
 		void		recursionVec();
