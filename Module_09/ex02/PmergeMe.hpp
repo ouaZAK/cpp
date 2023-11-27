@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/27 10:54:41 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:05:05 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <sstream>
 #include <vector>
 #include <list>
+#include <ctime>
+#include <iomanip>
 
 typedef std::vector< std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator > > pend;
 typedef std::pair< std::vector<int>, std::vector< std::vector<int> >::iterator > pendPair;
@@ -41,6 +43,7 @@ class PmergeMe
 		std::string 		str;
 		size_t				cof;
 		int					nbr;
+		int					count;
 		vecOfVec::iterator	pos;
 		pend::iterator		begin;
 		pend::iterator		end;
@@ -86,9 +89,6 @@ class PmergeMe
 		
 		void	print(vecOfVec mainVec);
 		void	print(vector mainVec);
-		void	printpendChain();
 		void	print(list mainVec);
 		void	print(listOfList mainVec);
 };
-
-std::ostream &operator<<(std::ostream &out, const std::vector<int> &dec);

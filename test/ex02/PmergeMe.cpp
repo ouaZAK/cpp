@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/14 09:53:40 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:32:59 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,7 +338,6 @@ PmergeMe::PmergeMe(char **av)
 
 	nbr = -1;
 	cof = 1;
-	count = 0;
 	std::cout << "\n-----------------------\n";
 	//########## REC
 	PmergeMe::recursion();
