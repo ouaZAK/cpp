@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/27 17:22:08 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:08:27 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,37 @@ PmergeMe::PmergeMe(const PmergeMe &mer)
 PmergeMe &PmergeMe::operator=(const PmergeMe &mer)
 {
 	if (this != &mer)
-		(void)mer;
+	{
+		mainVec = mer.mainVec;
+		mainChain = mer.mainChain;
+		pend = mer.pend;
+		pIt = mer.pIt;
+		pendPair = mer.pendPair;
+		last = mer.last;
+		ddIt = mer.ddIt;
+		dIt = mer.dIt;
+		str = mer.str;
+		cof = mer.cof;
+		pos = mer.pos;
+		begin = mer.begin;
+		end = mer.end;
+		nbr = mer.nbr;
+		count = mer.count;
+		time = mer.time;
+		tstart = mer.tstart;
+		tend = mer.tend;
+		mainLst = mer.mainLst;
+		mainChainL = mer.mainChainL;
+		pendList = mer.pendList;
+		plIt = mer.plIt;
+		pendPairL = mer.pendPairL;
+		lastInList = mer.lastInList;
+		llIt = mer.llIt;
+		lIt = mer.lIt;
+		posL = mer.posL;
+		beginL = mer.beginL;
+		endL = mer.endL;
+	}
 	return (*this);
 }
 

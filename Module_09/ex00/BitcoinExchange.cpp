@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:28 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/02 10:55:53 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:07:40 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	throwing(std::string str)
 	throw (std::invalid_argument(str));
 }
 
-void	BitcoinExchange::checkValue(std::string &str)
+void	BitcoinExchange::checkValue(std::string &str, bool dataCSV)
 {
 	int qCount = 0;
 	int count = 0;
@@ -76,7 +76,7 @@ void	BitcoinExchange::checkValue(std::string &str)
 	}
 
 	d = std::strtod(str.c_str(), NULL);
-	if (d > 1000)
+	if (d > 1000 && !dataCSV)//dataCSV 
 		throwing("Error: too large a number.");
 }
 
@@ -154,7 +154,7 @@ void	BitcoinExchange::reading()
 			strV = line.substr(n + 3, (line.size() - (n + 3)));
 			if (strV.empty())
 				throwing("Error: not a number");
-			checkValue(strV);
+			checkValue(strV, false);
 			strD = line.substr(0, n);
 			checkDate(strD);
 			it = map.upper_bound(strD);
@@ -173,7 +173,9 @@ void	BitcoinExchange::reading()
 void	BitcoinExchange::storeData()
 {
 	std::string date;
+	std::string value;
 	size_t		len;
+	size_t		n;
 
 	inpF.open("Data.csv");
 	if (!inpF.is_open())
@@ -181,9 +183,19 @@ void	BitcoinExchange::storeData()
 	std::getline(inpF, line);
 	if (line.empty())
 		throwing("Error: empty file");
+	else if (line != "date,exchange_rate")
+			throwing("Error: enter <date,exchange_rate> in first line");
 	while (std::getline(inpF, line))
 	{
-		date = line.substr(0, 10);
+		n = line.find(',', 0);
+		if (n == std::string::npos)
+			throwing("Error: bad input => " + line.substr(0, line.size()));
+		date = line.substr(0, n);
+		checkDate(date);
+		value = line.substr(n + 1, line.size() - (n + 1));
+		if (value.empty())
+				throwing("Error: not a number");
+		checkValue(value, true);
 		len = line.size() - line.find(',', 0) - 1;
 		d = std::strtod(line.substr(11, len).c_str() , NULL);
 		map.insert(std::make_pair(date, d));

@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:11:42 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/23 08:38:54 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:07:44 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class BitcoinExchange
 		BitcoinExchange();
 		void	storeData();
 		void	reading();
-		void	checkValue(std::string &str);
+		void	checkValue(std::string &str, bool data);
 	public:
 		BitcoinExchange(char *av);
 		BitcoinExchange(const BitcoinExchange &bitc);
