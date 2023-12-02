@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:33 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:30 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:03:43 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ class PmergeMe
 		pend::iterator		pIt;
 		pendPair			pendPair;
 		vector				last;
-		vecOfVec::iterator	ddIt;
-		vector::iterator	dIt;
+		vecOfVec::iterator	vvIt;
+		vector::iterator	vIt;
 		std::string 		str;
 		size_t				cof;
 		vecOfVec::iterator	pos;

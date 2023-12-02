@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:23:30 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/10/11 11:39:47 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/12/01 10:36:11 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	identify(Base &p)
 		{
 			try
 			{
+				
 				C c = dynamic_cast<C &>(p);
 				std::cout << "C" << std::endl;
 			}

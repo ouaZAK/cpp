@@ -6,7 +6,7 @@
 /*   By: zouaraqa <zouaraqa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 07:50:27 by zouaraqa          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:27 by zouaraqa         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:03:58 by zouaraqa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &mer)
 		pIt = mer.pIt;
 		pendPair = mer.pendPair;
 		last = mer.last;
-		ddIt = mer.ddIt;
-		dIt = mer.dIt;
+		vvIt = mer.vvIt;
+		vIt = mer.vIt;
 		str = mer.str;
 		cof = mer.cof;
 		pos = mer.pos;
@@ -60,8 +60,8 @@ PmergeMe::~PmergeMe(){}
 
 void	PmergeMe::print(vector mainVec)
 {
-	for (dIt = mainVec.begin(); dIt != mainVec.end(); dIt++)
-		std::cout << *dIt << ' ';
+	for (vIt = mainVec.begin(); vIt != mainVec.end(); vIt++)
+		std::cout << *vIt << ' ';
 }
 void	PmergeMe::print(list mainVec)
 {
@@ -103,12 +103,12 @@ PmergeMe::PmergeMe(char **av)
 	cof = 1;
 	recursionVec();
 	tend = std::clock();
-	time = static_cast<double>(tend - tstart);
+	time = static_cast<double>(tend - tstart) / CLOCKS_PER_SEC;
 
 	std::cout << "\nAfter: ";
 	print(mainVec);
 	std::cout << "\nTime to process a range of " << mainVec.size() <<" elements with std::vector : ";
-	std::cout << std::fixed << time * 1000 / CLOCKS_PER_SEC << " μs\n";
+	std::cout << std::fixed << time * 1000000  << " μs\n";
 	// if (x == mainVec.size() && std::is_sorted(mainVec.begin(), mainVec.end()))
 	// 	std::cout << "\nsorted\n";
 	// else
@@ -122,12 +122,12 @@ PmergeMe::PmergeMe(char **av)
 	tstart = std::clock();
 	recursionList();
 	tend = std::clock();
-	time = static_cast<double>(tend - tstart);
+	time = static_cast<double>(tend - tstart) / CLOCKS_PER_SEC;
 
 	std::cout << "\nAfter: ";
 	print(mainLst);
 	std::cout << "\nTime to process a range of " << mainLst.size() <<" elements with std::list : ";
-	std::cout << std::fixed << time * 1000 / CLOCKS_PER_SEC   << " μs\n";
+	std::cout << std::fixed << time * 1000000   << " μs\n";
 	// if (x == mainLst.size() && std::is_sorted(mainLst.begin(), mainLst.end()))
 	// 	std::cout << "\nsorted\n";
 	// else
@@ -145,14 +145,14 @@ bool	comp(vector a, vector b)
 
 bool	PmergeMe::continueRec(vecOfVec& vec)
 {
-	ddIt = vec.begin();
-	if (ddIt->size() == cof && (ddIt + 1)->size() == cof)
-		ddIt += 2;
-	while (ddIt != vec.end())
+	vvIt = vec.begin();
+	if (vvIt->size() == cof && (vvIt + 1)->size() == cof)
+		vvIt += 2;
+	while (vvIt != vec.end())
 	{
-		if (ddIt->size() == cof && (ddIt + 1)->size() == cof)
+		if (vvIt->size() == cof && (vvIt + 1)->size() == cof)
 			return true;
-		++ddIt;
+		++vvIt;
 	}
 	return (false);
 }
@@ -162,14 +162,14 @@ vecOfVec	PmergeMe::makePair()
 	vecOfVec 	vec;
 	vector 		tempVec;
 
-	for (dIt = mainVec.begin(); dIt != mainVec.end();)
+	for (vIt = mainVec.begin(); vIt != mainVec.end();)
 	{
 		for (size_t i = 0; i < cof; ++i)
 		{
-			if (dIt == mainVec.end())
+			if (vIt == mainVec.end())
 				break;
-			tempVec.push_back(*dIt);
-			++dIt;
+			tempVec.push_back(*vIt);
+			++vIt;
 		}
 		vec.push_back(tempVec);
 		tempVec.clear();
@@ -180,8 +180,8 @@ vecOfVec	PmergeMe::makePair()
 void	PmergeMe::copyToMainVec(vecOfVec tmpVec)
 {
 	mainVec.clear();
-	for (ddIt = tmpVec.begin(); ddIt != tmpVec.end(); ++ddIt)
-		std::copy(ddIt->begin(), ddIt->end(), std::inserter(mainVec, mainVec.end()));
+	for (vvIt = tmpVec.begin(); vvIt != tmpVec.end(); ++vvIt)
+		std::copy(vvIt->begin(), vvIt->end(), std::inserter(mainVec, mainVec.end()));
 }
 
 void	PmergeMe::stockLast(vecOfVec& vec)
@@ -202,28 +202,28 @@ void	PmergeMe::creatMainChainPend(vecOfVec& vec)
 	mainChain.clear();
 	mainChain.push_back(*vec.begin());
 	mainChain.push_back(*(vec.begin() + 1));
-	for (ddIt = vec.begin() + 2; ddIt != vec.end();)
+	for (vvIt = vec.begin() + 2; vvIt != vec.end();)
 	{
 		pendPair.second = mainChain.end();
-		pendPair.first = *ddIt;
-		++ddIt;
-		if (ddIt != vec.end())
-			pendPair.second = mainChain.insert(mainChain.end(), *ddIt);
+		pendPair.first = *vvIt;
+		++vvIt;
+		if (vvIt != vec.end())
+			pendPair.second = mainChain.insert(mainChain.end(), *vvIt);
 		pend.push_back(pendPair);
 		pendPair.first.clear();
-		if (ddIt != vec.end())
-			++ddIt;
+		if (vvIt != vec.end())
+			++vvIt;
 	}
 }
 
 void	PmergeMe::sorting(vecOfVec& vec)
 {
-	for (ddIt = vec.begin(); ddIt != vec.end(); ddIt += 2)
+	for (vvIt = vec.begin(); vvIt != vec.end(); vvIt += 2)
 	{
-		if ((ddIt + 1) == vec.end() || ddIt->size() != (ddIt + 1)->size())
+		if ((vvIt + 1) == vec.end() || vvIt->size() != (vvIt + 1)->size())
 			break;
-		if (ddIt->back() > (ddIt + 1)->back())
-			std::swap(*ddIt, *(ddIt + 1));
+		if (vvIt->back() > (vvIt + 1)->back())
+			std::swap(*vvIt, *(vvIt + 1));
 	}
 }
 
